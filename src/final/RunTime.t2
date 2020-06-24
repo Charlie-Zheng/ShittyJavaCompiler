@@ -1,0 +1,42 @@
+int x;
+main(){
+	printi(-456);
+	prints("\n");
+	printb(x==0);
+	prints("\n");
+}
+ void printi(int x){
+	int div;
+	div = 1;
+	if(x == 0){
+		printc(48);		
+	}else if(x < 0) {
+		printc(45); //the negative sign
+		while(div<=-(x/10)) {
+			div = div*10;
+		}
+		printc(-(x/div)+48);
+		while(div>1) {
+			printc((-(x%div))/(div/10)+48);
+			div = div/10;
+		}
+		
+	}else{
+		while(div<=x/10) {
+			div = div*10;
+		}
+		printc(x/div+48);
+		while(div>1) {
+			printc((x%div)/(div/10)+48);
+			div = div/10;
+		}
+	}
+}
+
+void printb(boolean x){
+	if(x){
+		prints("true");
+	}else{
+		prints("false");
+	}
+}

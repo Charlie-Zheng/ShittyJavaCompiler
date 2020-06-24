@@ -1,0 +1,5 @@
+boolean equals(int x, boolean y){
+	return y	//Test error recovery in code
+	break;
+	return z;
+}

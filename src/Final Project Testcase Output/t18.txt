@@ -1,0 +1,12 @@
+//Input 8*4
+ = 32
+//Input 111*111
+ = 12321
+//Input 11-11
+ = 0
+//Input 90-81
+ = 9
+//Input 11+8
+ = 19
+//Input 
+Error: expected factor.

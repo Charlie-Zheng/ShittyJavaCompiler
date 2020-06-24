@@ -1,0 +1,17 @@
+main(){
+	while(true){
+		while(true){
+			while(true){
+				break;
+			}
+		}
+	}
+	
+	while(true){
+		while(true){
+			while(true){
+				break;
+			}
+		}
+	}
+}

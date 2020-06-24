@@ -1,0 +1,27 @@
+//test loop and logic structure
+int reverseInt(int b){
+	int ans;
+	ans = 0;
+	while(b > 0){
+		ans = ans*10+b%10;
+		b = b/10;
+	}
+	return ans;	
+}
+
+boolean testIf(){
+	if(x == 0){
+		if(y || l){
+			if(k)
+				if(l)
+					if(m)
+						x=x+1;
+					else
+						x=x-1;
+			print("abcdefghijklmnopqrstuvwxyz\"\'\n\r\\!@#$%^&*()><?:|_+-=[];',./"); //Test some characters
+			
+		} 
+	
+	}
+
+}

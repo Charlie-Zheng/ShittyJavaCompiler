@@ -1,0 +1,1 @@
+java -jar ".\java-cup-11b.jar" -locations .\NewParser.cup && jflex .\test.flex && javac -cp ".\java-cup-11b-runtime.jar" *.java

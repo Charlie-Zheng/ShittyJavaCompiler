@@ -1,0 +1,34 @@
+main(){
+	int toCheck;
+	toCheck = 1;
+	while(toCheck < 100){
+		if(fibRecursive(toCheck) != fibLoop(toCheck))
+			prints("The two don't match up!!!");
+	}
+}
+
+int fibRecursive(int x){
+	if(x <= 0){
+		return 0;
+	}else if(x <= 2)
+		return 1;
+	return fibRecursive(x-1)+fibRecursive(x-2);
+}
+
+int fibLoop(int x){
+	if(x <= 0){
+		return 0;
+	}
+	int a;
+	int b;
+	a = 1;
+	b = 1;
+	while(x > 2){
+		b = a + b;
+		a = b - a;
+		x = x - 1;
+	}
+
+	return b;
+}
+

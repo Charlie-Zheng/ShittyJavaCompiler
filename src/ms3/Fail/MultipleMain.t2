@@ -1,0 +1,10 @@
+
+
+main1(){
+	int x;
+}
+
+//should fail
+main2(){
+	int y;
+}

@@ -1,0 +1,19 @@
+main(){
+	prints("\n\tthis is tabbed\nand this is not\n");
+	prints("making sure offsets are correct");
+	printi(-12345);
+	prints("\n");
+	printi(12345);
+	prints("\n");
+	printb(false);
+	prints("\n");
+	printb(true);
+	prints("\n");
+	printc(49); //ascii for 1
+	printc(48); //ascii for 0
+	prints("\nPlease enter a character, and it will be echoed back: ");
+	printc(getchar());
+	prints("\n");
+	halt();
+	prints("this should not be displayed\n");
+}

@@ -1,0 +1,511 @@
+Script started on 2020-04-12 17:30:20-06:00 [TERM="xterm-256color" TTY="/dev/pts/14" COLUMNS="120" LINES="30"]
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ java -jar "java-cup-11b.jar" -locations NewParser.cup && jflex test.flex && javac -d ./ -cp ./java-cup-11b-runtime.jar:. *.java
+------- CUP v0.11b 20160615 (GIT 4ac7450) Parser Generation Summary -------
+  0 errors and 0 warnings
+  36 terminals, 36 non-terminals, and 87 productions declared, 
+  producing 142 unique parse states.
+  0 terminals declared but not used.
+  0 non-terminals declared but not used.
+  0 productions never reduced.
+  0 conflicts detected (0 expected).
+  Code written to "parser.java", and "sym.java".
+---------------------------------------------------- (CUP v0.11b 20160615 (GIT 4ac7450))
+Reading "test.flex"
+Constructing NFA : 172 states in NFA
+Converting NFA to DFA : 
+..................................................................................
+84 states before minimization, 77 states in minimized DFA
+Old file "Scan.java" saved as "Scan.java~"
+Writing code to "Scan.java"
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ java -cp "java-cup-11b-runtime.jar:." Scan ~aycock/411/TEST/final/art-life.j-- > /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/art-life.j--.wat
+/bin/wat2wasm /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/art-life.j--.wat
+~aycock/411/bin/wasm-interp --411 /home/ugb/ce.zheng1/cpsc411/Scanner/src/art-life.j--.wasm]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ ~aycock/411/bin/wat2wasm /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/art-life.j--.wat
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ ~aycock/411/bin/wasm-interp --411 /home/ugb/ce.zheng1/cpsc411/Scanner/src/art-life.j--.wasm
+Generation 1:
+0 1 1 1 0 1 0 0 0 0 
+0 0 0 0 0 0 1 0 0 0 
+0 0 0 1 1 0 1 0 0 0 
+0 1 0 1 0 0 1 0 0 0 
+0 1 1 0 0 0 0 1 0 0 
+0 0 0 0 1 0 0 1 0 0 
+0 1 1 0 0 0 0 0 1 0 
+0 1 0 0 1 0 0 0 0 0 
+0 1 1 0 0 0 0 1 0 0 
+0 1 1 0 1 0 0 0 1 0 
+Generation 2:
+0 0 1 0 0 0 0 0 0 0 
+0 0 0 0 0 0 1 0 0 0 
+0 0 1 1 1 0 1 1 0 0 
+0 1 0 1 1 1 1 1 0 0 
+0 1 1 1 0 0 1 1 0 0 
+0 0 0 1 0 0 0 1 1 0 
+0 1 1 1 0 0 0 0 0 0 
+1 0 0 1 0 0 0 0 0 0 
+1 0 0 0 0 0 0 0 0 0 
+0 1 1 1 0 0 0 0 0 0 
+Generation 3:
+0 0 0 0 0 0 0 0 0 0 
+0 0 1 0 0 1 1 1 0 0 
+0 0 1 0 0 0 0 0 0 0 
+0 1 0 0 0 0 0 0 1 0 
+0 1 0 0 0 0 0 0 0 0 
+0 0 0 0 1 0 1 1 1 0 
+0 1 0 1 1 0 0 0 0 0 
+1 0 0 1 0 0 0 0 0 0 
+1 0 0 1 0 0 0 0 0 0 
+0 1 1 0 0 0 0 0 0 0 
+Generation 4:
+0 0 0 0 0 0 1 0 0 0 
+0 0 0 0 0 0 1 0 0 0 
+0 1 1 0 0 0 1 1 0 0 
+0 1 1 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 1 0 
+0 0 1 1 1 1 0 1 0 0 
+0 0 1 1 1 1 0 1 0 0 
+1 1 0 1 0 0 0 0 0 0 
+1 0 0 1 0 0 0 0 0 0 
+0 1 1 0 0 0 0 0 0 0 
+Generation 5:
+0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 1 1 0 0 0 
+0 1 1 0 0 0 1 1 0 0 
+0 1 1 0 0 0 0 1 0 0 
+0 1 0 0 1 0 0 0 0 0 
+0 0 1 0 0 1 0 1 1 0 
+0 0 0 0 0 1 0 0 0 0 
+1 1 0 0 0 0 0 0 0 0 
+1 0 0 1 0 0 0 0 0 0 
+0 1 1 0 0 0 0 0 0 0 
+Generation 6:
+0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 1 1 1 0 0 
+0 1 1 0 0 1 0 1 0 0 
+1 0 0 1 0 0 1 1 0 0 
+0 1 0 1 0 0 1 1 1 0 
+0 0 0 0 1 1 1 0 0 0 
+0 1 0 0 0 0 1 0 0 0 
+1 1 0 0 0 0 0 0 0 0 
+1 0 0 0 0 0 0 0 0 0 
+0 1 1 0 0 0 0 0 0 0 
+Generation 7:
+0 0 0 0 0 0 1 0 0 0 
+0 0 0 0 0 1 0 1 0 0 
+0 1 1 0 1 1 0 0 1 0 
+1 0 0 1 1 1 0 0 0 0 
+0 0 1 1 0 0 0 0 1 0 
+0 0 1 0 1 0 0 0 0 0 
+1 1 0 0 0 0 1 0 0 0 
+1 1 0 0 0 0 0 0 0 0 
+1 0 1 0 0 0 0 0 0 0 
+0 1 0 0 0 0 0 0 0 0 
+Generation 8:
+0 0 0 0 0 0 1 0 0 0 
+0 0 0 0 1 1 0 1 0 0 
+0 1 1 0 0 0 0 0 0 0 
+0 0 0 0 0 1 0 0 0 0 
+0 1 1 0 0 1 0 0 0 0 
+0 0 1 0 0 0 0 0 0 0 
+1 0 1 0 0 0 0 0 0 0 
+0 0 1 0 0 0 0 0 0 0 
+1 0 1 0 0 0 0 0 0 0 
+0 1 0 0 0 0 0 0 0 0 
+Generation 9:
+0 0 0 0 0 1 1 0 0 0 
+0 0 0 0 0 1 1 0 0 0 
+0 0 0 0 1 1 1 0 0 0 
+0 0 0 0 0 0 0 0 0 0 
+0 1 1 0 0 0 0 0 0 0 
+0 0 1 1 0 0 0 0 0 0 
+0 0 1 1 0 0 0 0 0 0 
+0 0 1 1 0 0 0 0 0 0 
+0 0 1 0 0 0 0 0 0 0 
+0 1 0 0 0 0 0 0 0 0 
+Generation 10:
+0 0 0 0 0 1 1 0 0 0 
+0 0 0 0 0 0 0 1 0 0 
+0 0 0 0 1 0 1 0 0 0 
+0 0 0 0 0 1 0 0 0 0 
+0 1 1 1 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 
+0 1 0 0 1 0 0 0 0 0 
+0 1 0 0 0 0 0 0 0 0 
+0 1 1 1 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ java -cp "java-cup-11b-runtime.jar:." Scan ~aycock/411/TEST/final/art-select.j-- >  /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/art-select.j--.wat
+n/wat2wasm /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/art-select.j--.wat
+~aycock/411/bin/wasm-interp --411 /home/ugb/ce.zheng1/cpsc411/Scanner/src/art-select.j--.wasm]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ ~aycock/411/bin/wat2wasm /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/art-select.j--.wat
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ ~aycock/411/bin/wasm-interp --411 /home/ugb/ce.zheng1/cpsc411/Scanner/src/art-select.j--.wasm
+30 23 4 9 86 63 48 61 98 39 8 73 18 35 0 
+0 23 4 9 86 63 48 61 98 39 8 73 18 35 30 
+0 4 23 9 86 63 48 61 98 39 8 73 18 35 30 
+0 4 8 9 86 63 48 61 98 39 23 73 18 35 30 
+0 4 8 9 86 63 48 61 98 39 23 73 18 35 30 
+0 4 8 9 18 63 48 61 98 39 23 73 86 35 30 
+0 4 8 9 18 23 48 61 98 39 63 73 86 35 30 
+0 4 8 9 18 23 30 61 98 39 63 73 86 35 48 
+0 4 8 9 18 23 30 35 98 39 63 73 86 61 48 
+0 4 8 9 18 23 30 35 39 98 63 73 86 61 48 
+0 4 8 9 18 23 30 35 39 48 63 73 86 61 98 
+0 4 8 9 18 23 30 35 39 48 61 73 86 63 98 
+0 4 8 9 18 23 30 35 39 48 61 63 86 73 98 
+0 4 8 9 18 23 30 35 39 48 61 63 73 86 98 
+0 4 8 9 18 23 30 35 39 48 61 63 73 86 98 
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ java -cp "java-cup-11b-runtime.jar:." Scan ~aycock/411/TEST/final/art-sieve.j-- > /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/art-sieve.j--.wat
+sc411/Scanner/src/final/art-sieve.j--.wat
+~aycock/411/bin/wasm-interp --411 /home/ugb/ce.zheng1/cpsc411/Scanner/src/art-sieve.j--.wasm]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ ~aycock/411/bin/wat2wasm /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/art-sieve.j--.wat
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ ~aycock/411/bin/wasm-interp --411 /home/ugb/ce.zheng1/cpsc411/Scanner/src/art-sieve.j--.wasm
+2
+3
+5
+7
+11
+13
+17
+19
+23
+29
+31
+37
+41
+43
+47
+53
+59
+61
+67
+71
+73
+79
+83
+89
+97
+25 prime numbers <= 100
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ java -cp "java-cup-11b-runtime.jar:." Scan ~aycock/411/TEST/final/gen.t1 > /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/gen.t1.wat
+/bin/wat2wasm /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/gen.t1.wat
+~aycock/411/bin/wasm-interp --411 /home/ugb/ce.zheng1/cpsc411/Scanner/src/gen.t1.wasm]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ ~aycock/411/bin/wat2wasm /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/gen.t1.wat
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ ~aycock/411/bin/wasm-interp --411 /home/ugb/ce.zheng1/cpsc411/Scanner/src/gen.t1.wasm
+Hello, world!
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ java -cp "java-cup-11b-runtime.jar:." Scan ~aycock/411/TEST/final/gen.t10 > /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/gen.t10.wat
+1/Scanner/src/final/gen.t10.wat
+~aycock/411/bin/wasm-interp --411 /home/ugb/ce.zheng1/cpsc411/Scanner/src/gen.t10.wasm]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ ~aycock/411/bin/wat2wasm /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/gen.t10.wat
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ ~aycock/411/bin/wasm-interp --411 /home/ugb/ce.zheng1/cpsc411/Scanner/src/gen.t10.wasm
+fib(0) = 0
+fib(1) = 1
+fib(2) = 1
+fib(3) = 2
+fib(4) = 3
+fib(5) = 5
+fib(6) = 8
+fib(7) = 13
+fib(8) = 21
+fib(9) = 34
+fib(10) = 55
+fib(11) = 89
+fib(12) = 144
+fib(13) = 233
+fib(14) = 377
+fib(15) = 610
+fib(16) = 987
+fib(17) = 1597
+fib(18) = 2584
+fib(19) = 4181
+fib(20) = 6765
+fib(21) = 10946
+fib(22) = 17711
+fib(23) = 28657
+fib(24) = 46368
+fib(25) = 75025
+fib(26) = 121393
+fib(27) = 196418
+fib(28) = 317811
+fib(29) = 514229
+fib(30) = 832040
+fib(31) = 1346269
+^C
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ java -cp "java-cup-11b-runtime.jar:." Scan ~aycock/411/TEST/final/gen.t11 > /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/gen.t11.wat
+~aycock/411/bin/wat2wasm /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/gen.t11.wat
+~aycock/411/bin/wasm-interp --411 /home/ugb/ce.zheng1/cpsc411/Scanner/src/gen.t11.wasm]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ ~aycock/411/bin/wat2wasm /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/gen.t11.wat
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ ~aycock/411/bin/wasm-interp --411 /home/ugb/ce.zheng1/cpsc411/Scanner/src/gen.t11.wasm
+global int default value: 0
+global boolean default value: false
+
+(it's ok if the following aren't 0/false)
+	local int default value: 0
+	local boolean default value: false
+
+(it's ok if the following aren't 0/false)
+	local int default value: 0
+	local boolean default value: false
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ java -cp "java-cup-11b-runtime.jar:." Scan ~aycock/411/TEST/final/gen.t12 > /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/gen.t12.wat
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ ~aycock/411/bin/wat2wasm /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/gen.t12.wat
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ ~aycock/411/bin/wasm-interp --411 /home/ugb/ce.zheng1/cpsc411/Scanner/src/gen.t12.wasm
+fib(0) = 0
+fib(1) = 1
+fib(2) = 1
+fib(3) = 2
+fib(4) = 3
+fib(5) = 5
+fib(6) = 8
+fib(7) = 13
+fib(8) = 21
+fib(9) = 34
+fib(10) = 55
+fib(11) = 89
+fib(12) = 144
+fib(13) = 233
+fib(14) = 377
+fib(15) = 610
+fib(16) = 987
+fib(17) = 1597
+fib(18) = 2584
+fib(19) = 4181
+fib(20) = 6765
+fib(21) = 10946
+fib(22) = 17711
+fib(23) = 28657
+fib(24) = 46368
+fib(25) = 75025
+fib(26) = 121393
+fib(27) = 196418
+fib(28) = 317811
+fib(29) = 514229
+fib(30) = 832040
+fib(31) = 1346269
+fib(32) = 2178309
+fib(33) = 3524578
+fib(34) = 5702887
+fib(35) = 9227465
+fib(36) = 14930352
+fib(37) = 24157817
+fib(38) = 39088169
+fib(39) = 63245986
+fib(40) = 102334155
+fib(41) = 165580141
+fib(42) = 267914296
+fib(43) = 433494437
+fib(44) = 701408733
+fib(45) = 1134903170
+fib(46) = 1836311903
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ java -cp "java-cup-11b-runtime.jar:." Scan ~aycock/411/TEST/final/gen.t13 > /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/gen.t13.wat
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ ~aycock/411/bin/wat2wasm /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/gen.t13.wat
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ ~aycock/411/bin/wasm-interp --411 /home/ugb/ce.zheng1/cpsc411/Scanner/src/gen.t13.wasm
+123456
+654321]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ java -cp "java-cup-11b-runtime.jar:." Scan ~aycock/411/TEST/final/gen.t14 > /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/gen.t14.wat
+ycock/411/bin/wat2wasm /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/gen.t14.wat
+~aycock/411/bin/wasm-interp --411 /home/ugb/ce.zheng1/cpsc411/Scanner/src/gen.t14.wasm]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ ~aycock/411/bin/wat2wasm /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/gen.t14.wat
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ ~aycock/411/bin/wasm-interp --411 /home/ugb/ce.zheng1/cpsc411/Scanner/src/gen.t14.wasm
+minint is -2147483648
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ java -cp "java-cup-11b-runtime.jar:." Scan ~aycock/411/TEST/final/gen.t15 > /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/gen.t15.wat
+r/src/final/gen.t15.wat
+~aycock/411/bin/wasm-interp --411 /home/ugb/ce.zheng1/cpsc411/Scanner/src/gen.t15.wasm]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ ~aycock/411/bin/wat2wasm /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/gen.t15.wat
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ ~aycock/411/bin/wasm-interp --411 /home/ugb/ce.zheng1/cpsc411/Scanner/src/gen.t15.wasm
+-123
+-2147483648
+-2147483648
+-2147483648
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ java -cp "java-cup-11b-runtime.jar:." Scan ~aycock/411/TEST/final/gen.t18 > /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/gen.t18.wat
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ ~aycock/411/bin/wat2wasm /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/gen.t18.wat
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ ~aycock/411/bin/wasm-interp --411 /home/ugb/ce.zheng1/cpsc411/Scanner/src/gen.t18.wasm
+1*8
+ = 8
+9*7  +7
+ = 16
+9-7
+ = 2
+(9+1)*2
+ = 20
+
+Error: expected factor.
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ java -cp "java-cup-11b-runtime.jar:." Scan ~aycock/411/TEST/final/gen.t22 > /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/gen.t22.wat
+k/411/bin/wat2wasm /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/gen.t22.wat
+~aycock/411/bin/wasm-interp --411 /home/ugb/ce.zheng1/cpsc411/Scanner/src/gen.t22.wasm]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ ~aycock/411/bin/wat2wasm /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/gen.t22.wat
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ ~aycock/411/bin/wasm-interp --411 /home/ugb/ce.zheng1/cpsc411/Scanner/src/gen.t22.wasm
+asdf	
+"'\  asdf ]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ java -cp "java-cup-11b-runtime.jar:." Scan ~aycock/411/TEST/final/gen.t26 > /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/gen.t26.wat
+ock/411/bin/wat2wasm /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/gen.t26.wat
+~aycock/411/bin/wasm-interp --411 /home/ugb/ce.zheng1/cpsc411/Scanner/src/gen.t26.wasm]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ ~aycock/411/bin/wat2wasm /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/gen.t26.wat
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ ~aycock/411/bin/wasm-interp --411 /home/ugb/ce.zheng1/cpsc411/Scanner/src/gen.t26.wasm
+0 = 
+	0 (base 2)
+	0 (base 8)
+	0 (base 10)
+17 = 
+	010001 (base 2)
+	021 (base 8)
+	017 (base 10)
+42 = 
+	0101010 (base 2)
+	052 (base 8)
+	042 (base 10)
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ java -cp "java-cup-11b-runtime.jar:." Scan ~aycock/411/TEST/final/gen.t29 > /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/gen.t29.wat
+cock/411/bin/wat2wasm /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/gen.t29.wat
+~aycock/411/bin/wasm-interp --411 /home/ugb/ce.zheng1/cpsc411/Scanner/src/gen.t29.wasm]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ ~aycock/411/bin/wat2wasm /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/gen.t29.wat
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ ~aycock/411/bin/wasm-interp --411 /home/ugb/ce.zheng1/cpsc411/Scanner/src/gen.t29.wasm
+if ((A && B) || C) {...} else {...}, with A=false B=false C=false
+evaluated A
+evaluated C
+else-part executed
+
+if ((A && B) || C) {...} else {...}, with A=false B=false C=true
+evaluated A
+evaluated C
+if-part executed
+
+if ((A && B) || C) {...} else {...}, with A=false B=true C=false
+evaluated A
+evaluated C
+else-part executed
+
+if ((A && B) || C) {...} else {...}, with A=false B=true C=true
+evaluated A
+evaluated C
+if-part executed
+
+if ((A && B) || C) {...} else {...}, with A=true B=false C=false
+evaluated A
+evaluated B
+evaluated C
+else-part executed
+
+if ((A && B) || C) {...} else {...}, with A=true B=false C=true
+evaluated A
+evaluated B
+evaluated C
+if-part executed
+
+if ((A && B) || C) {...} else {...}, with A=true B=true C=false
+evaluated A
+evaluated B
+if-part executed
+
+if ((A && B) || C) {...} else {...}, with A=true B=true C=true
+evaluated A
+evaluated B
+if-part executed
+
+x = (A && !B) || C, with A=false B=false C=false
+evaluated A
+evaluated C
+x=false
+
+x = (A && !B) || C, with A=false B=false C=true
+evaluated A
+evaluated C
+x=true
+
+x = (A && !B) || C, with A=false B=true C=false
+evaluated A
+evaluated C
+x=false
+
+x = (A && !B) || C, with A=false B=true C=true
+evaluated A
+evaluated C
+x=true
+
+x = (A && !B) || C, with A=true B=false C=false
+evaluated A
+evaluated B
+x=true
+
+x = (A && !B) || C, with A=true B=false C=true
+evaluated A
+evaluated B
+x=true
+
+x = (A && !B) || C, with A=true B=true C=false
+evaluated A
+evaluated B
+evaluated C
+x=false
+
+x = (A && !B) || C, with A=true B=true C=true
+evaluated A
+evaluated B
+evaluated C
+x=true
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ java -cp "java-cup-11b-runtime.jar:." Scan ~aycock/411/TEST/final/gen.t30 > /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/gen.t30.wat
+heng1/cpsc411/Scanner/src/final/gen.t30.wat
+~aycock/411/bin/wasm-interp --411 /home/ugb/ce.zheng1/cpsc411/Scanner/src/gen.t30.wasmError: Function does not return at line 1, column 1 in file /home/profs/aycock/411/TEST/final/gen.t30 on token: foo
+int functions must return a value
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ ~aycock/411/bin/wat2wasm /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/gen.t30.wat
+[1m/home/ugb/ce.zheng1/cpsc411/Scanner/src/final/gen.t30.wat:1:1: [31merror: [0munexpected token "EOF", expected a module field or a module.
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ ~aycock/411/bin/wasm-interp --411 /home/ugb/ce.zheng1/cpsc411/Scanner/src/gen.t30.wasm
+stat failed: No such file or directory
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ java -cp "java-cup-11b-runtime.jar:." Scan ~aycock/411/TEST/final/gen.t31 > /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/gen.t31.wat
+1/Scanner/src/gen.t31.wasm]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ ~aycock/411/bin/wat2wasm /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/gen.t31.wat
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ ~aycock/411/bin/wasm-interp --411 /home/ugb/ce.zheng1/cpsc411/Scanner/src/gen.t31.wasm
+error initialiazing module: integer divide by zero
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ java -cp "java-cup-11b-runtime.jar:." Scan ~aycock/411/TEST/final/gen.t32 > /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/gen.t32.wat
+ycock/411/bin/wat2wasm /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/gen.t32.wat
+~aycock/411/bin/wasm-interp --411 /home/ugb/ce.zheng1/cpsc411/Scanner/src/gen.t32.wasm]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ ~aycock/411/bin/wat2wasm /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/gen.t32.wat
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ ~aycock/411/bin/wasm-interp --411 /home/ugb/ce.zheng1/cpsc411/Scanner/src/gen.t32.wasm
+0
+100
+101
+102
+103
+104
+105
+1
+100
+101
+102
+103
+104
+105
+2
+100
+101
+102
+103
+104
+105
+3
+100
+101
+102
+103
+104
+105
+4
+100
+101
+102
+103
+104
+105
+5
+100
+101
+102
+103
+104
+105
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ java -cp "java-cup-11b-runtime.jar:." Scan ~aycock/411/TEST/final/gen.t33 > /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/gen.t33.wat
+1/bin/wat2wasm /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/gen.t33.wat
+~aycock/411/bin/wasm-interp --411 /home/ugb/ce.zheng1/cpsc411/Scanner/src/gen.t33.wasm]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ ~aycock/411/bin/wat2wasm /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/gen.t33.wat
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ ~aycock/411/bin/wasm-interp --411 /home/ugb/ce.zheng1/cpsc411/Scanner/src/gen.t33.wasm
+hello, my name is charlie
+hello, my name is charlie
+
+
+123456
+123456
+^C
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ java -cp "java-cup-11b-runtime.jar:." Scan ~aycock/411/TEST/final/gen.t34 > /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/gen.t34.wat
+k/411/bin/wat2wasm /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/gen.t34.wat
+~aycock/411/bin/wasm-interp --411 /home/ugb/ce.zheng1/cpsc411/Scanner/src/gen.t34.wasm]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ ~aycock/411/bin/wat2wasm /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/gen.t34.wat
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ ~aycock/411/bin/wasm-interp --411 /home/ugb/ce.zheng1/cpsc411/Scanner/src/gen.t34.wasm
+2903040
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ java -cp "java-cup-11b-runtime.jar:." Scan ~aycock/411/TEST/final/gen.t5 > /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/gen.t5.wat
+~aycock/411/bin/wat2wasm /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/gen.t5.wat
+~aycock/411/bin/wasm-interp --411 /home/ugb/ce.zheng1/cpsc411/Scanner/src/gen.t5.wasm]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ ~aycock/411/bin/wat2wasm /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/gen.t5.wat
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ ~aycock/411/bin/wasm-interp --411 /home/ugb/ce.zheng1/cpsc411/Scanner/src/gen.t5.wasm
+42
+42
+42
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ exit
+exit
+
+Script done on 2020-04-12 17:35:38-06:00 [COMMAND_EXIT_CODE="0"]

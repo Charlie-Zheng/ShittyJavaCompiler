@@ -1,0 +1,7 @@
+main(){
+	
+}
+
+boolean test(int test){
+	int test;	//fails here
+}

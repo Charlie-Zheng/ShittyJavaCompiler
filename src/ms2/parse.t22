@@ -1,0 +1,36 @@
+main() {
+	x = a--1;
+	x = a--b;
+	x = -------x;
+}
+
+
+//mainDecl {'type': 'mainDecl', 'lineno': 1}
+//void {'type': 'void'}
+//id {'type': 'id', 'lineno': 1, 'attr': 'main'}
+//formals {'type': 'formals'}
+//block {'type': 'block'}
+//        stmtExpr {'type': 'stmtExpr', 'lineno': 2}
+//                = {'type': '=', 'lineno': 2}
+//                        id {'type': 'id', 'lineno': 2, 'attr': 'x'}
+//                        - {'type': '-', 'lineno': 2}
+//                                id {'type': 'id', 'lineno': 2, 'attr': 'a'}
+//                                number {'type': 'number', 'lineno': 2, 'attr': '-1'}
+//        stmtExpr {'type': 'stmtExpr', 'lineno': 3}
+//                = {'type': '=', 'lineno': 3}
+//                        id {'type': 'id', 'lineno': 3, 'attr': 'x'}
+//                        - {'type': '-', 'lineno': 3}
+//                                id {'type': 'id', 'lineno': 3, 'attr': 'a'}
+//                                - {'type': '-', 'lineno': 3}
+//                                        id {'type': 'id', 'lineno': 3, 'attr': 'b'}
+//        stmtExpr {'type': 'stmtExpr', 'lineno': 4}
+//                = {'type': '=', 'lineno': 4}
+//                        id {'type': 'id', 'lineno': 4, 'attr': 'x'}
+//                        - {'type': '-', 'lineno': 4}
+//                                - {'type': '-', 'lineno': 4}
+//                                        - {'type': '-', 'lineno': 4}
+//                                                - {'type': '-', 'lineno': 4}
+//                                                        - {'type': '-', 'lineno': 4}
+//                                                                - {'type': '-', 'lineno': 4}
+//                                                                        - {'type': '-', 'lineno': 4}
+//                                                                                id {'type': 'id', 'lineno': 4, 'attr': 'x'}

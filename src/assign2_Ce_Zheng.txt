@@ -1,0 +1,1586 @@
+Script started on 2020-02-27 22:25:22-07:00 [TERM="xterm-256color" TTY="/dev/pts/66" COLUMNS="120" LINES="30"]
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ java -jar "java-cup-11b.jar" -locations NewParser.cup
+------- CUP v0.11b 20160615 (GIT 4ac7450) Parser Generation Summary -------
+  0 errors and 0 warnings
+  36 terminals, 46 non-terminals, and 97 productions declared, 
+  producing 169 unique parse states.
+  0 terminals declared but not used.
+  0 non-terminals declared but not used.
+  0 productions never reduced.
+  0 conflicts detected (0 expected).
+  Code written to "parser.java", and "sym.java".
+---------------------------------------------------- (CUP v0.11b 20160615 (GIT 4ac7450))
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ jflex test.flex
+Reading "test.flex"
+Constructing NFA : 172 states in NFA
+Converting NFA to DFA : 
+..................................................................................
+84 states before minimization, 77 states in minimized DFA
+Old file "Scan.java" saved as "Scan.java~"
+Writing code to "Scan.java"
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ javac -d ./ -cp ./java-cup-11b-runtime.jar:. *.java
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ java -cp "java-cup-11b-runtime.jar:." Scan ~aycock/411/TEST/ms2/*.t18
+globaldeclarations: {line = 5}[
+	mainfunctiondeclaration: {line = 5}[
+		void: {}
+		id: {line = 5,attr = calculator}
+		formalparameterlist: {}
+		block: {line = 7}[
+			functioninvocation: {line = 7}[
+				id: {line = 7,attr = init}
+				argumentlist: {}
+			]
+			functioninvocation: {line = 8}[
+				id: {line = 8,attr = parser}
+				argumentlist: {}
+			]
+		]
+	]
+	variabledeclaration: {line = 15}[
+		boolean: {line = 15}
+		id: {line = 15,attr = _havechar}
+	]
+	variabledeclaration: {line = 16}[
+		int: {line = 16}
+		id: {line = 16,attr = _char}
+	]
+	functiondeclaration: {line = 18}[
+		int: {line = 18}
+		id: {line = 18,attr = getc}
+		formalparameterlist: {}
+		block: {line = 20}[
+			if: {line = 20}[
+				id: {line = 20,attr = _havechar}
+				block: {line = 21}[
+					statementexpression: {line = 21}[
+						=: {line = 21}[
+							id: {line = 21,attr = _havechar}
+							false: {line = 21}
+						]
+					]
+					return: {line = 22}[
+						id: {line = 22,attr = _char}
+					]
+				]
+			]
+			return: {line = 24}[
+				functioninvocation: {line = 24}[
+					id: {line = 24,attr = getchar}
+					argumentlist: {}
+				]
+			]
+		]
+	]
+	functiondeclaration: {line = 27}[
+		void: {line = 27}
+		id: {line = 27,attr = ungetc}
+		formalparameterlist: {line = 27}[
+			formalparameter: {line = 27}[
+				int: {line = 27}
+				id: {line = 27,attr = ch}
+			]
+		]
+		block: {line = 29}[
+			if: {line = 29}[
+				id: {line = 29,attr = _havechar}
+				block: {line = 30}[
+					functioninvocation: {line = 30}[
+						id: {line = 30,attr = prints}
+						argumentlist: {line = 30}[
+							string: {line = 30,attr = Internal error: too many ungets!\n}
+						]
+					]
+					functioninvocation: {line = 31}[
+						id: {line = 31,attr = halt}
+						argumentlist: {}
+					]
+				]
+			]
+			statementexpression: {line = 33}[
+				=: {line = 33}[
+					id: {line = 33,attr = _havechar}
+					true: {line = 33}
+				]
+			]
+			statementexpression: {line = 34}[
+				=: {line = 34}[
+					id: {line = 34,attr = _char}
+					id: {line = 34,attr = ch}
+				]
+			]
+		]
+	]
+	variabledeclaration: {line = 41}[
+		boolean: {line = 41}
+		id: {line = 41,attr = _havetoken}
+	]
+	variabledeclaration: {line = 42}[
+		int: {line = 42}
+		id: {line = 42,attr = _token}
+	]
+	variabledeclaration: {line = 43}[
+		int: {line = 43}
+		id: {line = 43,attr = attr}
+	]
+	functiondeclaration: {line = 45}[
+		int: {line = 45}
+		id: {line = 45,attr = peek}
+		formalparameterlist: {}
+		block: {line = 47}[
+			if: {line = 47}[
+				id: {line = 47,attr = _havetoken}
+				return: {line = 48}[
+					id: {line = 48,attr = _token}
+				]
+			]
+			statementexpression: {line = 50}[
+				=: {line = 50}[
+					id: {line = 50,attr = _havetoken}
+					true: {line = 50}
+				]
+			]
+			return: {line = 51}[
+				=: {line = 51}[
+					id: {line = 51,attr = _token}
+					functioninvocation: {line = 51}[
+						id: {line = 51,attr = scanner}
+						argumentlist: {}
+					]
+				]
+			]
+		]
+	]
+	functiondeclaration: {line = 54}[
+		void: {line = 54}
+		id: {line = 54,attr = match}
+		formalparameterlist: {line = 54}[
+			formalparameter: {line = 54}[
+				int: {line = 54}
+				id: {line = 54,attr = expect}
+			]
+		]
+		block: {line = 56}[
+			if: {line = 56}[
+				!=: {line = 56}[
+					functioninvocation: {line = 56}[
+						id: {line = 56,attr = peek}
+						argumentlist: {}
+					]
+					id: {line = 56,attr = expect}
+				]
+				block: {line = 57}[
+					functioninvocation: {line = 57}[
+						id: {line = 57,attr = prints}
+						argumentlist: {line = 57}[
+							string: {line = 57,attr = Error: expected }
+						]
+					]
+					functioninvocation: {line = 58}[
+						id: {line = 58,attr = printc}
+						argumentlist: {line = 58}[
+							id: {line = 58,attr = expect}
+						]
+					]
+					functioninvocation: {line = 59}[
+						id: {line = 59,attr = prints}
+						argumentlist: {line = 59}[
+							string: {line = 59,attr = \n}
+						]
+					]
+					functioninvocation: {line = 60}[
+						id: {line = 60,attr = halt}
+						argumentlist: {}
+					]
+				]
+			]
+			statementexpression: {line = 62}[
+				=: {line = 62}[
+					id: {line = 62,attr = _havetoken}
+					false: {line = 62}
+				]
+			]
+		]
+	]
+	functiondeclaration: {line = 65}[
+		int: {line = 65}
+		id: {line = 65,attr = scanner}
+		formalparameterlist: {}
+		block: {line = 67}[
+			variabledeclaration: {line = 67}[
+				int: {line = 67}
+				id: {line = 67,attr = ch}
+			]
+			while: {line = 69}[
+				functioninvocation: {line = 69}[
+					id: {line = 69,attr = isspace}
+					argumentlist: {line = 69}[
+						=: {line = 69}[
+							id: {line = 69,attr = ch}
+							functioninvocation: {line = 69}[
+								id: {line = 69,attr = getc}
+								argumentlist: {}
+							]
+						]
+					]
+				]
+			]
+			if: {line = 72}[
+				==: {line = 72}[
+					id: {line = 72,attr = ch}
+					id: {line = 72,attr = EOF}
+				]
+				return: {line = 72}[
+					id: {line = 72,attr = TK_EOF}
+				]
+			]
+			if: {line = 73}[
+				==: {line = 73}[
+					id: {line = 73,attr = ch}
+					id: {line = 73,attr = ASCII_NL}
+				]
+				return: {line = 73}[
+					id: {line = 73,attr = TK_EOLN}
+				]
+			]
+			if: {line = 74}[
+				==: {line = 74}[
+					id: {line = 74,attr = ch}
+					id: {line = 74,attr = ASCII_PLUS}
+				]
+				return: {line = 74}[
+					id: {line = 74,attr = TK_ADD}
+				]
+			]
+			if: {line = 75}[
+				==: {line = 75}[
+					id: {line = 75,attr = ch}
+					id: {line = 75,attr = ASCII_MINUS}
+				]
+				return: {line = 75}[
+					id: {line = 75,attr = TK_SUB}
+				]
+			]
+			if: {line = 76}[
+				==: {line = 76}[
+					id: {line = 76,attr = ch}
+					id: {line = 76,attr = ASCII_STAR}
+				]
+				return: {line = 76}[
+					id: {line = 76,attr = TK_MUL}
+				]
+			]
+			if: {line = 77}[
+				==: {line = 77}[
+					id: {line = 77,attr = ch}
+					id: {line = 77,attr = ASCII_SLASH}
+				]
+				return: {line = 77}[
+					id: {line = 77,attr = TK_DIV}
+				]
+			]
+			if: {line = 78}[
+				==: {line = 78}[
+					id: {line = 78,attr = ch}
+					id: {line = 78,attr = ASCII_LPAREN}
+				]
+				return: {line = 78}[
+					id: {line = 78,attr = TK_LPAREN}
+				]
+			]
+			if: {line = 79}[
+				==: {line = 79}[
+					id: {line = 79,attr = ch}
+					id: {line = 79,attr = ASCII_RPAREN}
+				]
+				return: {line = 79}[
+					id: {line = 79,attr = TK_RPAREN}
+				]
+			]
+			if: {line = 81}[
+				functioninvocation: {line = 81}[
+					id: {line = 81,attr = isdigit}
+					argumentlist: {line = 81}[
+						id: {line = 81,attr = ch}
+					]
+				]
+				block: {line = 82}[
+					statementexpression: {line = 82}[
+						=: {line = 82}[
+							id: {line = 82,attr = attr}
+							int: {line = 82,attr = 0}
+						]
+					]
+					while: {line = 83}[
+						functioninvocation: {line = 83}[
+							id: {line = 83,attr = isdigit}
+							argumentlist: {line = 83}[
+								id: {line = 83,attr = ch}
+							]
+						]
+						block: {line = 84}[
+							statementexpression: {line = 84}[
+								=: {line = 84}[
+									id: {line = 84,attr = attr}
+									+: {line = 84}[
+										*: {line = 84}[
+											id: {line = 84,attr = attr}
+											int: {line = 84,attr = 10}
+										]
+										-: {line = 84}[
+											id: {line = 84,attr = ch}
+											id: {line = 84,attr = ASCII_0}
+										]
+									]
+								]
+							]
+							statementexpression: {line = 85}[
+								=: {line = 85}[
+									id: {line = 85,attr = ch}
+									functioninvocation: {line = 85}[
+										id: {line = 85,attr = getc}
+										argumentlist: {}
+									]
+								]
+							]
+						]
+					]
+					functioninvocation: {line = 87}[
+						id: {line = 87,attr = ungetc}
+						argumentlist: {line = 87}[
+							id: {line = 87,attr = ch}
+						]
+					]
+					return: {line = 88}[
+						id: {line = 88,attr = TK_NUMBER}
+					]
+				]
+			]
+			functioninvocation: {line = 91}[
+				id: {line = 91,attr = prints}
+				argumentlist: {line = 91}[
+					string: {line = 91,attr = Error: invalid character.\n}
+				]
+			]
+			functioninvocation: {line = 92}[
+				id: {line = 92,attr = halt}
+				argumentlist: {}
+			]
+		]
+	]
+	functiondeclaration: {line = 95}[
+		boolean: {line = 95}
+		id: {line = 95,attr = isdigit}
+		formalparameterlist: {line = 95}[
+			formalparameter: {line = 95}[
+				int: {line = 95}
+				id: {line = 95,attr = ch}
+			]
+		]
+		block: {line = 97}[
+			return: {line = 97}[
+				&&: {line = 97}[
+					>=: {line = 97}[
+						id: {line = 97,attr = ch}
+						id: {line = 97,attr = ASCII_0}
+					]
+					<=: {line = 97}[
+						id: {line = 97,attr = ch}
+						id: {line = 97,attr = ASCII_9}
+					]
+				]
+			]
+		]
+	]
+	functiondeclaration: {line = 100}[
+		boolean: {line = 100}
+		id: {line = 100,attr = isspace}
+		formalparameterlist: {line = 100}[
+			formalparameter: {line = 100}[
+				int: {line = 100}
+				id: {line = 100,attr = ch}
+			]
+		]
+		block: {line = 102}[
+			return: {line = 102}[
+				||: {line = 102}[
+					==: {line = 102}[
+						id: {line = 102,attr = ch}
+						id: {line = 102,attr = ASCII_SPACE}
+					]
+					||: {line = 103}[
+						==: {line = 103}[
+							id: {line = 103,attr = ch}
+							id: {line = 103,attr = ASCII_TAB}
+						]
+						==: {line = 104}[
+							id: {line = 104,attr = ch}
+							id: {line = 104,attr = ASCII_CR}
+						]
+					]
+				]
+			]
+		]
+	]
+	functiondeclaration: {line = 111}[
+		void: {line = 111}
+		id: {line = 111,attr = parser}
+		formalparameterlist: {}
+		block: {line = 113}[
+			variabledeclaration: {line = 113}[
+				int: {line = 113}
+				id: {line = 113,attr = result}
+			]
+			while: {line = 115}[
+				!=: {line = 115}[
+					functioninvocation: {line = 115}[
+						id: {line = 115,attr = peek}
+						argumentlist: {}
+					]
+					id: {line = 115,attr = TK_EOF}
+				]
+				block: {line = 116}[
+					statementexpression: {line = 116}[
+						=: {line = 116}[
+							id: {line = 116,attr = result}
+							functioninvocation: {line = 116}[
+								id: {line = 116,attr = E}
+								argumentlist: {}
+							]
+						]
+					]
+					functioninvocation: {line = 117}[
+						id: {line = 117,attr = match}
+						argumentlist: {line = 117}[
+							id: {line = 117,attr = TK_EOLN}
+						]
+					]
+					functioninvocation: {line = 119}[
+						id: {line = 119,attr = prints}
+						argumentlist: {line = 119}[
+							string: {line = 119,attr =  = }
+						]
+					]
+					functioninvocation: {line = 120}[
+						id: {line = 120,attr = printi}
+						argumentlist: {line = 120}[
+							id: {line = 120,attr = result}
+						]
+					]
+					functioninvocation: {line = 121}[
+						id: {line = 121,attr = prints}
+						argumentlist: {line = 121}[
+							string: {line = 121,attr = \n}
+						]
+					]
+				]
+			]
+		]
+	]
+	functiondeclaration: {line = 125}[
+		int: {line = 125}
+		id: {line = 125,attr = E}
+		formalparameterlist: {}
+		block: {line = 127}[
+			variabledeclaration: {line = 127}[
+				int: {line = 127}
+				id: {line = 127,attr = l}
+			]
+			variabledeclaration: {line = 128}[
+				int: {line = 128}
+				id: {line = 128,attr = r}
+			]
+			variabledeclaration: {line = 129}[
+				int: {line = 129}
+				id: {line = 129,attr = token}
+			]
+			statementexpression: {line = 131}[
+				=: {line = 131}[
+					id: {line = 131,attr = l}
+					functioninvocation: {line = 131}[
+						id: {line = 131,attr = T}
+						argumentlist: {}
+					]
+				]
+			]
+			while: {line = 132}[
+				||: {line = 132}[
+					==: {line = 132}[
+						functioninvocation: {line = 132}[
+							id: {line = 132,attr = peek}
+							argumentlist: {}
+						]
+						id: {line = 132,attr = TK_ADD}
+					]
+					==: {line = 132}[
+						functioninvocation: {line = 132}[
+							id: {line = 132,attr = peek}
+							argumentlist: {}
+						]
+						id: {line = 132,attr = TK_SUB}
+					]
+				]
+				block: {line = 133}[
+					functioninvocation: {line = 133}[
+						id: {line = 133,attr = match}
+						argumentlist: {line = 133}[
+							=: {line = 133}[
+								id: {line = 133,attr = token}
+								functioninvocation: {line = 133}[
+									id: {line = 133,attr = peek}
+									argumentlist: {}
+								]
+							]
+						]
+					]
+					statementexpression: {line = 134}[
+						=: {line = 134}[
+							id: {line = 134,attr = r}
+							functioninvocation: {line = 134}[
+								id: {line = 134,attr = T}
+								argumentlist: {}
+							]
+						]
+					]
+					if-else: {line = 136}[
+						==: {line = 136}[
+							id: {line = 136,attr = token}
+							id: {line = 136,attr = TK_ADD}
+						]
+						statementexpression: {line = 137}[
+							=: {line = 137}[
+								id: {line = 137,attr = l}
+								+: {line = 137}[
+									id: {line = 137,attr = l}
+									id: {line = 137,attr = r}
+								]
+							]
+						]
+						statementexpression: {line = 139}[
+							=: {line = 139}[
+								id: {line = 139,attr = l}
+								-: {line = 139}[
+									id: {line = 139,attr = l}
+									id: {line = 139,attr = r}
+								]
+							]
+						]
+					]
+				]
+			]
+			return: {line = 141}[
+				id: {line = 141,attr = l}
+			]
+		]
+	]
+	functiondeclaration: {line = 144}[
+		int: {line = 144}
+		id: {line = 144,attr = T}
+		formalparameterlist: {}
+		block: {line = 146}[
+			variabledeclaration: {line = 146}[
+				int: {line = 146}
+				id: {line = 146,attr = l}
+			]
+			variabledeclaration: {line = 147}[
+				int: {line = 147}
+				id: {line = 147,attr = r}
+			]
+			variabledeclaration: {line = 148}[
+				int: {line = 148}
+				id: {line = 148,attr = token}
+			]
+			statementexpression: {line = 150}[
+				=: {line = 150}[
+					id: {line = 150,attr = l}
+					functioninvocation: {line = 150}[
+						id: {line = 150,attr = F}
+						argumentlist: {}
+					]
+				]
+			]
+			while: {line = 151}[
+				||: {line = 151}[
+					==: {line = 151}[
+						functioninvocation: {line = 151}[
+							id: {line = 151,attr = peek}
+							argumentlist: {}
+						]
+						id: {line = 151,attr = TK_MUL}
+					]
+					==: {line = 151}[
+						functioninvocation: {line = 151}[
+							id: {line = 151,attr = peek}
+							argumentlist: {}
+						]
+						id: {line = 151,attr = TK_DIV}
+					]
+				]
+				block: {line = 152}[
+					functioninvocation: {line = 152}[
+						id: {line = 152,attr = match}
+						argumentlist: {line = 152}[
+							=: {line = 152}[
+								id: {line = 152,attr = token}
+								functioninvocation: {line = 152}[
+									id: {line = 152,attr = peek}
+									argumentlist: {}
+								]
+							]
+						]
+					]
+					statementexpression: {line = 153}[
+						=: {line = 153}[
+							id: {line = 153,attr = r}
+							functioninvocation: {line = 153}[
+								id: {line = 153,attr = F}
+								argumentlist: {}
+							]
+						]
+					]
+					if-else: {line = 155}[
+						==: {line = 155}[
+							id: {line = 155,attr = token}
+							id: {line = 155,attr = TK_MUL}
+						]
+						statementexpression: {line = 156}[
+							=: {line = 156}[
+								id: {line = 156,attr = l}
+								*: {line = 156}[
+									id: {line = 156,attr = l}
+									id: {line = 156,attr = r}
+								]
+							]
+						]
+						statementexpression: {line = 158}[
+							=: {line = 158}[
+								id: {line = 158,attr = l}
+								/: {line = 158}[
+									id: {line = 158,attr = l}
+									id: {line = 158,attr = r}
+								]
+							]
+						]
+					]
+				]
+			]
+			return: {line = 160}[
+				id: {line = 160,attr = l}
+			]
+		]
+	]
+	functiondeclaration: {line = 163}[
+		int: {line = 163}
+		id: {line = 163,attr = F}
+		formalparameterlist: {}
+		block: {line = 165}[
+			variabledeclaration: {line = 165}[
+				int: {line = 165}
+				id: {line = 165,attr = result}
+			]
+			variabledeclaration: {line = 167}[
+				int: {line = 167}
+				id: {line = 167,attr = token}
+			]
+			statementexpression: {line = 168}[
+				=: {line = 168}[
+					id: {line = 168,attr = token}
+					functioninvocation: {line = 168}[
+						id: {line = 168,attr = peek}
+						argumentlist: {}
+					]
+				]
+			]
+			if-else: {line = 170}[
+				==: {line = 170}[
+					id: {line = 170,attr = token}
+					id: {line = 170,attr = TK_LPAREN}
+				]
+				block: {line = 171}[
+					functioninvocation: {line = 171}[
+						id: {line = 171,attr = match}
+						argumentlist: {line = 171}[
+							id: {line = 171,attr = TK_LPAREN}
+						]
+					]
+					statementexpression: {line = 172}[
+						=: {line = 172}[
+							id: {line = 172,attr = result}
+							functioninvocation: {line = 172}[
+								id: {line = 172,attr = E}
+								argumentlist: {}
+							]
+						]
+					]
+					functioninvocation: {line = 173}[
+						id: {line = 173,attr = match}
+						argumentlist: {line = 173}[
+							id: {line = 173,attr = TK_RPAREN}
+						]
+					]
+				]
+				if-else: {line = 175}[
+					==: {line = 175}[
+						id: {line = 175,attr = token}
+						id: {line = 175,attr = TK_SUB}
+					]
+					block: {line = 176}[
+						functioninvocation: {line = 176}[
+							id: {line = 176,attr = match}
+							argumentlist: {line = 176}[
+								id: {line = 176,attr = TK_SUB}
+							]
+						]
+						statementexpression: {line = 177}[
+							=: {line = 177}[
+								id: {line = 177,attr = result}
+								-: {line = 177}[
+									functioninvocation: {line = 177}[
+										id: {line = 177,attr = F}
+										argumentlist: {}
+									]
+								]
+							]
+						]
+					]
+					if-else: {line = 179}[
+						==: {line = 179}[
+							id: {line = 179,attr = token}
+							id: {line = 179,attr = TK_NUMBER}
+						]
+						block: {line = 180}[
+							functioninvocation: {line = 180}[
+								id: {line = 180,attr = match}
+								argumentlist: {line = 180}[
+									id: {line = 180,attr = TK_NUMBER}
+								]
+							]
+							statementexpression: {line = 181}[
+								=: {line = 181}[
+									id: {line = 181,attr = result}
+									id: {line = 181,attr = attr}
+								]
+							]
+						]
+						block: {line = 184}[
+							functioninvocation: {line = 184}[
+								id: {line = 184,attr = prints}
+								argumentlist: {line = 184}[
+									string: {line = 184,attr = Error: expected factor.\n}
+								]
+							]
+							functioninvocation: {line = 185}[
+								id: {line = 185,attr = halt}
+								argumentlist: {}
+							]
+						]
+					]
+				]
+			]
+			return: {line = 187}[
+				id: {line = 187,attr = result}
+			]
+		]
+	]
+	variabledeclaration: {line = 194}[
+		int: {line = 194}
+		id: {line = 194,attr = EOF}
+	]
+	variabledeclaration: {line = 196}[
+		int: {line = 196}
+		id: {line = 196,attr = TK_EOF}
+	]
+	variabledeclaration: {line = 197}[
+		int: {line = 197}
+		id: {line = 197,attr = TK_EOLN}
+	]
+	variabledeclaration: {line = 198}[
+		int: {line = 198}
+		id: {line = 198,attr = TK_NUMBER}
+	]
+	variabledeclaration: {line = 199}[
+		int: {line = 199}
+		id: {line = 199,attr = TK_ADD}
+	]
+	variabledeclaration: {line = 200}[
+		int: {line = 200}
+		id: {line = 200,attr = TK_SUB}
+	]
+	variabledeclaration: {line = 201}[
+		int: {line = 201}
+		id: {line = 201,attr = TK_MUL}
+	]
+	variabledeclaration: {line = 202}[
+		int: {line = 202}
+		id: {line = 202,attr = TK_DIV}
+	]
+	variabledeclaration: {line = 203}[
+		int: {line = 203}
+		id: {line = 203,attr = TK_LPAREN}
+	]
+	variabledeclaration: {line = 204}[
+		int: {line = 204}
+		id: {line = 204,attr = TK_RPAREN}
+	]
+	variabledeclaration: {line = 206}[
+		int: {line = 206}
+		id: {line = 206,attr = ASCII_0}
+	]
+	variabledeclaration: {line = 207}[
+		int: {line = 207}
+		id: {line = 207,attr = ASCII_9}
+	]
+	variabledeclaration: {line = 208}[
+		int: {line = 208}
+		id: {line = 208,attr = ASCII_PLUS}
+	]
+	variabledeclaration: {line = 209}[
+		int: {line = 209}
+		id: {line = 209,attr = ASCII_MINUS}
+	]
+	variabledeclaration: {line = 210}[
+		int: {line = 210}
+		id: {line = 210,attr = ASCII_STAR}
+	]
+	variabledeclaration: {line = 211}[
+		int: {line = 211}
+		id: {line = 211,attr = ASCII_SLASH}
+	]
+	variabledeclaration: {line = 212}[
+		int: {line = 212}
+		id: {line = 212,attr = ASCII_LPAREN}
+	]
+	variabledeclaration: {line = 213}[
+		int: {line = 213}
+		id: {line = 213,attr = ASCII_RPAREN}
+	]
+	variabledeclaration: {line = 214}[
+		int: {line = 214}
+		id: {line = 214,attr = ASCII_SPACE}
+	]
+	variabledeclaration: {line = 215}[
+		int: {line = 215}
+		id: {line = 215,attr = ASCII_TAB}
+	]
+	variabledeclaration: {line = 216}[
+		int: {line = 216}
+		id: {line = 216,attr = ASCII_CR}
+	]
+	variabledeclaration: {line = 217}[
+		int: {line = 217}
+		id: {line = 217,attr = ASCII_NL}
+	]
+	functiondeclaration: {line = 219}[
+		void: {line = 219}
+		id: {line = 219,attr = init}
+		formalparameterlist: {}
+		block: {line = 221}[
+			statementexpression: {line = 221}[
+				=: {line = 221}[
+					id: {line = 221,attr = EOF}
+					-: {line = 221}[
+						int: {line = 221,attr = 1}
+					]
+				]
+			]
+			statementexpression: {line = 223}[
+				=: {line = 223}[
+					id: {line = 223,attr = ASCII_0}
+					int: {line = 223,attr = 48}
+				]
+			]
+			statementexpression: {line = 224}[
+				=: {line = 224}[
+					id: {line = 224,attr = ASCII_9}
+					int: {line = 224,attr = 57}
+				]
+			]
+			statementexpression: {line = 225}[
+				=: {line = 225}[
+					id: {line = 225,attr = ASCII_PLUS}
+					int: {line = 225,attr = 43}
+				]
+			]
+			statementexpression: {line = 226}[
+				=: {line = 226}[
+					id: {line = 226,attr = ASCII_MINUS}
+					int: {line = 226,attr = 45}
+				]
+			]
+			statementexpression: {line = 227}[
+				=: {line = 227}[
+					id: {line = 227,attr = ASCII_STAR}
+					int: {line = 227,attr = 42}
+				]
+			]
+			statementexpression: {line = 228}[
+				=: {line = 228}[
+					id: {line = 228,attr = ASCII_SLASH}
+					int: {line = 228,attr = 47}
+				]
+			]
+			statementexpression: {line = 229}[
+				=: {line = 229}[
+					id: {line = 229,attr = ASCII_LPAREN}
+					int: {line = 229,attr = 40}
+				]
+			]
+			statementexpression: {line = 230}[
+				=: {line = 230}[
+					id: {line = 230,attr = ASCII_RPAREN}
+					int: {line = 230,attr = 41}
+				]
+			]
+			statementexpression: {line = 231}[
+				=: {line = 231}[
+					id: {line = 231,attr = ASCII_SPACE}
+					int: {line = 231,attr = 32}
+				]
+			]
+			statementexpression: {line = 232}[
+				=: {line = 232}[
+					id: {line = 232,attr = ASCII_TAB}
+					int: {line = 232,attr = 9}
+				]
+			]
+			statementexpression: {line = 233}[
+				=: {line = 233}[
+					id: {line = 233,attr = ASCII_CR}
+					int: {line = 233,attr = 13}
+				]
+			]
+			statementexpression: {line = 234}[
+				=: {line = 234}[
+					id: {line = 234,attr = ASCII_NL}
+					int: {line = 234,attr = 10}
+				]
+			]
+			statementexpression: {line = 236}[
+				=: {line = 236}[
+					id: {line = 236,attr = TK_EOF}
+					int: {line = 236,attr = 256}
+				]
+			]
+			statementexpression: {line = 237}[
+				=: {line = 237}[
+					id: {line = 237,attr = TK_NUMBER}
+					int: {line = 237,attr = 257}
+				]
+			]
+			statementexpression: {line = 238}[
+				=: {line = 238}[
+					id: {line = 238,attr = TK_ADD}
+					id: {line = 238,attr = ASCII_PLUS}
+				]
+			]
+			statementexpression: {line = 239}[
+				=: {line = 239}[
+					id: {line = 239,attr = TK_SUB}
+					id: {line = 239,attr = ASCII_MINUS}
+				]
+			]
+			statementexpression: {line = 240}[
+				=: {line = 240}[
+					id: {line = 240,attr = TK_MUL}
+					id: {line = 240,attr = ASCII_STAR}
+				]
+			]
+			statementexpression: {line = 241}[
+				=: {line = 241}[
+					id: {line = 241,attr = TK_DIV}
+					id: {line = 241,attr = ASCII_SLASH}
+				]
+			]
+			statementexpression: {line = 242}[
+				=: {line = 242}[
+					id: {line = 242,attr = TK_LPAREN}
+					id: {line = 242,attr = ASCII_LPAREN}
+				]
+			]
+			statementexpression: {line = 243}[
+				=: {line = 243}[
+					id: {line = 243,attr = TK_RPAREN}
+					id: {line = 243,attr = ASCII_RPAREN}
+				]
+			]
+			statementexpression: {line = 244}[
+				=: {line = 244}[
+					id: {line = 244,attr = TK_EOLN}
+					id: {line = 244,attr = ASCII_NL}
+				]
+			]
+		]
+	]
+]
+
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ java -cp "java-cup-11b-runtime.jar:." Scan ~aycock/411/TEST/ms2/*.t18[K9
+globaldeclarations: {line = 1}[
+	mainfunctiondeclaration: {line = 1}[
+		void: {}
+		id: {line = 1,attr = main}
+		formalparameterlist: {}
+		block: {line = 2}[
+			if: {line = 2}[
+				true: {line = 2}
+				if-else: {line = 3}[
+					true: {line = 3}
+				]
+			]
+		]
+	]
+]
+
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ java -cp "java-cup-11b-runtime.jar:." Scan ~aycock/411/TEST/ms2/*.t19[K[K21
+globaldeclarations: {line = 1}[
+	mainfunctiondeclaration: {line = 1}[
+		void: {}
+		id: {line = 1,attr = main}
+		formalparameterlist: {}
+		block: {line = 2}[
+			statementexpression: {line = 2}[
+				=: {line = 2}[
+					id: {line = 2,attr = x}
+					+: {line = 2}[
+						int: {line = 2,attr = 1}
+						*: {line = 2}[
+							int: {line = 2,attr = 2}
+							int: {line = 2,attr = 3}
+						]
+					]
+				]
+			]
+			statementexpression: {line = 3}[
+				=: {line = 3}[
+					id: {line = 3,attr = x}
+					*: {line = 3}[
+						+: {line = 3}[
+							int: {line = 3,attr = 1}
+							int: {line = 3,attr = 2}
+						]
+						int: {line = 3,attr = 3}
+					]
+				]
+			]
+		]
+	]
+]
+
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ java -cp "java-cup-11b-runtime.jar:." Scan ~aycock/411/TEST/ms2/*.t21[K2
+globaldeclarations: {line = 1}[
+	mainfunctiondeclaration: {line = 1}[
+		void: {}
+		id: {line = 1,attr = main}
+		formalparameterlist: {}
+		block: {line = 2}[
+			statementexpression: {line = 2}[
+				=: {line = 2}[
+					id: {line = 2,attr = x}
+					-: {line = 2}[
+						id: {line = 2,attr = a}
+						-: {line = 2}[
+							int: {line = 2,attr = 1}
+						]
+					]
+				]
+			]
+			statementexpression: {line = 3}[
+				=: {line = 3}[
+					id: {line = 3,attr = x}
+					-: {line = 3}[
+						id: {line = 3,attr = a}
+						-: {line = 3}[
+							id: {line = 3,attr = b}
+						]
+					]
+				]
+			]
+			statementexpression: {line = 4}[
+				=: {line = 4}[
+					id: {line = 4,attr = x}
+					-: {line = 4}[
+						-: {line = 4}[
+							-: {line = 4}[
+								-: {line = 4}[
+									-: {line = 4}[
+										-: {line = 4}[
+											-: {line = 4}[
+												id: {line = 4,attr = x}
+											]
+										]
+									]
+								]
+							]
+						]
+					]
+				]
+			]
+		]
+	]
+]
+
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ java -cp "java-cup-11b-runtime.jar:." Scan ./ms2/*.t1
+globaldeclarations: {line = 1}[
+	variabledeclaration: {line = 1}[
+		int: {line = 1}
+		id: {line = 1,attr = o}
+	]
+	functiondeclaration: {line = 3}[
+		int: {line = 3}
+		id: {line = 3,attr = main}
+		formalparameterlist: {line = 5}[
+			formalparameter: {line = 4}[
+				int: {line = 4}
+				id: {line = 5,attr = x}
+			]
+			formalparameter: {line = 6}[
+				boolean: {line = 6}
+				id: {line = 6,attr = y}
+			]
+		]
+		block: {line = 10}[
+			variabledeclaration: {line = 10}[
+				boolean: {line = 10}
+				id: {line = 10,attr = x}
+			]
+			variabledeclaration: {line = 11}[
+				int: {line = 11}
+				id: {line = 11,attr = y}
+			]
+			statementexpression: {line = 13}[
+				=: {line = 13}[
+					id: {line = 13,attr = x}
+					||: {line = 13}[
+						<: {line = 13}[
+							*: {line = 13}[
+								+: {line = 13}[
+									int: {line = 13,attr = 1}
+									int: {line = 13,attr = 3}
+								]
+								%: {line = 13}[
+									int: {line = 13,attr = 5}
+									int: {line = 13,attr = 6}
+								]
+							]
+							functioninvocation: {line = 13}[
+								id: {line = 13,attr = foo}
+								argumentlist: {line = 13}[
+									string: {line = 13,attr = one}
+								]
+							]
+						]
+						&&: {line = 13}[
+							<: {line = 13}[
+								id: {line = 13,attr = y}
+								id: {line = 13,attr = z}
+							]
+							==: {line = 13}[
+								id: {line = 13,attr = x}
+								int: {line = 13,attr = 1}
+							]
+						]
+					]
+				]
+			]
+			statementexpression: {line = 14}[
+				=: {line = 14}[
+					id: {line = 14,attr = x}
+					&&: {line = 14}[
+						||: {line = 14}[
+							<: {line = 14}[
+								+: {line = 14}[
+									int: {line = 14,attr = 1}
+									*: {line = 14}[
+										int: {line = 14,attr = 3}
+										%: {line = 14}[
+											int: {line = 14,attr = 5}
+											int: {line = 14,attr = 6}
+										]
+									]
+								]
+								functioninvocation: {line = 14}[
+									id: {line = 14,attr = foo}
+									argumentlist: {line = 14}[
+										string: {line = 14,attr = one}
+									]
+								]
+							]
+							<: {line = 14}[
+								id: {line = 14,attr = y}
+								id: {line = 14,attr = z}
+							]
+						]
+						==: {line = 14}[
+							id: {line = 14,attr = x}
+							int: {line = 14,attr = 1}
+						]
+					]
+				]
+			]
+			block: {line = 16}[
+				statementexpression: {line = 16}[
+					=: {line = 17}[
+						id: {line = 16,attr = x}
+						||: {line = 28}[
+							<: {line = 25}[
+								*: {line = 22}[
+									+: {line = 20}[
+										int: {line = 19,attr = 1}
+										int: {line = 21,attr = 3}
+									]
+									%: {line = 23}[
+										int: {line = 23,attr = 5}
+										int: {line = 24,attr = 5}
+									]
+								]
+								functioninvocation: {line = 26}[
+									id: {line = 26,attr = foo}
+									argumentlist: {line = 27}[
+										string: {line = 27,attr = one}
+									]
+								]
+							]
+							functioninvocation: {line = 28}[
+								id: {line = 28,attr = equals}
+								argumentlist: {line = 29}[
+									int: {line = 29,attr = 3}
+									string: {line = 30,attr = three}
+									string: {line = 30,attr = THREE}
+									string: {line = 30,attr = tree}
+								]
+							]
+						]
+					]
+				]
+				statementexpression: {line = 32}[
+					=: {line = 32}[
+						id: {line = 32,attr = x}
+						-: {line = 32}[
+							-: {line = 32}[
+								-: {line = 32}[
+									-: {line = 32}[
+										int: {line = 32,attr = 1}
+									]
+								]
+							]
+						]
+					]
+				]
+			]
+		]
+	]
+	functiondeclaration: {line = 37}[
+		boolean: {line = 37}
+		id: {line = 37,attr = equals}
+		formalparameterlist: {line = 37}[
+			formalparameter: {line = 37}[
+				int: {line = 37}
+				id: {line = 37,attr = x}
+			]
+			formalparameter: {line = 37}[
+				boolean: {line = 37}
+				id: {line = 37,attr = y}
+			]
+		]
+		block: {line = 38}[
+			return: {line = 38}[
+				id: {line = 38,attr = y}
+			]
+			break: {line = 39}
+			return: {line = 40}[
+				id: {line = 40,attr = z}
+			]
+		]
+	]
+]
+
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ java -cp "java-cup-11b-runtime.jar:." Scan ./ms2/*.t1[K2
+Syntax error for input symbol "KW_BREAK" spanning from line 3, column 2 to line 3, column 6 in file ./ms2/missing_semicolon.t2
+The expected token classes are [ADD, SUBTRACT, MULTIPLY, DIVIDE, MODULUS, GREATER_THAN, LESSER_THAN, GREATER_EQUAL, LESSER_EQUAL, EQUAL, ASSIGN, NOT_EQUAL, AND, OR, OPEN_ROUND_BRACES, SEMI_COLON]
+Skipping ahead to next "SEMI_COLON"
+globaldeclarations: {line = 1}[
+	functiondeclaration: {line = 1}[
+		boolean: {line = 1}
+		id: {line = 1,attr = equals}
+		formalparameterlist: {line = 1}[
+			formalparameter: {line = 1}[
+				int: {line = 1}
+				id: {line = 1,attr = x}
+			]
+			formalparameter: {line = 1}[
+				boolean: {line = 1}
+				id: {line = 1,attr = y}
+			]
+		]
+		block: {line = 2}[
+			return: {line = 4}[
+				id: {line = 4,attr = z}
+			]
+		]
+	]
+]
+
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ java -cp "java-cup-11b-runtime.jar:." Scan ./ms2/*.t2[K3
+Syntax error for input symbol "OPEN_CURLY_BRACES" spanning from line 1, column 1 to line 1, column 1 in file ./ms2/crash.t3
+The expected token classes are [EOF, ID, KW_BOOLEAN, KW_INT, KW_VOID]
+Couldn't repair and continue parse for input symbol "OPEN_CURLY_BRACES" spanning from line 1, column 1 to line 1, column 1 in file ./ms2/crash.t3
+Compiler exiting with code 1
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ java -cp "java-cup-11b-runtime.jar:." Scan ./ms2/*.t3[K4
+Syntax error for input symbol "KW_INT" spanning from line 2, column 6 to line 2, column 8 in file ./ms2/lists.t4
+The expected token classes are []
+Skipping ahead to next "CLOSE_ROUND_BRACES"
+globaldeclarations: {line = 2}[
+	mainfunctiondeclaration: {line = 2}[
+		void: {}
+		id: {line = 2,attr = main}
+		formalparameterlist: {}
+		block: {line = 3}[
+			functioninvocation: {line = 3}[
+				id: {line = 3,attr = func1}
+				argumentlist: {line = 3}[
+					id: {line = 3,attr = a}
+					id: {line = 3,attr = b}
+					id: {line = 3,attr = c}
+					id: {line = 3,attr = x}
+					id: {line = 3,attr = y}
+					id: {line = 3,attr = z}
+				]
+			]
+			functioninvocation: {line = 4}[
+				id: {line = 4,attr = func2}
+				argumentlist: {line = 4}[
+					id: {line = 4,attr = a}
+					id: {line = 4,attr = b}
+					id: {line = 4,attr = c}
+					id: {line = 4,attr = x}
+					id: {line = 4,attr = y}
+					id: {line = 4,attr = z}
+				]
+			]
+			functioninvocation: {line = 5}[
+				id: {line = 5,attr = func3}
+				argumentlist: {line = 5}[
+					id: {line = 5,attr = a}
+					id: {line = 5,attr = b}
+					id: {line = 5,attr = c}
+					id: {line = 5,attr = x}
+					id: {line = 5,attr = y}
+					id: {line = 5,attr = z}
+				]
+			]
+			functioninvocation: {line = 6}[
+				id: {line = 6,attr = func4}
+				argumentlist: {line = 6}[
+					id: {line = 6,attr = a}
+					id: {line = 6,attr = b}
+					id: {line = 6,attr = c}
+					id: {line = 6,attr = x}
+					id: {line = 6,attr = y}
+					id: {line = 6,attr = z}
+				]
+			]
+			functioninvocation: {line = 7}[
+				id: {line = 7,attr = func5}
+				argumentlist: {line = 7}[
+					id: {line = 7,attr = a}
+					id: {line = 7,attr = b}
+					id: {line = 7,attr = c}
+					id: {line = 7,attr = x}
+					id: {line = 7,attr = y}
+					id: {line = 7,attr = z}
+				]
+			]
+			functioninvocation: {line = 8}[
+				id: {line = 8,attr = func6}
+				argumentlist: {line = 8}[
+					functioninvocation: {line = 8}[
+						id: {line = 8,attr = func1}
+						argumentlist: {line = 8}[
+							id: {line = 8,attr = a}
+							id: {line = 8,attr = b}
+							id: {line = 8,attr = c}
+							id: {line = 8,attr = x}
+							id: {line = 8,attr = y}
+							id: {line = 8,attr = z}
+						]
+					]
+					functioninvocation: {line = 8}[
+						id: {line = 8,attr = func2}
+						argumentlist: {line = 8}[
+							id: {line = 8,attr = a}
+							id: {line = 8,attr = b}
+							id: {line = 8,attr = c}
+							id: {line = 8,attr = x}
+							id: {line = 8,attr = y}
+							id: {line = 8,attr = z}
+						]
+					]
+					functioninvocation: {line = 8}[
+						id: {line = 8,attr = func3}
+						argumentlist: {line = 8}[
+							id: {line = 8,attr = a}
+							id: {line = 8,attr = b}
+							id: {line = 8,attr = c}
+							id: {line = 8,attr = x}
+							id: {line = 8,attr = y}
+							id: {line = 8,attr = z}
+						]
+					]
+					functioninvocation: {line = 8}[
+						id: {line = 8,attr = func4}
+						argumentlist: {line = 8}[
+							id: {line = 8,attr = a}
+							id: {line = 8,attr = b}
+							id: {line = 8,attr = c}
+							id: {line = 8,attr = x}
+							id: {line = 8,attr = y}
+							id: {line = 8,attr = z}
+						]
+					]
+					functioninvocation: {line = 8}[
+						id: {line = 8,attr = func5}
+						argumentlist: {line = 8}[
+							id: {line = 8,attr = a}
+							id: {line = 8,attr = b}
+							id: {line = 8,attr = c}
+							id: {line = 8,attr = x}
+							id: {line = 8,attr = y}
+							id: {line = 8,attr = z}
+						]
+					]
+					functioninvocation: {line = 8}[
+						id: {line = 8,attr = func6}
+						argumentlist: {line = 8}[
+							id: {line = 8,attr = a}
+							id: {line = 8,attr = b}
+							id: {line = 8,attr = c}
+							id: {line = 8,attr = x}
+							id: {line = 8,attr = y}
+							id: {line = 8,attr = z}
+						]
+					]
+				]
+			]
+		]
+	]
+]
+
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ java -cp "java-cup-11b-runtime.jar:." Scan ./ms2/*.t4[K5
+globaldeclarations: {line = 2}[
+	functiondeclaration: {line = 2}[
+		int: {line = 2}
+		id: {line = 2,attr = reverseInt}
+		formalparameterlist: {line = 2}[
+			formalparameter: {line = 2}[
+				int: {line = 2}
+				id: {line = 2,attr = b}
+			]
+		]
+		block: {line = 3}[
+			variabledeclaration: {line = 3}[
+				int: {line = 3}
+				id: {line = 3,attr = ans}
+			]
+			statementexpression: {line = 4}[
+				=: {line = 4}[
+					id: {line = 4,attr = ans}
+					int: {line = 4,attr = 0}
+				]
+			]
+			while: {line = 5}[
+				>: {line = 5}[
+					id: {line = 5,attr = b}
+					int: {line = 5,attr = 0}
+				]
+				block: {line = 6}[
+					statementexpression: {line = 6}[
+						=: {line = 6}[
+							id: {line = 6,attr = ans}
+							+: {line = 6}[
+								*: {line = 6}[
+									id: {line = 6,attr = ans}
+									int: {line = 6,attr = 10}
+								]
+								%: {line = 6}[
+									id: {line = 6,attr = b}
+									int: {line = 6,attr = 10}
+								]
+							]
+						]
+					]
+					statementexpression: {line = 7}[
+						=: {line = 7}[
+							id: {line = 7,attr = b}
+							/: {line = 7}[
+								id: {line = 7,attr = b}
+								int: {line = 7,attr = 10}
+							]
+						]
+					]
+				]
+			]
+			return: {line = 9}[
+				id: {line = 9,attr = ans}
+			]
+		]
+	]
+	functiondeclaration: {line = 12}[
+		boolean: {line = 12}
+		id: {line = 12,attr = testIf}
+		formalparameterlist: {}
+		block: {line = 13}[
+			if: {line = 13}[
+				==: {line = 13}[
+					id: {line = 13,attr = x}
+					int: {line = 13,attr = 0}
+				]
+				block: {line = 14}[
+					if: {line = 14}[
+						||: {line = 14}[
+							id: {line = 14,attr = y}
+							id: {line = 14,attr = l}
+						]
+						block: {line = 15}[
+							if: {line = 15}[
+								id: {line = 15,attr = k}
+								if: {line = 16}[
+									id: {line = 16,attr = l}
+									if-else: {line = 17}[
+										id: {line = 17,attr = m}
+										statementexpression: {line = 18}[
+											=: {line = 18}[
+												id: {line = 18,attr = x}
+												+: {line = 18}[
+													id: {line = 18,attr = x}
+													int: {line = 18,attr = 1}
+												]
+											]
+										]
+										statementexpression: {line = 20}[
+											=: {line = 20}[
+												id: {line = 20,attr = x}
+												-: {line = 20}[
+													id: {line = 20,attr = x}
+													int: {line = 20,attr = 1}
+												]
+											]
+										]
+									]
+								]
+							]
+							functioninvocation: {line = 21}[
+								id: {line = 21,attr = print}
+								argumentlist: {line = 21}[
+									string: {line = 21,attr = abcdefghijklmnopqrstuvwxyz\"\'\n\r\\!@#$%^&*()><?:|_+-=[];',./}
+								]
+							]
+						]
+					]
+				]
+			]
+		]
+	]
+]
+
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ exit
+exit
+
+Script done on 2020-02-27 22:26:34-07:00 [COMMAND_EXIT_CODE="0"]

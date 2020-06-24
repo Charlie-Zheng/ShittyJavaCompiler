@@ -1,0 +1,944 @@
+//
+//  A recursive-descent calculator.  Not particularly robust!
+//
+
+calculator()
+{
+	init();
+	parser();
+}
+
+//
+//  Input wrappers, so we can push back a character.
+//
+
+boolean _havechar;
+int _char;
+
+
+
+int getc()
+{
+	if (_havechar) {
+		_havechar = false;
+		return _char;
+	}
+	return getchar();
+}
+
+void ungetc(int ch)
+{
+	if (_havechar) {
+		prints("Internal error: too many ungets!\n");
+		halt();
+	}
+	_havechar = true;
+	_char = ch;
+}
+
+//
+//  Scanner.
+//
+
+boolean _havetoken;
+int _token;
+int attr;
+
+int peek()
+{
+	if (_havetoken)
+		return _token;
+
+	_havetoken = true;
+	return _token = scanner();
+}
+
+void match(int expect)
+{
+	if (peek() != expect) {
+		prints("Error: expected ");
+		printc(expect);			// XXX - not always printable
+		prints("\n");
+		halt();
+	}
+	_havetoken = false;
+}
+
+int scanner()
+{
+	int ch;
+
+	while (isspace(ch = getc()))
+		;
+
+	if (ch == EOF)			return TK_EOF;
+	if (ch == ASCII_NL)		return TK_EOLN;
+	if (ch == ASCII_PLUS)		return TK_ADD;
+	if (ch == ASCII_MINUS)		return TK_SUB;
+	if (ch == ASCII_STAR)		return TK_MUL;
+	if (ch == ASCII_SLASH)		return TK_DIV;
+	if (ch == ASCII_LPAREN)		return TK_LPAREN;
+	if (ch == ASCII_RPAREN)		return TK_RPAREN;
+
+	if (isdigit(ch)) {
+		attr = 0;
+		while (isdigit(ch)) {
+			attr = attr * 10 + (ch - ASCII_0);
+			ch = getc();
+		}
+		ungetc(ch);
+		return TK_NUMBER;
+	}
+
+	prints("Error: invalid character.\n");
+	halt();
+}
+
+boolean isdigit(int ch)
+{
+	return ch >= ASCII_0 && ch <= ASCII_9;
+}
+
+boolean isspace(int ch)
+{
+	return ch == ASCII_SPACE ||
+	       ch == ASCII_TAB ||
+	       ch == ASCII_CR;
+}
+
+//
+//  Parser.
+//
+
+void parser()
+{
+	int result;
+
+	while (peek() != TK_EOF) {
+		result = E();
+		match(TK_EOLN);
+
+		prints(" = ");
+		printi(result);
+		prints("\n");
+	}
+}
+
+int E()
+{
+	int l;
+	int r;
+	int token;
+
+	l = T();
+	while (peek() == TK_ADD || peek() == TK_SUB) {
+		match(token = peek());
+		r = T();
+
+		if (token == TK_ADD)
+			l = l + r;
+		else
+			l = l - r;
+	}
+	return l;
+}
+
+int T()
+{
+	int l;
+	int r;
+	int token;
+
+	l = F();
+	while (peek() == TK_MUL || peek() == TK_DIV) {
+		match(token = peek());
+		r = F();
+
+		if (token == TK_MUL)
+			l = l * r;
+		else
+			l = l / r;
+	}
+	return l;
+}
+
+int F()
+{
+	int result;
+
+	int token;
+	token = peek();
+
+	if (token == TK_LPAREN) {
+		match(TK_LPAREN);
+		result = E();
+		match(TK_RPAREN);
+
+	} else if (token == TK_SUB) {
+		match(TK_SUB);
+		result = -F();
+
+	} else if (token == TK_NUMBER) {
+		match(TK_NUMBER);
+		result = attr;
+
+	} else {
+		prints("Error: expected factor.\n");
+		halt();
+	}
+	return result;
+}
+
+//
+//  Initialization.
+//
+
+int EOF;
+
+int TK_EOF;
+int TK_EOLN;
+int TK_NUMBER;
+int TK_ADD;
+int TK_SUB;
+int TK_MUL;
+int TK_DIV;
+int TK_LPAREN;
+int TK_RPAREN;
+
+int ASCII_0;
+int ASCII_9;
+int ASCII_PLUS;
+int ASCII_MINUS;
+int ASCII_STAR;
+int ASCII_SLASH;
+int ASCII_LPAREN;
+int ASCII_RPAREN;
+int ASCII_SPACE;
+int ASCII_TAB;
+int ASCII_CR;
+int ASCII_NL;
+
+void init()
+{
+	EOF = -1;
+
+	ASCII_0 = 48;
+	ASCII_9 = 57;
+	ASCII_PLUS = 43;
+	ASCII_MINUS = 45;
+	ASCII_STAR = 42;
+	ASCII_SLASH = 47;
+	ASCII_LPAREN = 40;
+	ASCII_RPAREN = 41;
+	ASCII_SPACE = 32;
+	ASCII_TAB = 9;
+	ASCII_CR = 13;
+	ASCII_NL = 10;
+
+	TK_EOF = 256;
+	TK_NUMBER = 257;
+	TK_ADD = ASCII_PLUS;
+	TK_SUB = ASCII_MINUS;
+	TK_MUL = ASCII_STAR;
+	TK_DIV = ASCII_SLASH;
+	TK_LPAREN = ASCII_LPAREN;
+	TK_RPAREN = ASCII_RPAREN;
+	TK_EOLN = ASCII_NL;
+}
+
+
+//program {'type': 'program'}
+//mainDecl {'type': 'mainDecl', 'lineno': 5}
+//        void {'type': 'void'}
+//        id {'type': 'id', 'lineno': 5, 'attr': 'calculator'}
+//        formals {'type': 'formals'}
+//        block {'type': 'block'}
+//                stmtExpr {'type': 'stmtExpr', 'lineno': 7}
+//                        funcCall {'type': 'funcCall', 'lineno': 7}
+//                                id {'type': 'id', 'lineno': 7, 'attr': 'init'}
+//                                actuals {'type': 'actuals'}
+//                stmtExpr {'type': 'stmtExpr', 'lineno': 8}
+//                        funcCall {'type': 'funcCall', 'lineno': 8}
+//                                id {'type': 'id', 'lineno': 8, 'attr': 'parser'}
+//                                actuals {'type': 'actuals'}
+//globVarDecl {'type': 'globVarDecl', 'lineno': 15}
+//        boolean {'type': 'boolean', 'lineno': 15, 'attr': None}
+//        id {'type': 'id', 'lineno': 15, 'attr': '_havechar'}
+//globVarDecl {'type': 'globVarDecl', 'lineno': 16}
+//        int {'type': 'int', 'lineno': 16, 'attr': None}
+//        id {'type': 'id', 'lineno': 16, 'attr': '_char'}
+//funcDecl {'type': 'funcDecl', 'lineno': 18}
+//        int {'type': 'int', 'lineno': 18, 'attr': None}
+//        id {'type': 'id', 'lineno': 18, 'attr': 'getc'}
+//        formals {'type': 'formals'}
+//        block {'type': 'block'}
+//                if {'type': 'if', 'lineno': 20}
+//                        id {'type': 'id', 'lineno': 20, 'attr': '_havechar'}
+//                        block {'type': 'block'}
+//                                stmtExpr {'type': 'stmtExpr', 'lineno': 21}
+//                                        = {'type': '=', 'lineno': 21}
+//                                                id {'type': 'id', 'lineno': 21, 'attr': '_havechar'}
+//                                                false {'type': 'false', 'lineno': 21, 'attr': None}
+//                                return {'type': 'return', 'lineno': 22}
+//                                        id {'type': 'id', 'lineno': 22, 'attr': '_char'}
+//                return {'type': 'return', 'lineno': 24}
+//                        funcCall {'type': 'funcCall', 'lineno': 24}
+//                                id {'type': 'id', 'lineno': 24, 'attr': 'getchar'}
+//                                actuals {'type': 'actuals'}
+//funcDecl {'type': 'funcDecl', 'lineno': 27}
+//        void {'type': 'void', 'lineno': 27, 'attr': None}
+//        id {'type': 'id', 'lineno': 27, 'attr': 'ungetc'}
+//        formals {'type': 'formals'}
+//                formal {'type': 'formal', 'lineno': 27}
+//                        int {'type': 'int', 'lineno': 27, 'attr': None}
+//                        id {'type': 'id', 'lineno': 27, 'attr': 'ch'}
+//        block {'type': 'block'}
+//                if {'type': 'if', 'lineno': 29}
+//                        id {'type': 'id', 'lineno': 29, 'attr': '_havechar'}
+//                        block {'type': 'block'}
+//                                stmtExpr {'type': 'stmtExpr', 'lineno': 30}
+//                                        funcCall {'type': 'funcCall', 'lineno': 30}
+//                                                id {'type': 'id', 'lineno': 30, 'attr': 'prints'}
+//                                                actuals {'type': 'actuals'}
+//                                                        string {'type': 'string', 'lineno': 30, 'attr': 'Internal error: too many ungets!\\n'}
+//                                stmtExpr {'type': 'stmtExpr', 'lineno': 31}
+//                                        funcCall {'type': 'funcCall', 'lineno': 31}
+//                                                id {'type': 'id', 'lineno': 31, 'attr': 'halt'}
+//                                                actuals {'type': 'actuals'}
+//                stmtExpr {'type': 'stmtExpr', 'lineno': 33}
+//                        = {'type': '=', 'lineno': 33}
+//                                id {'type': 'id', 'lineno': 33, 'attr': '_havechar'}
+//                                true {'type': 'true', 'lineno': 33, 'attr': None}
+//                stmtExpr {'type': 'stmtExpr', 'lineno': 34}
+//                        = {'type': '=', 'lineno': 34}
+//                                id {'type': 'id', 'lineno': 34, 'attr': '_char'}
+//                                id {'type': 'id', 'lineno': 34, 'attr': 'ch'}
+//globVarDecl {'type': 'globVarDecl', 'lineno': 41}
+//        boolean {'type': 'boolean', 'lineno': 41, 'attr': None}
+//        id {'type': 'id', 'lineno': 41, 'attr': '_havetoken'}
+//globVarDecl {'type': 'globVarDecl', 'lineno': 42}
+//        int {'type': 'int', 'lineno': 42, 'attr': None}
+//        id {'type': 'id', 'lineno': 42, 'attr': '_token'}
+//globVarDecl {'type': 'globVarDecl', 'lineno': 43}
+//        int {'type': 'int', 'lineno': 43, 'attr': None}
+//        id {'type': 'id', 'lineno': 43, 'attr': 'attr'}
+//funcDecl {'type': 'funcDecl', 'lineno': 45}
+//        int {'type': 'int', 'lineno': 45, 'attr': None}
+//        id {'type': 'id', 'lineno': 45, 'attr': 'peek'}
+//        formals {'type': 'formals'}
+//        block {'type': 'block'}
+//                if {'type': 'if', 'lineno': 47}
+//                        id {'type': 'id', 'lineno': 47, 'attr': '_havetoken'}
+//                        return {'type': 'return', 'lineno': 48}
+//                                id {'type': 'id', 'lineno': 48, 'attr': '_token'}
+//                stmtExpr {'type': 'stmtExpr', 'lineno': 50}
+//                        = {'type': '=', 'lineno': 50}
+//                                id {'type': 'id', 'lineno': 50, 'attr': '_havetoken'}
+//                                true {'type': 'true', 'lineno': 50, 'attr': None}
+//                return {'type': 'return', 'lineno': 51}
+//                        = {'type': '=', 'lineno': 51}
+//                                id {'type': 'id', 'lineno': 51, 'attr': '_token'}
+//                                funcCall {'type': 'funcCall', 'lineno': 51}
+//                                        id {'type': 'id', 'lineno': 51, 'attr': 'scanner'}
+//                                        actuals {'type': 'actuals'}
+//funcDecl {'type': 'funcDecl', 'lineno': 54}
+//        void {'type': 'void', 'lineno': 54, 'attr': None}
+//        id {'type': 'id', 'lineno': 54, 'attr': 'match'}
+//        formals {'type': 'formals'}
+//                formal {'type': 'formal', 'lineno': 54}
+//                        int {'type': 'int', 'lineno': 54, 'attr': None}
+//                        id {'type': 'id', 'lineno': 54, 'attr': 'expect'}
+//        block {'type': 'block'}
+//                if {'type': 'if', 'lineno': 56}
+//                        != {'type': '!=', 'lineno': 56}
+//                                funcCall {'type': 'funcCall', 'lineno': 56}
+//                                        id {'type': 'id', 'lineno': 56, 'attr': 'peek'}
+//                                        actuals {'type': 'actuals'}
+//                                id {'type': 'id', 'lineno': 56, 'attr': 'expect'}
+//                        block {'type': 'block'}
+//                                stmtExpr {'type': 'stmtExpr', 'lineno': 57}
+//                                        funcCall {'type': 'funcCall', 'lineno': 57}
+//                                                id {'type': 'id', 'lineno': 57, 'attr': 'prints'}
+//                                                actuals {'type': 'actuals'}
+//                                                        string {'type': 'string', 'lineno': 57, 'attr': 'Error: expected '}
+//                                stmtExpr {'type': 'stmtExpr', 'lineno': 58}
+//                                        funcCall {'type': 'funcCall', 'lineno': 58}
+//                                                id {'type': 'id', 'lineno': 58, 'attr': 'printc'}
+//                                                actuals {'type': 'actuals'}
+//                                                        id {'type': 'id', 'lineno': 58, 'attr': 'expect'}
+//                                stmtExpr {'type': 'stmtExpr', 'lineno': 59}
+//                                        funcCall {'type': 'funcCall', 'lineno': 59}
+//                                                id {'type': 'id', 'lineno': 59, 'attr': 'prints'}
+//                                                actuals {'type': 'actuals'}
+//                                                        string {'type': 'string', 'lineno': 59, 'attr': '\\n'}
+//                                stmtExpr {'type': 'stmtExpr', 'lineno': 60}
+//                                        funcCall {'type': 'funcCall', 'lineno': 60}
+//                                                id {'type': 'id', 'lineno': 60, 'attr': 'halt'}
+//                                                actuals {'type': 'actuals'}
+//                stmtExpr {'type': 'stmtExpr', 'lineno': 62}
+//                        = {'type': '=', 'lineno': 62}
+//                                id {'type': 'id', 'lineno': 62, 'attr': '_havetoken'}
+//                                false {'type': 'false', 'lineno': 62, 'attr': None}
+//funcDecl {'type': 'funcDecl', 'lineno': 65}
+//        int {'type': 'int', 'lineno': 65, 'attr': None}
+//        id {'type': 'id', 'lineno': 65, 'attr': 'scanner'}
+//        formals {'type': 'formals'}
+//        block {'type': 'block'}
+//                varDecl {'type': 'varDecl', 'lineno': 67}
+//                        int {'type': 'int', 'lineno': 67, 'attr': None}
+//                        id {'type': 'id', 'lineno': 67, 'attr': 'ch'}
+//                while {'type': 'while', 'lineno': 69}
+//                        funcCall {'type': 'funcCall', 'lineno': 69}
+//                                id {'type': 'id', 'lineno': 69, 'attr': 'isspace'}
+//                                actuals {'type': 'actuals'}
+//                                        = {'type': '=', 'lineno': 69}
+//                                                id {'type': 'id', 'lineno': 69, 'attr': 'ch'}
+//                                                funcCall {'type': 'funcCall', 'lineno': 69}
+//                                                        id {'type': 'id', 'lineno': 69, 'attr': 'getc'}
+//                                                        actuals {'type': 'actuals'}
+//                        nullStmt {'type': 'nullStmt', 'lineno': 70}
+//                if {'type': 'if', 'lineno': 72}
+//                        == {'type': '==', 'lineno': 72}
+//                                id {'type': 'id', 'lineno': 72, 'attr': 'ch'}
+//                                id {'type': 'id', 'lineno': 72, 'attr': 'EOF'}
+//                        return {'type': 'return', 'lineno': 72}
+//                                id {'type': 'id', 'lineno': 72, 'attr': 'TK_EOF'}
+//                if {'type': 'if', 'lineno': 73}
+//                        == {'type': '==', 'lineno': 73}
+//                                id {'type': 'id', 'lineno': 73, 'attr': 'ch'}
+//                                id {'type': 'id', 'lineno': 73, 'attr': 'ASCII_NL'}
+//                        return {'type': 'return', 'lineno': 73}
+//                                id {'type': 'id', 'lineno': 73, 'attr': 'TK_EOLN'}
+//                if {'type': 'if', 'lineno': 74}
+//                        == {'type': '==', 'lineno': 74}
+//                                id {'type': 'id', 'lineno': 74, 'attr': 'ch'}
+//                                id {'type': 'id', 'lineno': 74, 'attr': 'ASCII_PLUS'}
+//                        return {'type': 'return', 'lineno': 74}
+//                                id {'type': 'id', 'lineno': 74, 'attr': 'TK_ADD'}
+//                if {'type': 'if', 'lineno': 75}
+//                        == {'type': '==', 'lineno': 75}
+//                                id {'type': 'id', 'lineno': 75, 'attr': 'ch'}
+//                                id {'type': 'id', 'lineno': 75, 'attr': 'ASCII_MINUS'}
+//                        return {'type': 'return', 'lineno': 75}
+//                                id {'type': 'id', 'lineno': 75, 'attr': 'TK_SUB'}
+//                if {'type': 'if', 'lineno': 76}
+//                        == {'type': '==', 'lineno': 76}
+//                                id {'type': 'id', 'lineno': 76, 'attr': 'ch'}
+//                                id {'type': 'id', 'lineno': 76, 'attr': 'ASCII_STAR'}
+//                        return {'type': 'return', 'lineno': 76}
+//                                id {'type': 'id', 'lineno': 76, 'attr': 'TK_MUL'}
+//                if {'type': 'if', 'lineno': 77}
+//                        == {'type': '==', 'lineno': 77}
+//                                id {'type': 'id', 'lineno': 77, 'attr': 'ch'}
+//                                id {'type': 'id', 'lineno': 77, 'attr': 'ASCII_SLASH'}
+//                        return {'type': 'return', 'lineno': 77}
+//                                id {'type': 'id', 'lineno': 77, 'attr': 'TK_DIV'}
+//                if {'type': 'if', 'lineno': 78}
+//                        == {'type': '==', 'lineno': 78}
+//                                id {'type': 'id', 'lineno': 78, 'attr': 'ch'}
+//                                id {'type': 'id', 'lineno': 78, 'attr': 'ASCII_LPAREN'}
+//                        return {'type': 'return', 'lineno': 78}
+//                                id {'type': 'id', 'lineno': 78, 'attr': 'TK_LPAREN'}
+//                if {'type': 'if', 'lineno': 79}
+//                        == {'type': '==', 'lineno': 79}
+//                                id {'type': 'id', 'lineno': 79, 'attr': 'ch'}
+//                                id {'type': 'id', 'lineno': 79, 'attr': 'ASCII_RPAREN'}
+//                        return {'type': 'return', 'lineno': 79}
+//                                id {'type': 'id', 'lineno': 79, 'attr': 'TK_RPAREN'}
+//                if {'type': 'if', 'lineno': 81}
+//                        funcCall {'type': 'funcCall', 'lineno': 81}
+//                                id {'type': 'id', 'lineno': 81, 'attr': 'isdigit'}
+//                                actuals {'type': 'actuals'}
+//                                        id {'type': 'id', 'lineno': 81, 'attr': 'ch'}
+//                        block {'type': 'block'}
+//                                stmtExpr {'type': 'stmtExpr', 'lineno': 82}
+//                                        = {'type': '=', 'lineno': 82}
+//                                                id {'type': 'id', 'lineno': 82, 'attr': 'attr'}
+//                                                number {'type': 'number', 'lineno': 82, 'attr': '0'}
+//                                while {'type': 'while', 'lineno': 83}
+//                                        funcCall {'type': 'funcCall', 'lineno': 83}
+//                                                id {'type': 'id', 'lineno': 83, 'attr': 'isdigit'}
+//                                                actuals {'type': 'actuals'}
+//                                                        id {'type': 'id', 'lineno': 83, 'attr': 'ch'}
+//                                        block {'type': 'block'}
+//                                                stmtExpr {'type': 'stmtExpr', 'lineno': 84}
+//                                                        = {'type': '=', 'lineno': 84}
+//                                                                id {'type': 'id', 'lineno': 84, 'attr': 'attr'}
+//                                                                + {'type': '+', 'lineno': 84}
+//                                                                        * {'type': '*', 'lineno': 84}
+//                                                                                id {'type': 'id', 'lineno': 84, 'attr': 'attr'}
+//                                                                                number {'type': 'number', 'lineno': 84, 'attr': '10'}
+//                                                                        - {'type': '-', 'lineno': 84}
+//                                                                                id {'type': 'id', 'lineno': 84, 'attr': 'ch'}
+//                                                                                id {'type': 'id', 'lineno': 84, 'attr': 'ASCII_0'}
+//                                                stmtExpr {'type': 'stmtExpr', 'lineno': 85}
+//                                                        = {'type': '=', 'lineno': 85}
+//                                                                id {'type': 'id', 'lineno': 85, 'attr': 'ch'}
+//                                                                funcCall {'type': 'funcCall', 'lineno': 85}
+//                                                                        id {'type': 'id', 'lineno': 85, 'attr': 'getc'}
+//                                                                        actuals {'type': 'actuals'}
+//                                stmtExpr {'type': 'stmtExpr', 'lineno': 87}
+//                                        funcCall {'type': 'funcCall', 'lineno': 87}
+//                                                id {'type': 'id', 'lineno': 87, 'attr': 'ungetc'}
+//                                                actuals {'type': 'actuals'}
+//                                                        id {'type': 'id', 'lineno': 87, 'attr': 'ch'}
+//                                return {'type': 'return', 'lineno': 88}
+//                                        id {'type': 'id', 'lineno': 88, 'attr': 'TK_NUMBER'}
+//                stmtExpr {'type': 'stmtExpr', 'lineno': 91}
+//                        funcCall {'type': 'funcCall', 'lineno': 91}
+//                                id {'type': 'id', 'lineno': 91, 'attr': 'prints'}
+//                                actuals {'type': 'actuals'}
+//                                        string {'type': 'string', 'lineno': 91, 'attr': 'Error: invalid character.\\n'}
+//                stmtExpr {'type': 'stmtExpr', 'lineno': 92}
+//                        funcCall {'type': 'funcCall', 'lineno': 92}
+//                                id {'type': 'id', 'lineno': 92, 'attr': 'halt'}
+//                                actuals {'type': 'actuals'}
+//funcDecl {'type': 'funcDecl', 'lineno': 95}
+//        boolean {'type': 'boolean', 'lineno': 95, 'attr': None}
+//        id {'type': 'id', 'lineno': 95, 'attr': 'isdigit'}
+//        formals {'type': 'formals'}
+//                formal {'type': 'formal', 'lineno': 95}
+//                        int {'type': 'int', 'lineno': 95, 'attr': None}
+//                        id {'type': 'id', 'lineno': 95, 'attr': 'ch'}
+//        block {'type': 'block'}
+//                return {'type': 'return', 'lineno': 97}
+//                        && {'type': '&&', 'lineno': 97}
+//                                >= {'type': '>=', 'lineno': 97}
+//                                        id {'type': 'id', 'lineno': 97, 'attr': 'ch'}
+//                                        id {'type': 'id', 'lineno': 97, 'attr': 'ASCII_0'}
+//                                <= {'type': '<=', 'lineno': 97}
+//                                        id {'type': 'id', 'lineno': 97, 'attr': 'ch'}
+//                                        id {'type': 'id', 'lineno': 97, 'attr': 'ASCII_9'}
+//funcDecl {'type': 'funcDecl', 'lineno': 100}
+//        boolean {'type': 'boolean', 'lineno': 100, 'attr': None}
+//        id {'type': 'id', 'lineno': 100, 'attr': 'isspace'}
+//        formals {'type': 'formals'}
+//                formal {'type': 'formal', 'lineno': 100}
+//                        int {'type': 'int', 'lineno': 100, 'attr': None}
+//                        id {'type': 'id', 'lineno': 100, 'attr': 'ch'}
+//        block {'type': 'block'}
+//                return {'type': 'return', 'lineno': 102}
+//                        || {'type': '||', 'lineno': 103}
+//                                || {'type': '||', 'lineno': 102}
+//                                        == {'type': '==', 'lineno': 102}
+//                                                id {'type': 'id', 'lineno': 102, 'attr': 'ch'}
+//                                                id {'type': 'id', 'lineno': 102, 'attr': 'ASCII_SPACE'}
+//                                        == {'type': '==', 'lineno': 103}
+//                                                id {'type': 'id', 'lineno': 103, 'attr': 'ch'}
+//                                                id {'type': 'id', 'lineno': 103, 'attr': 'ASCII_TAB'}
+//                                == {'type': '==', 'lineno': 104}
+//                                        id {'type': 'id', 'lineno': 104, 'attr': 'ch'}
+//                                        id {'type': 'id', 'lineno': 104, 'attr': 'ASCII_CR'}
+//funcDecl {'type': 'funcDecl', 'lineno': 111}
+//        void {'type': 'void', 'lineno': 111, 'attr': None}
+//        id {'type': 'id', 'lineno': 111, 'attr': 'parser'}
+//        formals {'type': 'formals'}
+//        block {'type': 'block'}
+//                varDecl {'type': 'varDecl', 'lineno': 113}
+//                        int {'type': 'int', 'lineno': 113, 'attr': None}
+//                        id {'type': 'id', 'lineno': 113, 'attr': 'result'}
+//                while {'type': 'while', 'lineno': 115}
+//                        != {'type': '!=', 'lineno': 115}
+//                                funcCall {'type': 'funcCall', 'lineno': 115}
+//                                        id {'type': 'id', 'lineno': 115, 'attr': 'peek'}
+//                                        actuals {'type': 'actuals'}
+//                                id {'type': 'id', 'lineno': 115, 'attr': 'TK_EOF'}
+//                        block {'type': 'block'}
+//                                stmtExpr {'type': 'stmtExpr', 'lineno': 116}
+//                                        = {'type': '=', 'lineno': 116}
+//                                                id {'type': 'id', 'lineno': 116, 'attr': 'result'}
+//                                                funcCall {'type': 'funcCall', 'lineno': 116}
+//                                                        id {'type': 'id', 'lineno': 116, 'attr': 'E'}
+//                                                        actuals {'type': 'actuals'}
+//                                stmtExpr {'type': 'stmtExpr', 'lineno': 117}
+//                                        funcCall {'type': 'funcCall', 'lineno': 117}
+//                                                id {'type': 'id', 'lineno': 117, 'attr': 'match'}
+//                                                actuals {'type': 'actuals'}
+//                                                        id {'type': 'id', 'lineno': 117, 'attr': 'TK_EOLN'}
+//                                stmtExpr {'type': 'stmtExpr', 'lineno': 119}
+//                                        funcCall {'type': 'funcCall', 'lineno': 119}
+//                                                id {'type': 'id', 'lineno': 119, 'attr': 'prints'}
+//                                                actuals {'type': 'actuals'}
+//                                                        string {'type': 'string', 'lineno': 119, 'attr': ' = '}
+//                                stmtExpr {'type': 'stmtExpr', 'lineno': 120}
+//                                        funcCall {'type': 'funcCall', 'lineno': 120}
+//                                                id {'type': 'id', 'lineno': 120, 'attr': 'printi'}
+//                                                actuals {'type': 'actuals'}
+//                                                        id {'type': 'id', 'lineno': 120, 'attr': 'result'}
+//                                stmtExpr {'type': 'stmtExpr', 'lineno': 121}
+//                                        funcCall {'type': 'funcCall', 'lineno': 121}
+//                                                id {'type': 'id', 'lineno': 121, 'attr': 'prints'}
+//                                                actuals {'type': 'actuals'}
+//                                                        string {'type': 'string', 'lineno': 121, 'attr': '\\n'}
+//funcDecl {'type': 'funcDecl', 'lineno': 125}
+//        int {'type': 'int', 'lineno': 125, 'attr': None}
+//        id {'type': 'id', 'lineno': 125, 'attr': 'E'}
+//        formals {'type': 'formals'}
+//        block {'type': 'block'}
+//                varDecl {'type': 'varDecl', 'lineno': 127}
+//                        int {'type': 'int', 'lineno': 127, 'attr': None}
+//                        id {'type': 'id', 'lineno': 127, 'attr': 'l'}
+//                varDecl {'type': 'varDecl', 'lineno': 128}
+//                        int {'type': 'int', 'lineno': 128, 'attr': None}
+//                        id {'type': 'id', 'lineno': 128, 'attr': 'r'}
+//                varDecl {'type': 'varDecl', 'lineno': 129}
+//                        int {'type': 'int', 'lineno': 129, 'attr': None}
+//                        id {'type': 'id', 'lineno': 129, 'attr': 'token'}
+//                stmtExpr {'type': 'stmtExpr', 'lineno': 131}
+//                        = {'type': '=', 'lineno': 131}
+//                                id {'type': 'id', 'lineno': 131, 'attr': 'l'}
+//                                funcCall {'type': 'funcCall', 'lineno': 131}
+//                                        id {'type': 'id', 'lineno': 131, 'attr': 'T'}
+//                                        actuals {'type': 'actuals'}
+//                while {'type': 'while', 'lineno': 132}
+//                        || {'type': '||', 'lineno': 132}
+//                                == {'type': '==', 'lineno': 132}
+//                                        funcCall {'type': 'funcCall', 'lineno': 132}
+//                                                id {'type': 'id', 'lineno': 132, 'attr': 'peek'}
+//                                                actuals {'type': 'actuals'}
+//                                        id {'type': 'id', 'lineno': 132, 'attr': 'TK_ADD'}
+//                                == {'type': '==', 'lineno': 132}
+//                                        funcCall {'type': 'funcCall', 'lineno': 132}
+//                                                id {'type': 'id', 'lineno': 132, 'attr': 'peek'}
+//                                                actuals {'type': 'actuals'}
+//                                        id {'type': 'id', 'lineno': 132, 'attr': 'TK_SUB'}
+//                        block {'type': 'block'}
+//                                stmtExpr {'type': 'stmtExpr', 'lineno': 133}
+//                                        funcCall {'type': 'funcCall', 'lineno': 133}
+//                                                id {'type': 'id', 'lineno': 133, 'attr': 'match'}
+//                                                actuals {'type': 'actuals'}
+//                                                        = {'type': '=', 'lineno': 133}
+//                                                                id {'type': 'id', 'lineno': 133, 'attr': 'token'}
+//                                                                funcCall {'type': 'funcCall', 'lineno': 133}
+//                                                                        id {'type': 'id', 'lineno': 133, 'attr': 'peek'}
+//                                                                        actuals {'type': 'actuals'}
+//                                stmtExpr {'type': 'stmtExpr', 'lineno': 134}
+//                                        = {'type': '=', 'lineno': 134}
+//                                                id {'type': 'id', 'lineno': 134, 'attr': 'r'}
+//                                                funcCall {'type': 'funcCall', 'lineno': 134}
+//                                                        id {'type': 'id', 'lineno': 134, 'attr': 'T'}
+//                                                        actuals {'type': 'actuals'}
+//                                ifElse {'type': 'ifElse', 'lineno': 136}
+//                                        == {'type': '==', 'lineno': 136}
+//                                                id {'type': 'id', 'lineno': 136, 'attr': 'token'}
+//                                                id {'type': 'id', 'lineno': 136, 'attr': 'TK_ADD'}
+//                                        stmtExpr {'type': 'stmtExpr', 'lineno': 137}
+//                                                = {'type': '=', 'lineno': 137}
+//                                                        id {'type': 'id', 'lineno': 137, 'attr': 'l'}
+//                                                        + {'type': '+', 'lineno': 137}
+//                                                                id {'type': 'id', 'lineno': 137, 'attr': 'l'}
+//                                                                id {'type': 'id', 'lineno': 137, 'attr': 'r'}
+//                                        stmtExpr {'type': 'stmtExpr', 'lineno': 139}
+//                                                = {'type': '=', 'lineno': 139}
+//                                                        id {'type': 'id', 'lineno': 139, 'attr': 'l'}
+//                                                        - {'type': '-', 'lineno': 139}
+//                                                                id {'type': 'id', 'lineno': 139, 'attr': 'l'}
+//                                                                id {'type': 'id', 'lineno': 139, 'attr': 'r'}
+//                return {'type': 'return', 'lineno': 141}
+//                        id {'type': 'id', 'lineno': 141, 'attr': 'l'}
+//funcDecl {'type': 'funcDecl', 'lineno': 144}
+//        int {'type': 'int', 'lineno': 144, 'attr': None}
+//        id {'type': 'id', 'lineno': 144, 'attr': 'T'}
+//        formals {'type': 'formals'}
+//        block {'type': 'block'}
+//                varDecl {'type': 'varDecl', 'lineno': 146}
+//                        int {'type': 'int', 'lineno': 146, 'attr': None}
+//                        id {'type': 'id', 'lineno': 146, 'attr': 'l'}
+//                varDecl {'type': 'varDecl', 'lineno': 147}
+//                        int {'type': 'int', 'lineno': 147, 'attr': None}
+//                        id {'type': 'id', 'lineno': 147, 'attr': 'r'}
+//                varDecl {'type': 'varDecl', 'lineno': 148}
+//                        int {'type': 'int', 'lineno': 148, 'attr': None}
+//                        id {'type': 'id', 'lineno': 148, 'attr': 'token'}
+//                stmtExpr {'type': 'stmtExpr', 'lineno': 150}
+//                        = {'type': '=', 'lineno': 150}
+//                                id {'type': 'id', 'lineno': 150, 'attr': 'l'}
+//                                funcCall {'type': 'funcCall', 'lineno': 150}
+//                                        id {'type': 'id', 'lineno': 150, 'attr': 'F'}
+//                                        actuals {'type': 'actuals'}
+//                while {'type': 'while', 'lineno': 151}
+//                        || {'type': '||', 'lineno': 151}
+//                                == {'type': '==', 'lineno': 151}
+//                                        funcCall {'type': 'funcCall', 'lineno': 151}
+//                                                id {'type': 'id', 'lineno': 151, 'attr': 'peek'}
+//                                                actuals {'type': 'actuals'}
+//                                        id {'type': 'id', 'lineno': 151, 'attr': 'TK_MUL'}
+//                                == {'type': '==', 'lineno': 151}
+//                                        funcCall {'type': 'funcCall', 'lineno': 151}
+//                                                id {'type': 'id', 'lineno': 151, 'attr': 'peek'}
+//                                                actuals {'type': 'actuals'}
+//                                        id {'type': 'id', 'lineno': 151, 'attr': 'TK_DIV'}
+//                        block {'type': 'block'}
+//                                stmtExpr {'type': 'stmtExpr', 'lineno': 152}
+//                                        funcCall {'type': 'funcCall', 'lineno': 152}
+//                                                id {'type': 'id', 'lineno': 152, 'attr': 'match'}
+//                                                actuals {'type': 'actuals'}
+//                                                        = {'type': '=', 'lineno': 152}
+//                                                                id {'type': 'id', 'lineno': 152, 'attr': 'token'}
+//                                                                funcCall {'type': 'funcCall', 'lineno': 152}
+//                                                                        id {'type': 'id', 'lineno': 152, 'attr': 'peek'}
+//                                                                        actuals {'type': 'actuals'}
+//                                stmtExpr {'type': 'stmtExpr', 'lineno': 153}
+//                                        = {'type': '=', 'lineno': 153}
+//                                                id {'type': 'id', 'lineno': 153, 'attr': 'r'}
+//                                                funcCall {'type': 'funcCall', 'lineno': 153}
+//                                                        id {'type': 'id', 'lineno': 153, 'attr': 'F'}
+//                                                        actuals {'type': 'actuals'}
+//                                ifElse {'type': 'ifElse', 'lineno': 155}
+//                                        == {'type': '==', 'lineno': 155}
+//                                                id {'type': 'id', 'lineno': 155, 'attr': 'token'}
+//                                                id {'type': 'id', 'lineno': 155, 'attr': 'TK_MUL'}
+//                                        stmtExpr {'type': 'stmtExpr', 'lineno': 156}
+//                                                = {'type': '=', 'lineno': 156}
+//                                                        id {'type': 'id', 'lineno': 156, 'attr': 'l'}
+//                                                        * {'type': '*', 'lineno': 156}
+//                                                                id {'type': 'id', 'lineno': 156, 'attr': 'l'}
+//                                                                id {'type': 'id', 'lineno': 156, 'attr': 'r'}
+//                                        stmtExpr {'type': 'stmtExpr', 'lineno': 158}
+//                                                = {'type': '=', 'lineno': 158}
+//                                                        id {'type': 'id', 'lineno': 158, 'attr': 'l'}
+//                                                        / {'type': '/', 'lineno': 158}
+//                                                                id {'type': 'id', 'lineno': 158, 'attr': 'l'}
+//                                                                id {'type': 'id', 'lineno': 158, 'attr': 'r'}
+//                return {'type': 'return', 'lineno': 160}
+//                        id {'type': 'id', 'lineno': 160, 'attr': 'l'}
+//funcDecl {'type': 'funcDecl', 'lineno': 163}
+//        int {'type': 'int', 'lineno': 163, 'attr': None}
+//        id {'type': 'id', 'lineno': 163, 'attr': 'F'}
+//        formals {'type': 'formals'}
+//        block {'type': 'block'}
+//                varDecl {'type': 'varDecl', 'lineno': 165}
+//                        int {'type': 'int', 'lineno': 165, 'attr': None}
+//                        id {'type': 'id', 'lineno': 165, 'attr': 'result'}
+//                varDecl {'type': 'varDecl', 'lineno': 167}
+//                        int {'type': 'int', 'lineno': 167, 'attr': None}
+//                        id {'type': 'id', 'lineno': 167, 'attr': 'token'}
+//                stmtExpr {'type': 'stmtExpr', 'lineno': 168}
+//                        = {'type': '=', 'lineno': 168}
+//                                id {'type': 'id', 'lineno': 168, 'attr': 'token'}
+//                                funcCall {'type': 'funcCall', 'lineno': 168}
+//                                        id {'type': 'id', 'lineno': 168, 'attr': 'peek'}
+//                                        actuals {'type': 'actuals'}
+//                ifElse {'type': 'ifElse', 'lineno': 170}
+//                        == {'type': '==', 'lineno': 170}
+//                                id {'type': 'id', 'lineno': 170, 'attr': 'token'}
+//                                id {'type': 'id', 'lineno': 170, 'attr': 'TK_LPAREN'}
+//                        block {'type': 'block'}
+//                                stmtExpr {'type': 'stmtExpr', 'lineno': 171}
+//                                        funcCall {'type': 'funcCall', 'lineno': 171}
+//                                                id {'type': 'id', 'lineno': 171, 'attr': 'match'}
+//                                                actuals {'type': 'actuals'}
+//                                                        id {'type': 'id', 'lineno': 171, 'attr': 'TK_LPAREN'}
+//                                stmtExpr {'type': 'stmtExpr', 'lineno': 172}
+//                                        = {'type': '=', 'lineno': 172}
+//                                                id {'type': 'id', 'lineno': 172, 'attr': 'result'}
+//                                                funcCall {'type': 'funcCall', 'lineno': 172}
+//                                                        id {'type': 'id', 'lineno': 172, 'attr': 'E'}
+//                                                        actuals {'type': 'actuals'}
+//                                stmtExpr {'type': 'stmtExpr', 'lineno': 173}
+//                                        funcCall {'type': 'funcCall', 'lineno': 173}
+//                                                id {'type': 'id', 'lineno': 173, 'attr': 'match'}
+//                                                actuals {'type': 'actuals'}
+//                                                        id {'type': 'id', 'lineno': 173, 'attr': 'TK_RPAREN'}
+//                        ifElse {'type': 'ifElse', 'lineno': 175}
+//                                == {'type': '==', 'lineno': 175}
+//                                        id {'type': 'id', 'lineno': 175, 'attr': 'token'}
+//                                        id {'type': 'id', 'lineno': 175, 'attr': 'TK_SUB'}
+//                                block {'type': 'block'}
+//                                        stmtExpr {'type': 'stmtExpr', 'lineno': 176}
+//                                                funcCall {'type': 'funcCall', 'lineno': 176}
+//                                                        id {'type': 'id', 'lineno': 176, 'attr': 'match'}
+//                                                        actuals {'type': 'actuals'}
+//                                                                id {'type': 'id', 'lineno': 176, 'attr': 'TK_SUB'}
+//                                        stmtExpr {'type': 'stmtExpr', 'lineno': 177}
+//                                                = {'type': '=', 'lineno': 177}
+//                                                        id {'type': 'id', 'lineno': 177, 'attr': 'result'}
+//                                                        - {'type': '-', 'lineno': 177}
+//                                                                funcCall {'type': 'funcCall', 'lineno': 177}
+//                                                                        id {'type': 'id', 'lineno': 177, 'attr': 'F'}
+//                                                                        actuals {'type': 'actuals'}
+//                                ifElse {'type': 'ifElse', 'lineno': 179}
+//                                        == {'type': '==', 'lineno': 179}
+//                                                id {'type': 'id', 'lineno': 179, 'attr': 'token'}
+//                                                id {'type': 'id', 'lineno': 179, 'attr': 'TK_NUMBER'}
+//                                        block {'type': 'block'}
+//                                                stmtExpr {'type': 'stmtExpr', 'lineno': 180}
+//                                                        funcCall {'type': 'funcCall', 'lineno': 180}
+//                                                                id {'type': 'id', 'lineno': 180, 'attr': 'match'}
+//                                                                actuals {'type': 'actuals'}
+//                                                                        id {'type': 'id', 'lineno': 180, 'attr': 'TK_NUMBER'}
+//                                                stmtExpr {'type': 'stmtExpr', 'lineno': 181}
+//                                                        = {'type': '=', 'lineno': 181}
+//                                                                id {'type': 'id', 'lineno': 181, 'attr': 'result'}
+//                                                                id {'type': 'id', 'lineno': 181, 'attr': 'attr'}
+//                                        block {'type': 'block'}
+//                                                stmtExpr {'type': 'stmtExpr', 'lineno': 184}
+//                                                        funcCall {'type': 'funcCall', 'lineno': 184}
+//                                                                id {'type': 'id', 'lineno': 184, 'attr': 'prints'}
+//                                                                actuals {'type': 'actuals'}
+//                                                                        string {'type': 'string', 'lineno': 184, 'attr': 'Error: expected factor.\\n'}
+//                                                stmtExpr {'type': 'stmtExpr', 'lineno': 185}
+//                                                        funcCall {'type': 'funcCall', 'lineno': 185}
+//                                                                id {'type': 'id', 'lineno': 185, 'attr': 'halt'}
+//                                                                actuals {'type': 'actuals'}
+//                return {'type': 'return', 'lineno': 187}
+//                        id {'type': 'id', 'lineno': 187, 'attr': 'result'}
+//globVarDecl {'type': 'globVarDecl', 'lineno': 194}
+//        int {'type': 'int', 'lineno': 194, 'attr': None}
+//        id {'type': 'id', 'lineno': 194, 'attr': 'EOF'}
+//globVarDecl {'type': 'globVarDecl', 'lineno': 196}
+//        int {'type': 'int', 'lineno': 196, 'attr': None}
+//        id {'type': 'id', 'lineno': 196, 'attr': 'TK_EOF'}
+//globVarDecl {'type': 'globVarDecl', 'lineno': 197}
+//        int {'type': 'int', 'lineno': 197, 'attr': None}
+//        id {'type': 'id', 'lineno': 197, 'attr': 'TK_EOLN'}
+//globVarDecl {'type': 'globVarDecl', 'lineno': 198}
+//        int {'type': 'int', 'lineno': 198, 'attr': None}
+//        id {'type': 'id', 'lineno': 198, 'attr': 'TK_NUMBER'}
+//globVarDecl {'type': 'globVarDecl', 'lineno': 199}
+//        int {'type': 'int', 'lineno': 199, 'attr': None}
+//        id {'type': 'id', 'lineno': 199, 'attr': 'TK_ADD'}
+//globVarDecl {'type': 'globVarDecl', 'lineno': 200}
+//        int {'type': 'int', 'lineno': 200, 'attr': None}
+//        id {'type': 'id', 'lineno': 200, 'attr': 'TK_SUB'}
+//globVarDecl {'type': 'globVarDecl', 'lineno': 201}
+//        int {'type': 'int', 'lineno': 201, 'attr': None}
+//        id {'type': 'id', 'lineno': 201, 'attr': 'TK_MUL'}
+//globVarDecl {'type': 'globVarDecl', 'lineno': 202}
+//        int {'type': 'int', 'lineno': 202, 'attr': None}
+//        id {'type': 'id', 'lineno': 202, 'attr': 'TK_DIV'}
+//globVarDecl {'type': 'globVarDecl', 'lineno': 203}
+//        int {'type': 'int', 'lineno': 203, 'attr': None}
+//        id {'type': 'id', 'lineno': 203, 'attr': 'TK_LPAREN'}
+//globVarDecl {'type': 'globVarDecl', 'lineno': 204}
+//        int {'type': 'int', 'lineno': 204, 'attr': None}
+//        id {'type': 'id', 'lineno': 204, 'attr': 'TK_RPAREN'}
+//globVarDecl {'type': 'globVarDecl', 'lineno': 206}
+//        int {'type': 'int', 'lineno': 206, 'attr': None}
+//        id {'type': 'id', 'lineno': 206, 'attr': 'ASCII_0'}
+//globVarDecl {'type': 'globVarDecl', 'lineno': 207}
+//        int {'type': 'int', 'lineno': 207, 'attr': None}
+//        id {'type': 'id', 'lineno': 207, 'attr': 'ASCII_9'}
+//globVarDecl {'type': 'globVarDecl', 'lineno': 208}
+//        int {'type': 'int', 'lineno': 208, 'attr': None}
+//        id {'type': 'id', 'lineno': 208, 'attr': 'ASCII_PLUS'}
+//globVarDecl {'type': 'globVarDecl', 'lineno': 209}
+//        int {'type': 'int', 'lineno': 209, 'attr': None}
+//        id {'type': 'id', 'lineno': 209, 'attr': 'ASCII_MINUS'}
+//globVarDecl {'type': 'globVarDecl', 'lineno': 210}
+//        int {'type': 'int', 'lineno': 210, 'attr': None}
+//        id {'type': 'id', 'lineno': 210, 'attr': 'ASCII_STAR'}
+//globVarDecl {'type': 'globVarDecl', 'lineno': 211}
+//        int {'type': 'int', 'lineno': 211, 'attr': None}
+//        id {'type': 'id', 'lineno': 211, 'attr': 'ASCII_SLASH'}
+//globVarDecl {'type': 'globVarDecl', 'lineno': 212}
+//        int {'type': 'int', 'lineno': 212, 'attr': None}
+//        id {'type': 'id', 'lineno': 212, 'attr': 'ASCII_LPAREN'}
+//globVarDecl {'type': 'globVarDecl', 'lineno': 213}
+//        int {'type': 'int', 'lineno': 213, 'attr': None}
+//        id {'type': 'id', 'lineno': 213, 'attr': 'ASCII_RPAREN'}
+//globVarDecl {'type': 'globVarDecl', 'lineno': 214}
+//        int {'type': 'int', 'lineno': 214, 'attr': None}
+//        id {'type': 'id', 'lineno': 214, 'attr': 'ASCII_SPACE'}
+//globVarDecl {'type': 'globVarDecl', 'lineno': 215}
+//        int {'type': 'int', 'lineno': 215, 'attr': None}
+//        id {'type': 'id', 'lineno': 215, 'attr': 'ASCII_TAB'}
+//globVarDecl {'type': 'globVarDecl', 'lineno': 216}
+//        int {'type': 'int', 'lineno': 216, 'attr': None}
+//        id {'type': 'id', 'lineno': 216, 'attr': 'ASCII_CR'}
+//globVarDecl {'type': 'globVarDecl', 'lineno': 217}
+//        int {'type': 'int', 'lineno': 217, 'attr': None}
+//        id {'type': 'id', 'lineno': 217, 'attr': 'ASCII_NL'}
+//funcDecl {'type': 'funcDecl', 'lineno': 219}
+//        void {'type': 'void', 'lineno': 219, 'attr': None}
+//        id {'type': 'id', 'lineno': 219, 'attr': 'init'}
+//        formals {'type': 'formals'}
+//        block {'type': 'block'}
+//                stmtExpr {'type': 'stmtExpr', 'lineno': 221}
+//                        = {'type': '=', 'lineno': 221}
+//                                id {'type': 'id', 'lineno': 221, 'attr': 'EOF'}
+//                                number {'type': 'number', 'lineno': 221, 'attr': '-1'}
+//                stmtExpr {'type': 'stmtExpr', 'lineno': 223}
+//                        = {'type': '=', 'lineno': 223}
+//                                id {'type': 'id', 'lineno': 223, 'attr': 'ASCII_0'}
+//                                number {'type': 'number', 'lineno': 223, 'attr': '48'}
+//                stmtExpr {'type': 'stmtExpr', 'lineno': 224}
+//                        = {'type': '=', 'lineno': 224}
+//                                id {'type': 'id', 'lineno': 224, 'attr': 'ASCII_9'}
+//                                number {'type': 'number', 'lineno': 224, 'attr': '57'}
+//                stmtExpr {'type': 'stmtExpr', 'lineno': 225}
+//                        = {'type': '=', 'lineno': 225}
+//                                id {'type': 'id', 'lineno': 225, 'attr': 'ASCII_PLUS'}
+//                                number {'type': 'number', 'lineno': 225, 'attr': '43'}
+//                stmtExpr {'type': 'stmtExpr', 'lineno': 226}
+//                        = {'type': '=', 'lineno': 226}
+//                                id {'type': 'id', 'lineno': 226, 'attr': 'ASCII_MINUS'}
+//                                number {'type': 'number', 'lineno': 226, 'attr': '45'}
+//                stmtExpr {'type': 'stmtExpr', 'lineno': 227}
+//                        = {'type': '=', 'lineno': 227}
+//                                id {'type': 'id', 'lineno': 227, 'attr': 'ASCII_STAR'}
+//                                number {'type': 'number', 'lineno': 227, 'attr': '42'}
+//                stmtExpr {'type': 'stmtExpr', 'lineno': 228}
+//                        = {'type': '=', 'lineno': 228}
+//                                id {'type': 'id', 'lineno': 228, 'attr': 'ASCII_SLASH'}
+//                                number {'type': 'number', 'lineno': 228, 'attr': '47'}
+//                stmtExpr {'type': 'stmtExpr', 'lineno': 229}
+//                        = {'type': '=', 'lineno': 229}
+//                                id {'type': 'id', 'lineno': 229, 'attr': 'ASCII_LPAREN'}
+//                                number {'type': 'number', 'lineno': 229, 'attr': '40'}
+//                stmtExpr {'type': 'stmtExpr', 'lineno': 230}
+//                        = {'type': '=', 'lineno': 230}
+//                                id {'type': 'id', 'lineno': 230, 'attr': 'ASCII_RPAREN'}
+//                                number {'type': 'number', 'lineno': 230, 'attr': '41'}
+//                stmtExpr {'type': 'stmtExpr', 'lineno': 231}
+//                        = {'type': '=', 'lineno': 231}
+//                                id {'type': 'id', 'lineno': 231, 'attr': 'ASCII_SPACE'}
+//                                number {'type': 'number', 'lineno': 231, 'attr': '32'}
+//                stmtExpr {'type': 'stmtExpr', 'lineno': 232}
+//                        = {'type': '=', 'lineno': 232}
+//                                id {'type': 'id', 'lineno': 232, 'attr': 'ASCII_TAB'}
+//                                number {'type': 'number', 'lineno': 232, 'attr': '9'}
+//                stmtExpr {'type': 'stmtExpr', 'lineno': 233}
+//                        = {'type': '=', 'lineno': 233}
+//                                id {'type': 'id', 'lineno': 233, 'attr': 'ASCII_CR'}
+//                                number {'type': 'number', 'lineno': 233, 'attr': '13'}
+//                stmtExpr {'type': 'stmtExpr', 'lineno': 234}
+//                        = {'type': '=', 'lineno': 234}
+//                                id {'type': 'id', 'lineno': 234, 'attr': 'ASCII_NL'}
+//                                number {'type': 'number', 'lineno': 234, 'attr': '10'}
+//                stmtExpr {'type': 'stmtExpr', 'lineno': 236}
+//                        = {'type': '=', 'lineno': 236}
+//                                id {'type': 'id', 'lineno': 236, 'attr': 'TK_EOF'}
+//                                number {'type': 'number', 'lineno': 236, 'attr': '256'}
+//                stmtExpr {'type': 'stmtExpr', 'lineno': 237}
+//                        = {'type': '=', 'lineno': 237}
+//                                id {'type': 'id', 'lineno': 237, 'attr': 'TK_NUMBER'}
+//                                number {'type': 'number', 'lineno': 237, 'attr': '257'}
+//                stmtExpr {'type': 'stmtExpr', 'lineno': 238}
+//                        = {'type': '=', 'lineno': 238}
+//                                id {'type': 'id', 'lineno': 238, 'attr': 'TK_ADD'}
+//                                id {'type': 'id', 'lineno': 238, 'attr': 'ASCII_PLUS'}
+//                stmtExpr {'type': 'stmtExpr', 'lineno': 239}
+//                        = {'type': '=', 'lineno': 239}
+//                                id {'type': 'id', 'lineno': 239, 'attr': 'TK_SUB'}
+//                                id {'type': 'id', 'lineno': 239, 'attr': 'ASCII_MINUS'}
+//                stmtExpr {'type': 'stmtExpr', 'lineno': 240}
+//                        = {'type': '=', 'lineno': 240}
+//                                id {'type': 'id', 'lineno': 240, 'attr': 'TK_MUL'}
+//                                id {'type': 'id', 'lineno': 240, 'attr': 'ASCII_STAR'}
+//                stmtExpr {'type': 'stmtExpr', 'lineno': 241}
+//                        = {'type': '=', 'lineno': 241}
+//                                id {'type': 'id', 'lineno': 241, 'attr': 'TK_DIV'}
+//                                id {'type': 'id', 'lineno': 241, 'attr': 'ASCII_SLASH'}
+//                stmtExpr {'type': 'stmtExpr', 'lineno': 242}
+//                        = {'type': '=', 'lineno': 242}
+//                                id {'type': 'id', 'lineno': 242, 'attr': 'TK_LPAREN'}
+//                                id {'type': 'id', 'lineno': 242, 'attr': 'ASCII_LPAREN'}
+//                stmtExpr {'type': 'stmtExpr', 'lineno': 243}
+//                        = {'type': '=', 'lineno': 243}
+//                                id {'type': 'id', 'lineno': 243, 'attr': 'TK_RPAREN'}
+//                                id {'type': 'id', 'lineno': 243, 'attr': 'ASCII_RPAREN'}
+//                stmtExpr {'type': 'stmtExpr', 'lineno': 244}
+//                        = {'type': '=', 'lineno': 244}
+//                                id {'type': 'id', 'lineno': 244, 'attr': 'TK_EOLN'}
+//                                id {'type': 'id', 'lineno': 244, 'attr': 'ASCII_NL'}

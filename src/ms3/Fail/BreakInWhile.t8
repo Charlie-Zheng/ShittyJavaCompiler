@@ -1,0 +1,16 @@
+//should pass
+main(){
+	int x;
+	while(x<9){
+		printi(x);
+		if(x==8){
+			break;
+		}
+	}
+}
+
+//should fail
+void breakNotInWhile(){
+	break;
+}
+

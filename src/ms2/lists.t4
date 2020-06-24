@@ -1,0 +1,13 @@
+//test lists being shown in right order
+int x;
+//int y;
+int main(int a, int b, int c, boolean x, boolean y, boolean z){
+	if(true){
+		test(x);
+		return a;
+	}
+}
+
+void test(boolean x){
+
+}

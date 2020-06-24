@@ -1,0 +1,1 @@
+I assumed that "a non-void function must return a value" means that "a non void function returns a value on all execution branchs"

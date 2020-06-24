@@ -1,0 +1,3 @@
+//Input hello my name is charlie
+hello my name is charlie
+^C

@@ -1,0 +1,9 @@
+main(){
+
+}
+
+int test;
+
+boolean test(int x){
+	return true;
+}

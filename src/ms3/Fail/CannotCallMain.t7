@@ -1,0 +1,9 @@
+main(){
+	int x;
+	printi(x);
+}
+
+//should fail
+int callsMain(){
+	main();
+}	

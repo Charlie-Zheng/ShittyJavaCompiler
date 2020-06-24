@@ -1,0 +1,42 @@
+//General test, looks are global declarations, and order of operations
+int o
+;
+int main
+(int
+x,
+boolean y
+)
+{
+	//Comments should not be found
+	boolean x;
+	int y;
+	//Test order of operations
+	x = (1 + 3) * (5 % 6) < foo("one") || y < z && x == 1;
+	x = (1 + 3 * 5 % 6 < foo("one") || y < z) && x == 1;
+	{ //Testing brackets
+		x 
+		=
+		(
+		1
+		+
+		3
+		)*(
+		5%
+		5
+		) < 
+		foo(		//This is just line 7 with extra endlines inserted between tokens
+		"one") 
+		|| equals (
+		3, 
+		"three","THREE","tree")
+		;
+	x = ----1;
+	
+	}
+}
+
+boolean equals(int x, boolean y){
+	return y;
+	break;
+	return z;
+}

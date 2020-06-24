@@ -1,0 +1,8 @@
+//should fail
+main(){
+	int x;
+	x = 1;
+	boolean y;
+	y = false;
+	x = x % y;
+}

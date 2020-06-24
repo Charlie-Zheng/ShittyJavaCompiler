@@ -1,0 +1,12 @@
+//should fail
+main(){
+	int x;
+	x = 1;
+	while(x==1){
+		int y;
+		y = 0;
+		if(y!=0){
+			printi(y);
+		}
+	}
+}

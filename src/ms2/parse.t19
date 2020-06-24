@@ -1,0 +1,19 @@
+main() {
+	if (true)	
+		if (true)
+			;
+		else
+			;
+}
+
+//mainDecl {'type': 'mainDecl', 'lineno': 1}
+//void {'type': 'void'}
+//id {'type': 'id', 'lineno': 1, 'attr': 'main'}
+//formals {'type': 'formals'}
+//block {'type': 'block'}
+//        if {'type': 'if', 'lineno': 2}
+//                true {'type': 'true', 'lineno': 2, 'attr': None}
+//                ifElse {'type': 'ifElse', 'lineno': 3}
+//                        true {'type': 'true', 'lineno': 3, 'attr': None}
+//                        nullStmt {'type': 'nullStmt', 'lineno': 4}
+//                        nullStmt {'type': 'nullStmt', 'lineno': 6}

@@ -1,0 +1,26 @@
+main(){
+	x = 1 + 2 * 3;
+	x = (1 + 2) * 3;
+}
+//program {'type': 'program'}
+//mainDecl {'type': 'mainDecl', 'lineno': 1}
+//        void {'type': 'void'}
+//        id {'type': 'id', 'lineno': 1, 'attr': 'main'}
+//        formals {'type': 'formals'}
+//        block {'type': 'block'}
+//                stmtExpr {'type': 'stmtExpr', 'lineno': 2}
+//                        = {'type': '=', 'lineno': 2}
+//                                id {'type': 'id', 'lineno': 2, 'attr': 'x'}
+//                                + {'type': '+', 'lineno': 2}
+//                                        number {'type': 'number', 'lineno': 2, 'attr': '1'}
+//                                        * {'type': '*', 'lineno': 2}
+//                                                number {'type': 'number', 'lineno': 2, 'attr': '2'}
+//                                                number {'type': 'number', 'lineno': 2, 'attr': '3'}
+//                stmtExpr {'type': 'stmtExpr', 'lineno': 3}
+//                        = {'type': '=', 'lineno': 3}
+//                                id {'type': 'id', 'lineno': 3, 'attr': 'x'}
+//                                * {'type': '*', 'lineno': 3}
+//                                        + {'type': '+', 'lineno': 3}
+//                                                number {'type': 'number', 'lineno': 3, 'attr': '1'}
+//                                                number {'type': 'number', 'lineno': 3, 'attr': '2'}
+//                                        number {'type': 'number', 'lineno': 3, 'attr': '3'}

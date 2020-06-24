@@ -1,0 +1,9 @@
+//int tests
+
+69420		//int
+
+//String Tests
+
+"hello"		//String
+"hel\nlo"		//String
+"\"\\\\\\\"([^\\\\\\\"\\\\n]|\\\"\\\\\\\\\\\\\\\"\\ABCDE\"\"" //String

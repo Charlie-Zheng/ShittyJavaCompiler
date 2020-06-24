@@ -1,0 +1,78 @@
+main(){
+	S();
+}
+S(){
+	switch(peek()){
+		case number:
+		case '(':
+			E();
+			match($);
+			return;
+		default:
+			ERROR();
+	}
+}
+E(){
+	switch(peek()){
+		case number:
+		case '(':
+			F();
+			Eprime();
+			break;
+		default:
+			ERROR();
+	}
+}
+Eprime(){
+	switch(peek()){
+		case '+':
+			match('+');
+			F();
+			Eprime();
+			break;
+		case ')':
+		case $:
+			return;
+		default:
+			ERROR();
+	}
+}
+F(){
+	switch(peek()){
+		case number:
+			match(number);
+			return;
+		case '(':
+			match('(');
+			E();
+			match(')');
+			return;
+		default:
+			ERROR();
+	}
+}
+
+
+
+
+func int hello();
+hello = someFunc;
+if(getChar()==65){
+	prints("changing hello");
+	hello = someOtherFunc();
+}else{
+	prints("did not change hello");
+}
+prints("Running hello");
+hello();
+
+if(getChar()==65){
+	prints("changing hello");
+	prints("Running hello");
+	someOtherFunc();
+}else{
+	prints("did not change hello");
+	prints("Running hello");
+	someFunc();
+}
+

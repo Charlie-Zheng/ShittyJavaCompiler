@@ -1,0 +1,18 @@
+//test return checking
+
+main(){
+}
+
+//should pass
+int ret1(){
+	boolean x;
+	if(x){
+		return 1;
+	}else
+		return 1;
+}
+
+//should fail
+int  ret2(){
+	boolean x;
+}

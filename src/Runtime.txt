@@ -1,0 +1,258 @@
+	(import "host" "exit" (func $Dhalt))
+	(import "host" "getchar" (func $Dgetchar (result i32)))
+	(import "host" "putchar" (func $Dprintc (param i32)))
+	(func $Dprints (param $start i32) (param $length i32)
+		(local $end i32)
+		local.get $start
+		local.get $length
+		i32.add
+		local.set $end
+		(block $b0
+			(loop $l0
+				local.get $start
+				local.get $end
+				i32.ge_s
+				(br_if $b0)
+				
+				local.get $start
+				i32.load
+				call $Dprintc
+				
+				local.get $start
+				i32.const 1
+				i32.add
+				local.set $start
+				(br $l0)
+			)
+		)
+	)
+	(func $Dprinti (param $Lx i32) 
+		(local $boolTemp i32)
+		(local $Ldiv i32)
+		
+		i32.const 1
+		local.set $Ldiv
+		local.get $Ldiv
+		;; div = 1
+		
+		drop
+		
+		local.get $Lx
+		i32.const 0
+		i32.eq
+		;; x == 0
+		
+		(if
+			(then
+				
+				i32.const 48
+				;; 48
+				
+				call $Dprintc
+			)
+			(else
+				
+				local.get $Lx
+				i32.const 0
+				i32.lt_s
+				;; x < 0
+				
+				(if
+					(then
+						
+						i32.const 45
+						;; 45
+						
+						call $Dprintc
+						(block $B0
+							(loop $L0
+								
+								local.get $Ldiv
+								i32.const 0
+								local.get $Lx
+								i32.const 10
+								i32.div_s
+								i32.sub
+								i32.le_s
+								;; div <= -x / 10
+								
+								i32.eqz
+								br_if $B0
+								
+								local.get $Ldiv
+								i32.const 10
+								i32.mul
+								local.set $Ldiv
+								local.get $Ldiv
+								;; div = div * 10
+								
+								drop
+								
+								local.get $Ldiv
+								i32.const 0
+								local.get $Lx
+								i32.const 10
+								i32.div_s
+								i32.sub
+								i32.le_s
+								;; div <= -x / 10
+								
+								br_if $L0
+							)
+						)
+						
+						i32.const 0
+						local.get $Lx
+						local.get $Ldiv
+						i32.div_s
+						i32.sub
+						i32.const 48
+						i32.add
+						;; -x / div + 48
+						
+						call $Dprintc
+						(block $B1
+							(loop $L1
+								
+								local.get $Ldiv
+								i32.const 1
+								i32.gt_s
+								;; div > 1
+								
+								i32.eqz
+								br_if $B1
+								
+								i32.const 0
+								local.get $Lx
+								local.get $Ldiv
+								i32.rem_s
+								i32.sub
+								local.get $Ldiv
+								i32.const 10
+								i32.div_s
+								i32.div_s
+								i32.const 48
+								i32.add
+								;; -x % div / div / 10 + 48
+								
+								call $Dprintc
+								
+								local.get $Ldiv
+								i32.const 10
+								i32.div_s
+								local.set $Ldiv
+								local.get $Ldiv
+								;; div = div / 10
+								
+								drop
+								
+								local.get $Ldiv
+								i32.const 1
+								i32.gt_s
+								;; div > 1
+								
+								br_if $L1
+							)
+						)
+					)
+					(else
+						(block $B2
+							(loop $L2
+								
+								local.get $Ldiv
+								local.get $Lx
+								i32.const 10
+								i32.div_s
+								i32.le_s
+								
+								i32.eqz
+								br_if $B2
+								
+								local.get $Ldiv
+								i32.const 10
+								i32.mul
+								local.set $Ldiv
+								local.get $Ldiv
+								;; div = div * 10
+								
+								drop
+								
+								local.get $Ldiv
+								local.get $Lx
+								i32.const 10
+								i32.div_s
+								i32.le_s
+								
+								br_if $L2
+							)
+						)
+						
+						local.get $Lx
+						local.get $Ldiv
+						i32.div_s
+						i32.const 48
+						i32.add
+						
+						call $Dprintc
+						(block $B3
+							(loop $L3
+								
+								local.get $Ldiv
+								i32.const 1
+								i32.gt_s
+								;; div > 1
+								
+								i32.eqz
+								br_if $B3
+								
+								local.get $Lx
+								local.get $Ldiv
+								i32.rem_s
+								local.get $Ldiv
+								i32.const 10
+								i32.div_s
+								i32.div_s
+								i32.const 48
+								i32.add
+								;; x % div / div / 10 + 48
+								
+								call $Dprintc
+								
+								local.get $Ldiv
+								i32.const 10
+								i32.div_s
+								local.set $Ldiv
+								local.get $Ldiv
+								;; div = div / 10
+								
+								drop
+								
+								local.get $Ldiv
+								i32.const 1
+								i32.gt_s
+								;; div > 1
+								
+								br_if $L3
+							)
+						)
+					)
+				)
+			)
+		)
+	)
+	
+	(func $Dprintb (param $b i32) 
+		local.get $b
+		(if
+			(then
+				i32.const 0
+				i32.const 4
+				call $Dprints
+			)
+			(else
+				i32.const 4
+				i32.const 5
+				call $Dprints
+			)
+		)
+	)

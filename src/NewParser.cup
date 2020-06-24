@@ -1,0 +1,456 @@
+/*
+   Simple +/-/* expression:exp language; 
+   parser evaluates constant expressions on the fly
+
+javac -cp .\java-cup-11b-runtime.jar *.java
+java -cp ".\java-cup-11b-runtime.jar;." Main
+
+*/
+import java.util.List;
+import java_cup.runtime.ComplexSymbolFactory;
+import java_cup.runtime.ComplexSymbolFactory.ComplexSymbol;
+import java_cup.runtime.Symbol;
+parser code {:
+    Scan s;
+	int depth = 0;
+	Tree tree;
+	/** 
+	*	Construct a parser with the specified Scan and ComplexSymbolFactory
+	*/
+	parser(Scan s, ComplexSymbolFactory sf){ 
+		super(s, sf);
+		this.s=s;
+	}
+
+	/**
+	*	Code copied from CUP source, modified to print the file name after the location
+	*/
+	@Override
+	public void report_error(String message, Object info) {
+		if (info instanceof ComplexSymbol) {
+			ComplexSymbol cs = (ComplexSymbol) info;
+			System.err.println(message + " for input symbol \"" + cs.getName() + "\" spanning from " + cs.getLeft()
+					+ " to " + cs.getRight() + " in file " + Scan.inputFileName);
+			return;
+		}
+
+		System.err.print(message);
+		System.err.flush();
+		if (info instanceof Symbol)
+			if (((Symbol) info).left != -1)
+				System.err.println(" at character " + ((Symbol) info).left + " of input");
+			else
+				System.err.println("");
+
+	}
+	/**
+	* Override the default fatal error reporting to catch the exception and exit the compiler with exit code 1
+	*/	
+	@Override
+	public void report_fatal_error(String message, Object info){
+		try{
+			super.report_fatal_error(message,info);
+		}catch(java.lang.Exception e){
+			System.err.println("Compiler exiting with code 1");
+			System.exit(1);
+		}
+	}
+	/**
+	* Override the default reporting of expected token classes to output to standard error.
+	*/	
+	@Override
+	protected void report_expected_token_ids() {
+		StringBuffer s = new StringBuffer("The expected token classes are [");
+		List<Integer> list = expected_token_ids();
+		if(list.size() == 0){
+			//Just add an empty list if no tokens are expected
+			s.append(']');
+		}else {
+			//Append the names of the terminals expected to the output
+			for(Integer i: expected_token_ids()){
+				s.append(sym.terminalNames[i]);
+				s.append(", ");
+			}
+			//Replace the last ", " with a "]"
+			s.replace(s.length()-2, s.length(), "]");
+		}
+		System.err.println(s);
+	}
+:}
+
+/* define how to connect to the scanner! */
+init with {::};
+// T
+scan with {:
+		return s.next_token();
+:};
+
+/* Terminals (tokens returned by the scanner). */
+terminal String	 ID, INT, STRING;
+terminal ADD, SUBTRACT, MULTIPLY,DIVIDE,MODULUS,GREATER_THAN,
+			LESSER_THAN, GREATER_EQUAL, LESSER_EQUAL, EQUAL,ASSIGN, 
+			NOT_EQUAL, NOT, AND, OR, KW_TRUE, KW_FALSE, KW_BOOLEAN, 
+			KW_INT,KW_VOID, KW_IF, KW_ELSE, KW_WHILE, KW_BREAK, 
+			KW_RETURN, OPEN_ROUND_BRACES, CLOSE_ROUND_BRACES, 
+			OPEN_CURLY_BRACES, CLOSE_CURLY_BRACES, COMMA,SEMI_COLON;
+
+/* Non terminals */
+//List of grammar states. Specification grammar was modified to remove immediate left recursion and shift/reduce conflicts
+non terminal TreeNode   s,literal,type,globaldeclarations,globaldeclaration,
+						variabledeclaration,identifier,functiondeclaration,
+						functionheader,functiondeclarator,formalparameterlist,
+						formalparameter,mainfunctiondeclaration,
+						mainfunctiondeclarator,block,blockstatement,blockstatements,
+						statement,statementexpression,primary,argumentlist,functioninvocation,
+						postfixexpression,unaryexpression,multiplicativeexpression,
+						additiveexpression,relationalexpression,equalityexpression,
+						conditionalandexpression,conditionalorexpression,
+						assignmentexpression,assignment,expression,
+						label,elsematched, elseunmatched;
+
+
+
+/* The grammar rules */
+//Specified the starting symbol
+start with s;
+
+s           ::=
+				/* empty */	
+                | globaldeclarations:gds
+                //Instantiate a new AST, with the gds node as a root
+                {:tree = new Tree(gds);:}
+                ;
+                
+//Return a new node with the type of the literal, and add attributes for numbers and string
+literal         ::=
+				INT:num
+				{:RESULT=new TreeNode(TreeNodeType.NUM,numxleft).setAttr(num);:}
+                | STRING:str
+				{:RESULT=new TreeNode(TreeNodeType.STRING,strxleft).setAttr(str);:}
+                | KW_TRUE:t
+                {:RESULT=new TreeNode(TreeNodeType.TRUE,txleft);:}
+                | KW_FALSE:f
+                {:RESULT=new TreeNode(TreeNodeType.FALSE,fxleft);:}
+                ;
+                
+//Return a new node with the type
+type            ::=
+				KW_BOOLEAN:bool
+				{:RESULT=new TreeNode(TreeNodeType.BOOL,boolxleft);:}
+                | KW_INT:i				
+				{:RESULT=new TreeNode(TreeNodeType.INT,ixleft);:}
+                ;
+                
+globaldeclarations      ::=
+						globaldeclarations:gds	globaldeclaration:gd
+						{:
+							RESULT=gds.addChild(gd);
+						:}
+						| globaldeclaration:gd
+						{:
+							RESULT = new TreeNode(TreeNodeType.globaldeclarations).addChild(gd);
+						:}
+                        ;
+                        
+						
+globaldeclaration       ::=
+						
+						variabledeclaration:vdc
+						{:RESULT=vdc;:} 
+                        | functiondeclaration :fd
+						{:RESULT=fd;:} 
+                        | mainfunctiondeclaration :mfd
+                        {:RESULT=mfd;:} 
+                        ;
+
+variabledeclaration     ::=
+						type:tp identifier:id SEMI_COLON
+						{:RESULT=new TreeNode(TreeNodeType.variabledeclaration,tpxleft).addChild(tp).addChild(id);:} 
+                        ;
+
+identifier             ::=
+						ID:id
+						{:RESULT=new TreeNode(TreeNodeType.ID,idxleft).setAttr(id);:} 
+                        ;
+
+functiondeclaration     ::=
+						functionheader:fh block:bl
+						{:RESULT=new TreeNode(TreeNodeType.functiondeclaration,fhxleft).addChildren(fh).addChild(bl);:} 
+                        ;
+
+functionheader          ::=
+						type:tp functiondeclarator:fd
+						{:RESULT=new TreeNode(TreeNodeType.functionheader,tpxleft).addChild(tp).addChildren(fd);:} 
+                        | KW_VOID:vd functiondeclarator:fd
+                        {:RESULT=new TreeNode(TreeNodeType.functionheader,vdxleft).addChild(new TreeNode(TreeNodeType.VOID,vdxleft)).addChildren(fd);:} 
+                        ;
+
+functiondeclarator      ::=
+						identifier:id OPEN_ROUND_BRACES formalparameterlist:fpl CLOSE_ROUND_BRACES
+						{:RESULT=new TreeNode(TreeNodeType.functiondeclarator,idxleft).addChild(id).addChild(fpl);:} 
+                        | identifier:id OPEN_ROUND_BRACES CLOSE_ROUND_BRACES
+						{:RESULT=new TreeNode(TreeNodeType.functiondeclarator,idxleft).addChild(id).addChild(new TreeNode(TreeNodeType.formalparameterlist));:} 
+                        ;
+                        
+formalparameterlist     ::=                        
+						formalparameterlist:fpl COMMA formalparameter:fp
+						{:
+							RESULT=fpl.addChild(fp);
+						:}
+						| formalparameter:fp
+						{:
+							RESULT = new TreeNode(TreeNodeType.formalparameterlist).addChild(fp);
+						:}
+                        ;
+
+formalparameter         ::=
+						type:tp identifier:id
+						{:RESULT=new TreeNode(TreeNodeType.formalparameter,tpxleft).addChild(tp).addChild(id);:} 
+                        ;
+
+mainfunctiondeclaration ::=
+						mainfunctiondeclarator:mfd block:bl
+						{:RESULT=new TreeNode(TreeNodeType.mainfunctiondeclaration,mfdxleft).addChildren(mfd).addChild(bl);:} 
+                        ;
+
+mainfunctiondeclarator  ::=
+						identifier:id OPEN_ROUND_BRACES:brace CLOSE_ROUND_BRACES
+						{:RESULT=new TreeNode(TreeNodeType.mainfunctiondeclarator,idxleft).addChild(new TreeNode(TreeNodeType.VOID)).addChild(id).addChild(new TreeNode(TreeNodeType.formalparameterlist));:} 
+						|identifier:id OPEN_ROUND_BRACES:brace error CLOSE_ROUND_BRACES
+						{:
+							System.err.println("Main function declaration should not have arguments. Skipping ahead to next \"CLOSE_ROUND_BRACES\"");
+							RESULT=new TreeNode(TreeNodeType.mainfunctiondeclarator,idxleft).addChild(new TreeNode(TreeNodeType.VOID)).addChild(id).addChild(new TreeNode(TreeNodeType.formalparameterlist));
+						:} 
+                        ;
+
+block                   ::=
+						OPEN_CURLY_BRACES blockstatements:blsms CLOSE_CURLY_BRACES
+						{:RESULT=new TreeNode(TreeNodeType.block,blsmsxleft).addChildren(blsms);:} 
+                        | OPEN_CURLY_BRACES:brace CLOSE_CURLY_BRACES
+                        {:RESULT=new TreeNode(TreeNodeType.block,bracexleft);:} 
+                        ;
+                    
+blockstatements         ::=
+						blockstatements:blsms blockstatement:blsm
+						{:
+							RESULT = blsms.addChild(blsm);
+						:}
+						| blockstatement:blsm
+						{:
+							RESULT = new TreeNode(TreeNodeType.blockstatements).addChild(blsm);
+						:}
+                        ;
+			
+blockstatement          ::=
+						variabledeclaration:vdc
+						{:RESULT=vdc;:} 
+                        | statement:sm
+                        {:RESULT=sm;:} 
+                        ;
+                          
+//shift reduce conflict resolved using http://eli-project.sourceforge.net/elionline/syntax_3.html and https://en.wikipedia.org/wiki/Dangling_else#Avoiding_the_conflict_in_LR_parsers
+statement               ::=
+						elsematched:elm
+						{:RESULT=elm;:} 
+						| elseunmatched:elum
+						{:RESULT=elum;:} 
+						//When an error occurs while attempting to parse a statement, throw away tokens until the next ';' or '}' or ')', which are the usual symbols to end statements
+						| error:e SEMI_COLON
+						{:System.err.println("Skipping ahead to next \"SEMI_COLON\"");:}
+						| error:e CLOSE_CURLY_BRACES
+						{:System.err.println("Skipping ahead to next \"CLOSE_CURLY_BRACES\"");:}
+						| error:e CLOSE_ROUND_BRACES
+						{:System.err.println("Skipping ahead to next \"CLOSE_ROUND_BRACES\"");:}
+						;
+
+elsematched				::=
+						block:bl
+						{:RESULT=bl;:} 
+                        | SEMI_COLON:sc
+                        {:RESULT = new TreeNode(TreeNodeType.nullStatement,scxleft);:}
+                        | statementexpression:smexp SEMI_COLON
+                        {:RESULT=smexp;:} 
+                        | KW_BREAK:brk SEMI_COLON
+                        {:RESULT=new TreeNode(TreeNodeType.BREAK,brkxleft);:} 
+                        | KW_RETURN:ret label:lb SEMI_COLON
+                        {:RESULT=new TreeNode(TreeNodeType.RETURN,retxleft).addChild(lb);:} 
+                  	   	| KW_WHILE:wl OPEN_ROUND_BRACES expression:exp CLOSE_ROUND_BRACES elsematched:elm
+                        {:RESULT=new TreeNode(TreeNodeType.WHILE,wlxleft).addChild(exp).addChild(elm);:} 
+                        | KW_IF:i OPEN_ROUND_BRACES expression:exp CLOSE_ROUND_BRACES elsematched:elm1 KW_ELSE elsematched:elm2
+                        {:RESULT=new TreeNode(TreeNodeType.IFELSE,ixleft).addChild(exp).addChild(elm1).addChild(elm2);:} 
+                       	;
+                       	                  	
+elseunmatched			::=
+						KW_IF:i OPEN_ROUND_BRACES expression:exp CLOSE_ROUND_BRACES elsematched:elm KW_ELSE elseunmatched:elum
+                    	{:RESULT=new TreeNode(TreeNodeType.IFELSE,ixleft).addChild(exp).addChild(elm).addChild(elum);:} 
+						| KW_IF:i OPEN_ROUND_BRACES expression:exp CLOSE_ROUND_BRACES statement:sm
+                        {:RESULT=new TreeNode(TreeNodeType.IF,ixleft).addChild(exp).addChild(sm);:} 
+                  	   	| KW_WHILE:wl OPEN_ROUND_BRACES expression:exp CLOSE_ROUND_BRACES elseunmatched:elum
+                        {:RESULT=new TreeNode(TreeNodeType.WHILE,wlxleft).addChild(exp).addChild(elum);:} 
+						;
+						
+statementexpression     ::=
+						assignment:assn
+						{:RESULT=new TreeNode(TreeNodeType.statementexpression,assnxleft).addChild(assn);:} 
+                        | functioninvocation:fninv
+                        {:RESULT=fninv;:} 
+                        ;
+                        
+label					::=
+						expression:exp
+						{:RESULT=exp;:} 
+						| /* empty */
+						;
+						
+primary                 ::=
+						literal:lit			
+						{:RESULT=lit;:} 			
+                        | OPEN_ROUND_BRACES expression:exp CLOSE_ROUND_BRACES
+                        {:RESULT=exp;:} 
+                        | functioninvocation:fninv
+                        {:RESULT=fninv;:} 
+                        ;
+
+argumentlist            ::=
+						argumentlist:agml COMMA expression:exp 
+						{:
+							RESULT = agml.addChild(exp);
+						:} 
+						| expression:exp
+						{:
+							RESULT = new TreeNode(TreeNodeType.argumentlist).addChild(exp);
+						:}
+                        ;
+                        
+						
+functioninvocation      ::=
+						identifier:id OPEN_ROUND_BRACES argumentlist:agml CLOSE_ROUND_BRACES
+						{:RESULT=new TreeNode(TreeNodeType.functioninvocation,idxleft).addChild(id).addChild(agml);:} 
+                        | identifier:id OPEN_ROUND_BRACES CLOSE_ROUND_BRACES
+                        {:RESULT=new TreeNode(TreeNodeType.functioninvocation,idxleft).addChild(id).addChild(new TreeNode(TreeNodeType.argumentlist));:} 
+                        ;
+
+postfixexpression       ::=
+						primary:pri
+						{:RESULT=pri;:} 
+                        | identifier:id
+                        {:RESULT=id;:}
+                        ;
+
+unaryexpression         ::=
+						postfixexpression:pstfxexp
+						{:RESULT=pstfxexp;:} 
+                        | NOT:not unaryexpression:unexp
+                        {:RESULT=new TreeNode(TreeNodeType.NOT,notxleft).addChild(unexp);:} 
+                        | SUBTRACT:sub unaryexpression:unexp
+                        {:RESULT=new TreeNode(TreeNodeType.UNARY_SUB,subxleft).addChild(unexp);:} 
+                        ;
+                        
+multiplicativeexpression::= 
+						unaryexpression:un
+						{:
+							RESULT=un;
+						:}
+                        | multiplicativeexpression:ml MULTIPLY:mul unaryexpression:un
+						{:
+							RESULT=new TreeNode(TreeNodeType.MUL,mulxleft).addChild(ml).addChild(un);
+						:} 
+                        | multiplicativeexpression:ml DIVIDE:div unaryexpression:un
+						{:
+							RESULT=new TreeNode(TreeNodeType.DIV,divxleft).addChild(ml).addChild(un);
+						:} 
+                        | multiplicativeexpression:ml MODULUS:mod unaryexpression:un
+						{:
+							RESULT=new TreeNode(TreeNodeType.MOD,modxleft).addChild(ml).addChild(un);
+						:} 
+						;
+additiveexpression      ::= 
+						multiplicativeexpression:ml
+						{:
+							RESULT=ml;
+						:}
+                        | additiveexpression:ad ADD:add multiplicativeexpression:ml
+                        {:
+							RESULT=new TreeNode(TreeNodeType.ADD,addxleft).addChild(ad).addChild(ml);
+						:}
+                        | additiveexpression:ad SUBTRACT:sub multiplicativeexpression:ml
+                        {:
+							RESULT=new TreeNode(TreeNodeType.SUB,subxleft).addChild(ad).addChild(ml);
+						:}
+                        ;
+
+relationalexpression    ::=
+						additiveexpression:ad
+						{:
+							RESULT=ad;
+						:}
+                        | relationalexpression:rel LESSER_THAN:lt additiveexpression:ad
+                        {:
+							RESULT=new TreeNode(TreeNodeType.LT,ltxleft).addChild(rel).addChild(ad);
+						:}
+                        | relationalexpression:rel GREATER_THAN:gt additiveexpression:ad
+                        {:
+							RESULT=new TreeNode(TreeNodeType.GT,gtxleft).addChild(rel).addChild(ad);
+						:}
+                        | relationalexpression:rel LESSER_EQUAL:le additiveexpression:ad
+                        {:
+							RESULT=new TreeNode(TreeNodeType.LE,lexleft).addChild(rel).addChild(ad);
+						:}
+                        | relationalexpression:rel GREATER_EQUAL:ge additiveexpression:ad
+                        {:
+							RESULT=new TreeNode(TreeNodeType.GE,gexleft).addChild(rel).addChild(ad);
+						:}
+                        ;
+
+equalityexpression      ::= 
+						relationalexpression:rel
+						{:
+							RESULT=rel;
+						:}
+                        | equalityexpression:eq EQUAL:eql relationalexpression:rel
+                       	{:
+							RESULT=new TreeNode(TreeNodeType.EQ,eqlxleft).addChild(eq).addChild(rel);
+						:}
+                        | equalityexpression:eq NOT_EQUAL:ne relationalexpression:rel
+                       	{:
+							RESULT=new TreeNode(TreeNodeType.NEQ,nexleft).addChild(eq).addChild(rel);
+						:}
+                        ;
+                                          
+conditionalandexpression::=
+						equalityexpression:eq
+						{:
+							RESULT=eq;
+						:}
+                        | conditionalandexpression:conda AND:and equalityexpression:eq
+                        {:
+							RESULT = new TreeNode(TreeNodeType.AND,andxleft).addChild(conda).addChild(eq);
+						:}
+                        ;      
+                                     
+conditionalorexpression ::= conditionalandexpression:conda
+						{:
+							RESULT=conda;
+						:}
+                        | conditionalorexpression:condo OR:or conditionalandexpression:conda
+						{:
+							RESULT=new TreeNode(TreeNodeType.OR,orxleft).addChild(condo).addChild(conda);
+						:}
+                        ;
+                                               
+assignmentexpression    ::=
+						conditionalorexpression:condexp
+						{:RESULT=condexp;:} 
+                        | assignment:assn
+                        {:RESULT=assn;:} 
+                        ;
+
+assignment              ::=
+						identifier:id ASSIGN:assn assignmentexpression:assnexp
+						{:RESULT=new TreeNode(TreeNodeType.ASSIGN,assnxleft).addChild(id).addChild(assnexp);:} 
+                        ;
+
+expression              ::=
+						assignmentexpression:assnexp
+						{:RESULT=assnexp;:} 
+                        ;

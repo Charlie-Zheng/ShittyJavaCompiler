@@ -1,0 +1,61 @@
+java -jar "java-cup-11b.jar" -locations NewParser.cup && jflex test.flex && javac -d ./ -cp ./java-cup-11b-runtime.jar:. *.java
+java -cp "java-cup-11b-runtime.jar:." Scan ~aycock/411/TEST/final/art-life.j-- > /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/art-life.j--.wat
+~aycock/411/bin/wat2wasm /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/art-life.j--.wat
+~aycock/411/bin/wasm-interp --411 /home/ugb/ce.zheng1/cpsc411/Scanner/src/art-life.j--.wasm
+java -cp "java-cup-11b-runtime.jar:." Scan ~aycock/411/TEST/final/art-select.j-- > /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/art-select.j--.wat
+~aycock/411/bin/wat2wasm /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/art-select.j--.wat
+~aycock/411/bin/wasm-interp --411 /home/ugb/ce.zheng1/cpsc411/Scanner/src/art-select.j--.wasm
+java -cp "java-cup-11b-runtime.jar:." Scan ~aycock/411/TEST/final/art-sieve.j-- > /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/art-sieve.j--.wat
+~aycock/411/bin/wat2wasm /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/art-sieve.j--.wat
+~aycock/411/bin/wasm-interp --411 /home/ugb/ce.zheng1/cpsc411/Scanner/src/art-sieve.j--.wasm
+java -cp "java-cup-11b-runtime.jar:." Scan ~aycock/411/TEST/final/gen.t1 > /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/gen.t1.wat
+~aycock/411/bin/wat2wasm /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/gen.t1.wat
+~aycock/411/bin/wasm-interp --411 /home/ugb/ce.zheng1/cpsc411/Scanner/src/gen.t1.wasm
+java -cp "java-cup-11b-runtime.jar:." Scan ~aycock/411/TEST/final/gen.t10 > /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/gen.t10.wat
+~aycock/411/bin/wat2wasm /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/gen.t10.wat
+~aycock/411/bin/wasm-interp --411 /home/ugb/ce.zheng1/cpsc411/Scanner/src/gen.t10.wasm
+java -cp "java-cup-11b-runtime.jar:." Scan ~aycock/411/TEST/final/gen.t11 > /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/gen.t11.wat
+~aycock/411/bin/wat2wasm /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/gen.t11.wat
+~aycock/411/bin/wasm-interp --411 /home/ugb/ce.zheng1/cpsc411/Scanner/src/gen.t11.wasm
+java -cp "java-cup-11b-runtime.jar:." Scan ~aycock/411/TEST/final/gen.t12 > /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/gen.t12.wat
+~aycock/411/bin/wat2wasm /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/gen.t12.wat
+~aycock/411/bin/wasm-interp --411 /home/ugb/ce.zheng1/cpsc411/Scanner/src/gen.t12.wasm
+java -cp "java-cup-11b-runtime.jar:." Scan ~aycock/411/TEST/final/gen.t13 > /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/gen.t13.wat
+~aycock/411/bin/wat2wasm /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/gen.t13.wat
+~aycock/411/bin/wasm-interp --411 /home/ugb/ce.zheng1/cpsc411/Scanner/src/gen.t13.wasm
+java -cp "java-cup-11b-runtime.jar:." Scan ~aycock/411/TEST/final/gen.t14 > /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/gen.t14.wat
+~aycock/411/bin/wat2wasm /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/gen.t14.wat
+~aycock/411/bin/wasm-interp --411 /home/ugb/ce.zheng1/cpsc411/Scanner/src/gen.t14.wasm
+java -cp "java-cup-11b-runtime.jar:." Scan ~aycock/411/TEST/final/gen.t15 > /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/gen.t15.wat
+~aycock/411/bin/wat2wasm /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/gen.t15.wat
+~aycock/411/bin/wasm-interp --411 /home/ugb/ce.zheng1/cpsc411/Scanner/src/gen.t15.wasm
+java -cp "java-cup-11b-runtime.jar:." Scan ~aycock/411/TEST/final/gen.t18 > /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/gen.t18.wat
+~aycock/411/bin/wat2wasm /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/gen.t18.wat
+~aycock/411/bin/wasm-interp --411 /home/ugb/ce.zheng1/cpsc411/Scanner/src/gen.t18.wasm
+java -cp "java-cup-11b-runtime.jar:." Scan ~aycock/411/TEST/final/gen.t22 > /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/gen.t22.wat
+~aycock/411/bin/wat2wasm /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/gen.t22.wat
+~aycock/411/bin/wasm-interp --411 /home/ugb/ce.zheng1/cpsc411/Scanner/src/gen.t22.wasm
+java -cp "java-cup-11b-runtime.jar:." Scan ~aycock/411/TEST/final/gen.t26 > /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/gen.t26.wat
+~aycock/411/bin/wat2wasm /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/gen.t26.wat
+~aycock/411/bin/wasm-interp --411 /home/ugb/ce.zheng1/cpsc411/Scanner/src/gen.t26.wasm
+java -cp "java-cup-11b-runtime.jar:." Scan ~aycock/411/TEST/final/gen.t29 > /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/gen.t29.wat
+~aycock/411/bin/wat2wasm /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/gen.t29.wat
+~aycock/411/bin/wasm-interp --411 /home/ugb/ce.zheng1/cpsc411/Scanner/src/gen.t29.wasm
+java -cp "java-cup-11b-runtime.jar:." Scan ~aycock/411/TEST/final/gen.t30 > /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/gen.t30.wat
+~aycock/411/bin/wat2wasm /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/gen.t30.wat
+~aycock/411/bin/wasm-interp --411 /home/ugb/ce.zheng1/cpsc411/Scanner/src/gen.t30.wasm
+java -cp "java-cup-11b-runtime.jar:." Scan ~aycock/411/TEST/final/gen.t31 > /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/gen.t31.wat
+~aycock/411/bin/wat2wasm /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/gen.t31.wat
+~aycock/411/bin/wasm-interp --411 /home/ugb/ce.zheng1/cpsc411/Scanner/src/gen.t31.wasm
+java -cp "java-cup-11b-runtime.jar:." Scan ~aycock/411/TEST/final/gen.t32 > /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/gen.t32.wat
+~aycock/411/bin/wat2wasm /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/gen.t32.wat
+~aycock/411/bin/wasm-interp --411 /home/ugb/ce.zheng1/cpsc411/Scanner/src/gen.t32.wasm
+java -cp "java-cup-11b-runtime.jar:." Scan ~aycock/411/TEST/final/gen.t33 > /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/gen.t33.wat
+~aycock/411/bin/wat2wasm /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/gen.t33.wat
+~aycock/411/bin/wasm-interp --411 /home/ugb/ce.zheng1/cpsc411/Scanner/src/gen.t33.wasm
+java -cp "java-cup-11b-runtime.jar:." Scan ~aycock/411/TEST/final/gen.t34 > /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/gen.t34.wat
+~aycock/411/bin/wat2wasm /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/gen.t34.wat
+~aycock/411/bin/wasm-interp --411 /home/ugb/ce.zheng1/cpsc411/Scanner/src/gen.t34.wasm
+java -cp "java-cup-11b-runtime.jar:." Scan ~aycock/411/TEST/final/gen.t5 > /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/gen.t5.wat
+~aycock/411/bin/wat2wasm /home/ugb/ce.zheng1/cpsc411/Scanner/src/final/gen.t5.wat
+~aycock/411/bin/wasm-interp --411 /home/ugb/ce.zheng1/cpsc411/Scanner/src/gen.t5.wasm

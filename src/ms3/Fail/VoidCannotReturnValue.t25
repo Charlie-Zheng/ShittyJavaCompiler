@@ -1,0 +1,7 @@
+main(){
+	test1();
+}
+
+void test1(){
+	return 1;
+}

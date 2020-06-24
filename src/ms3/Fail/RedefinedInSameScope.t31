@@ -1,0 +1,6 @@
+//should fail
+main(){
+	main = 1;
+}
+
+int main;

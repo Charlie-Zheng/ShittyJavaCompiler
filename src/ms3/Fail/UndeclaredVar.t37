@@ -1,0 +1,4 @@
+//should fail
+main(){
+	x = x + 1;
+}

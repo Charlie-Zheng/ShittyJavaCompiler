@@ -1,0 +1,1302 @@
+Script started on 2020-03-27 00:11:46-06:00 [TERM="xterm-256color" TTY="/dev/pts/4" COLUMNS="120" LINES="50"]
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ java -jar "java-cup-11b.jar" -locations NewParser.cup && jflex test.flex && javac -d ./ -cp ./java-cup-11b-runtime.jar:. *.java
+------- CUP v0.11b 20160615 (GIT 4ac7450) Parser Generation Summary -------
+  0 errors and 0 warnings
+  36 terminals, 36 non-terminals, and 87 productions declared, 
+  producing 142 unique parse states.
+  0 terminals declared but not used.
+  0 non-terminals declared but not used.
+  0 productions never reduced.
+  0 conflicts detected (0 expected).
+  Code written to "parser.java", and "sym.java".
+---------------------------------------------------- (CUP v0.11b 20160615 (GIT 4ac7450))
+Reading "test.flex"
+Constructing NFA : 172 states in NFA
+Converting NFA to DFA : 
+..................................................................................
+84 states before minimization, 77 states in minimized DFA
+Old file "Scan.java" saved as "Scan.java~"
+Writing code to "Scan.java"
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ java -cp "java-cup-11b-runtime.jar:." Scan ./ms3/Fail/*.t1
+Error: Main function not found
+Program has no main function
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ java -cp "java-cup-11b-runtime.jar:." Scan ./ms3/Fail/*.t1[K2
+Error: Duplicate main at line 8, column 1 in file ./ms3/Fail/MultipleMain.t2 on token: main2
+Program cannot have two main functions
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ java -cp "java-cup-11b-runtime.jar:." Scan ./ms3/Fail/*.t2[K3
+Error: Variable declaration in inner block at line 6, column 3 in file ./ms3/Fail/OuterBlockDeclaration.t3 on token: int y
+Variables must be declared globally or in the outermost block of a function
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ java -cp "java-cup-11b-runtime.jar:." Scan ./ms3/Fail/*.t3[K4
+Error: Type mismatch at line 3, column 11 in file ./ms3/Fail/FuncCallArgumentsType.t4 on token: true
+Type int was expected
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ java -cp "java-cup-11b-runtime.jar:." Scan ./ms3/Fail/*.t4[K5
+Error: Argument mismatch at line 3, column 2 in file ./ms3/Fail/FuncCallArgumentsNum.t5 on token: test(1, 2)
+Number of arguments must match the number of declared parameters of called function
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ java -cp "java-cup-11b-runtime.jar:." Scan ./ms3/Fail/*.t5[K6
+Syntax error for input symbol "KW_INT" spanning from line 2, column 6 to line 2, column 8 in file ./ms3/Fail/MainNoParam.t6
+The expected token classes are []
+Main function declaration should not have arguments. Skipping ahead to next "CLOSE_ROUND_BRACES"
+globaldeclarations: {}[
+	mainfunctiondeclaration: {line = 2} [
+		VOID: {}
+		ID: {line = 2, attr = main, sig = main(), scope = GlobalScope@7f31245a} 
+		formalparameterlist: {}
+		block: {line = 3} [
+			RETURN: {line = 3} 
+		]
+	]
+]
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ java -cp "java-cup-11b-runtime.jar:." Scan ./ms3/Fail/*.t6[K7
+Error: Undeclared function at line 8, column 2 in file ./ms3/Fail/CannotCallMain.t7 on token: main
+Functions must be declared before use
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ java -cp "java-cup-11b-runtime.jar:." Scan ./ms3/Fail/*.t7[K8
+Error: Break not in loop at line 14, column 2 in file ./ms3/Fail/BreakInWhile.t8
+Break statements must be inside a while loop
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ java -cp "java-cup-11b-runtime.jar:." Scan ./ms3/Fail/*.t8[K9
+Error: Type mismatch at line 7, column 6 in file ./ms3/Fail/OperatorTypes.t9 on token: x
+Type boolean was expected
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ java -cp "java-cup-11b-runtime.jar:." Scan ./ms3/Fail/*.t9[K10
+Error: Type mismatch at line 7, column 6 in file ./ms3/Fail/OperatorTypes.t10 on token: x
+Type boolean was expected
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ java -cp "java-cup-11b-runtime.jar:." Scan ./ms3/Fail/*.t10[K1
+Error: Type mismatch at line 7, column 11 in file ./ms3/Fail/OperatorTypes.t11 on token: y
+Type int was expected
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ java -cp "java-cup-11b-runtime.jar:." Scan ./ms3/Fail/*.t11[K2
+Error: Type mismatch at line 7, column 11 in file ./ms3/Fail/OperatorTypes.t12 on token: y
+Type int was expected
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ java -cp "java-cup-11b-runtime.jar:." Scan ./ms3/Fail/*.t12[K3
+Error: Type mismatch at line 7, column 6 in file ./ms3/Fail/OperatorTypes.t13 on token: y
+Type boolean was expected
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ java -cp "java-cup-11b-runtime.jar:." Scan ./ms3/Fail/*.t13[K4
+Error: Type mismatch at line 7, column 10 in file ./ms3/Fail/OperatorTypes.t14 on token: y
+Type int was expected
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ java -cp "java-cup-11b-runtime.jar:." Scan ./ms3/Fail/*.t14[K5
+Error: Type mismatch at line 7, column 10 in file ./ms3/Fail/OperatorTypes.t15 on token: y
+Type int was expected
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ java -cp "java-cup-11b-runtime.jar:." Scan ./ms3/Fail/*.t15[K6
+Error: Type mismatch at line 7, column 11 in file ./ms3/Fail/OperatorTypes.t16 on token: y
+Type int was expected
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ java -cp "java-cup-11b-runtime.jar:." Scan ./ms3/Fail/*.t16[K7
+Error: Type mismatch at line 7, column 11 in file ./ms3/Fail/OperatorTypes.t17 on token: y
+Type int was expected
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ java -cp "java-cup-11b-runtime.jar:." Scan ./ms3/Fail/*.t17[K8
+Error: Type mismatch at line 7, column 10 in file ./ms3/Fail/OperatorTypes.t18 on token: y
+Type int was expected
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ java -cp "java-cup-11b-runtime.jar:." Scan ./ms3/Fail/*.t18[K9
+Error: Type mismatch at line 7, column 7 in file ./ms3/Fail/OperatorTypes.t19 on token: y
+Type int was expected
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ java -cp "java-cup-11b-runtime.jar:." Scan ./ms3/Fail/*.t19[K[K20
+Error: Type mismatch at line 7, column 10 in file ./ms3/Fail/OperatorTypes.t20 on token: y
+Type int was expected
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ java -cp "java-cup-11b-runtime.jar:." Scan ./ms3/Fail/*.t20[K1
+Error: Type mismatch at line 7, column 10 in file ./ms3/Fail/OperatorTypes.t21 on token: y
+Type int was expected
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ java -cp "java-cup-11b-runtime.jar:." Scan ./ms3/Fail/*.t21[K2
+Error: Type mismatch at line 7, column 10 in file ./ms3/Fail/OperatorTypes.t22 on token: y
+Type int was expected
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ java -cp "java-cup-11b-runtime.jar:." Scan ./ms3/Fail/*.t22[K3
+Error: Type mismatch at line 7, column 7 in file ./ms3/Fail/OperatorTypes.t23 on token: x
+Type boolean was expected
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ java -cp "java-cup-11b-runtime.jar:." Scan ./ms3/Fail/*.t23[K4
+Error: Function does not return at line 16, column 1 in file ./ms3/Fail/ReturnInNonVoid.t24 on token: ret2
+int functions must return a value
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ java -cp "java-cup-11b-runtime.jar:." Scan ./ms3/Fail/*.t24[K5
+Error: Argument mismatch at line 6, column 2 in file ./ms3/Fail/VoidCannotReturnValue.t25 on token: return
+0 arguments expected
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ java -cp "java-cup-11b-runtime.jar:." Scan ./ms3/Fail/*.t25[K6
+Error: Function does not return at line 16, column 1 in file ./ms3/Fail/NonVoidMustReturn.t26 on token: ret2
+int functions must return a value
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ java -cp "java-cup-11b-runtime.jar:." Scan ./ms3/Fail/*.t26[K7
+Error: Function does not return at line 16, column 1 in file ./ms3/Fail/NonVoidMustReturn.t27 on token: ret2
+int functions must return a value
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ java -cp "java-cup-11b-runtime.jar:." Scan ./ms3/Fail/*.t27[K8
+Error: Type mismatch at line 7, column 2 in file ./ms3/Fail/ValueReturnedWrongType.t28 on token: x
+Type int was expected
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ java -cp "java-cup-11b-runtime.jar:." Scan ./ms3/Fail/*.t28[K9
+Error: Type mismatch at line 4, column 5 in file ./ms3/Fail/IfConditionMustBeBoolean.t29 on token: x
+Type boolean was expected
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ java -cp "java-cup-11b-runtime.jar:." Scan ./ms3/Fail/*.t29[K[K30
+Error: Type mismatch at line 4, column 8 in file ./ms3/Fail/WhileConditionMustBeBoolean.t30 on token: x
+Type boolean was expected
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ java -cp "java-cup-11b-runtime.jar:." Scan ./ms3/Pass/*.t1
+globaldeclarations: {}[
+	mainfunctiondeclaration: {line = 1} [
+		VOID: {}
+		ID: {line = 1, attr = main, sig = main(), scope = GlobalScope@677327b6} 
+		formalparameterlist: {}
+		block: {line = 2} [
+			variabledeclaration: {line = 2} [
+				INT: {line = 2} 
+				ID: {line = 2, attr = toCheck, sig = int, scope = Scope@14ae5a5} 
+			]
+			statementexpression: {line = 3} [
+				ASSIGN: {line = 3, sig = int} [
+					ID: {line = 3, attr = toCheck, sig = int, scope = Scope@14ae5a5} 
+					NUM: {line = 3, attr = 1, sig = int} 
+				]
+			]
+			WHILE: {line = 4} [
+				LT: {line = 4, sig = boolean} [
+					ID: {line = 4, attr = toCheck, sig = int, scope = Scope@14ae5a5} 
+					NUM: {line = 4, attr = 100, sig = int} 
+				]
+				block: {line = 5} [
+					IF: {line = 5} [
+						NEQ: {line = 5, sig = boolean} [
+							functioninvocation: {line = 5} [
+								ID: {line = 5, attr = fibRecursive, sig = int f(int), scope = GlobalScope@677327b6} 
+								argumentlist: {}[
+									ID: {line = 5, attr = toCheck, sig = int, scope = Scope@14ae5a5} 
+								]
+							]
+							functioninvocation: {line = 5} [
+								ID: {line = 5, attr = fibLoop, sig = int f(int), scope = GlobalScope@677327b6} 
+								argumentlist: {}[
+									ID: {line = 5, attr = toCheck, sig = int, scope = Scope@14ae5a5} 
+								]
+							]
+						]
+						functioninvocation: {line = 6} [
+							ID: {line = 6, attr = prints, sig = void f(string), scope = GlobalScope@7f31245a} 
+							argumentlist: {}[
+								STRING: {line = 6, attr = The two don't match up!!!, sig = string} 
+							]
+						]
+					]
+				]
+			]
+		]
+	]
+	functiondeclaration: {line = 10} [
+		INT: {line = 10} 
+		ID: {line = 10, attr = fibRecursive, sig = int f(int), scope = GlobalScope@677327b6} 
+		formalparameterlist: {}[
+			formalparameter: {line = 10} [
+				INT: {line = 10} 
+				ID: {line = 10, attr = x, sig = int, scope = GlobalScope@677327b6} 
+			]
+		]
+		block: {line = 11} [
+			IFELSE: {line = 11} [
+				LE: {line = 11, sig = boolean} [
+					ID: {line = 11, attr = x, sig = int, scope = Scope@6d6f6e28} 
+					NUM: {line = 11, attr = 0, sig = int} 
+				]
+				block: {line = 12} [
+					RETURN: {line = 12} [
+						NUM: {line = 12, attr = 0, sig = int} 
+					]
+				]
+				IF: {line = 13} [
+					LE: {line = 13, sig = boolean} [
+						ID: {line = 13, attr = x, sig = int, scope = Scope@6d6f6e28} 
+						NUM: {line = 13, attr = 2, sig = int} 
+					]
+					RETURN: {line = 14} [
+						NUM: {line = 14, attr = 1, sig = int} 
+					]
+				]
+			]
+			RETURN: {line = 15} [
+				ADD: {line = 15, sig = int} [
+					functioninvocation: {line = 15} [
+						ID: {line = 15, attr = fibRecursive, sig = int f(int), scope = GlobalScope@677327b6} 
+						argumentlist: {}[
+							SUB: {line = 15, sig = int} [
+								ID: {line = 15, attr = x, sig = int, scope = Scope@6d6f6e28} 
+								NUM: {line = 15, attr = 1, sig = int} 
+							]
+						]
+					]
+					functioninvocation: {line = 15} [
+						ID: {line = 15, attr = fibRecursive, sig = int f(int), scope = GlobalScope@677327b6} 
+						argumentlist: {}[
+							SUB: {line = 15, sig = int} [
+								ID: {line = 15, attr = x, sig = int, scope = Scope@6d6f6e28} 
+								NUM: {line = 15, attr = 2, sig = int} 
+							]
+						]
+					]
+				]
+			]
+		]
+	]
+	functiondeclaration: {line = 18} [
+		INT: {line = 18} 
+		ID: {line = 18, attr = fibLoop, sig = int f(int), scope = GlobalScope@677327b6} 
+		formalparameterlist: {}[
+			formalparameter: {line = 18} [
+				INT: {line = 18} 
+				ID: {line = 18, attr = x, sig = int, scope = GlobalScope@677327b6} 
+			]
+		]
+		block: {line = 19} [
+			IF: {line = 19} [
+				LE: {line = 19, sig = boolean} [
+					ID: {line = 19, attr = x, sig = int, scope = Scope@135fbaa4} 
+					NUM: {line = 19, attr = 0, sig = int} 
+				]
+				block: {line = 20} [
+					RETURN: {line = 20} [
+						NUM: {line = 20, attr = 0, sig = int} 
+					]
+				]
+			]
+			variabledeclaration: {line = 22} [
+				INT: {line = 22} 
+				ID: {line = 22, attr = a, sig = int, scope = Scope@135fbaa4} 
+			]
+			variabledeclaration: {line = 23} [
+				INT: {line = 23} 
+				ID: {line = 23, attr = b, sig = int, scope = Scope@135fbaa4} 
+			]
+			statementexpression: {line = 24} [
+				ASSIGN: {line = 24, sig = int} [
+					ID: {line = 24, attr = a, sig = int, scope = Scope@135fbaa4} 
+					NUM: {line = 24, attr = 1, sig = int} 
+				]
+			]
+			statementexpression: {line = 25} [
+				ASSIGN: {line = 25, sig = int} [
+					ID: {line = 25, attr = b, sig = int, scope = Scope@135fbaa4} 
+					NUM: {line = 25, attr = 1, sig = int} 
+				]
+			]
+			WHILE: {line = 26} [
+				GT: {line = 26, sig = boolean} [
+					ID: {line = 26, attr = x, sig = int, scope = Scope@135fbaa4} 
+					NUM: {line = 26, attr = 2, sig = int} 
+				]
+				block: {line = 27} [
+					statementexpression: {line = 27} [
+						ASSIGN: {line = 27, sig = int} [
+							ID: {line = 27, attr = b, sig = int, scope = Scope@135fbaa4} 
+							ADD: {line = 27, sig = int} [
+								ID: {line = 27, attr = a, sig = int, scope = Scope@135fbaa4} 
+								ID: {line = 27, attr = b, sig = int, scope = Scope@135fbaa4} 
+							]
+						]
+					]
+					statementexpression: {line = 28} [
+						ASSIGN: {line = 28, sig = int} [
+							ID: {line = 28, attr = a, sig = int, scope = Scope@135fbaa4} 
+							SUB: {line = 28, sig = int} [
+								ID: {line = 28, attr = b, sig = int, scope = Scope@135fbaa4} 
+								ID: {line = 28, attr = a, sig = int, scope = Scope@135fbaa4} 
+							]
+						]
+					]
+					statementexpression: {line = 29} [
+						ASSIGN: {line = 29, sig = int} [
+							ID: {line = 29, attr = x, sig = int, scope = Scope@135fbaa4} 
+							SUB: {line = 29, sig = int} [
+								ID: {line = 29, attr = x, sig = int, scope = Scope@135fbaa4} 
+								NUM: {line = 29, attr = 1, sig = int} 
+							]
+						]
+					]
+				]
+			]
+			RETURN: {line = 32} [
+				ID: {line = 32, attr = b, sig = int, scope = Scope@135fbaa4} 
+			]
+		]
+	]
+]
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ java -cp "java-cup-11b-runtime.jar:." Scan ./ms3/Pass/*.t1[K2
+globaldeclarations: {}[
+	mainfunctiondeclaration: {line = 5} [
+		VOID: {}
+		ID: {line = 5, attr = calculator, sig = main(), scope = GlobalScope@677327b6} 
+		formalparameterlist: {}
+		block: {line = 7} [
+			functioninvocation: {line = 7} [
+				ID: {line = 7, attr = init, sig = void f(), scope = GlobalScope@677327b6} 
+				argumentlist: {}
+			]
+			functioninvocation: {line = 8} [
+				ID: {line = 8, attr = parser, sig = void f(), scope = GlobalScope@677327b6} 
+				argumentlist: {}
+			]
+		]
+	]
+	variabledeclaration: {line = 15} [
+		BOOL: {line = 15} 
+		ID: {line = 15, attr = _havechar, sig = boolean, scope = GlobalScope@677327b6} 
+	]
+	variabledeclaration: {line = 16} [
+		INT: {line = 16} 
+		ID: {line = 16, attr = _char, sig = int, scope = GlobalScope@677327b6} 
+	]
+	functiondeclaration: {line = 20} [
+		INT: {line = 20} 
+		ID: {line = 20, attr = getc, sig = int f(), scope = GlobalScope@677327b6} 
+		formalparameterlist: {}
+		block: {line = 22} [
+			IF: {line = 22} [
+				ID: {line = 22, attr = _havechar, sig = boolean, scope = GlobalScope@677327b6} 
+				block: {line = 23} [
+					statementexpression: {line = 23} [
+						ASSIGN: {line = 23, sig = boolean} [
+							ID: {line = 23, attr = _havechar, sig = boolean, scope = GlobalScope@677327b6} 
+							FALSE: {line = 23, sig = boolean} 
+						]
+					]
+					RETURN: {line = 24} [
+						ID: {line = 24, attr = _char, sig = int, scope = GlobalScope@677327b6} 
+					]
+				]
+			]
+			RETURN: {line = 26} [
+				functioninvocation: {line = 26} [
+					ID: {line = 26, attr = getchar, sig = int f(), scope = GlobalScope@14ae5a5} 
+					argumentlist: {}
+				]
+			]
+		]
+	]
+	functiondeclaration: {line = 29} [
+		VOID: {line = 29} 
+		ID: {line = 29, attr = ungetc, sig = void f(int), scope = GlobalScope@677327b6} 
+		formalparameterlist: {}[
+			formalparameter: {line = 29} [
+				INT: {line = 29} 
+				ID: {line = 29, attr = ch, sig = int, scope = GlobalScope@677327b6} 
+			]
+		]
+		block: {line = 31} [
+			IF: {line = 31} [
+				ID: {line = 31, attr = _havechar, sig = boolean, scope = GlobalScope@677327b6} 
+				block: {line = 32} [
+					functioninvocation: {line = 32} [
+						ID: {line = 32, attr = prints, sig = void f(string), scope = GlobalScope@14ae5a5} 
+						argumentlist: {}[
+							STRING: {line = 32, attr = Internal error: too many ungets!\n, sig = string} 
+						]
+					]
+					functioninvocation: {line = 33} [
+						ID: {line = 33, attr = halt, sig = void f(), scope = GlobalScope@14ae5a5} 
+						argumentlist: {}
+					]
+				]
+			]
+			statementexpression: {line = 35} [
+				ASSIGN: {line = 35, sig = boolean} [
+					ID: {line = 35, attr = _havechar, sig = boolean, scope = GlobalScope@677327b6} 
+					TRUE: {line = 35, sig = boolean} 
+				]
+			]
+			statementexpression: {line = 36} [
+				ASSIGN: {line = 36, sig = int} [
+					ID: {line = 36, attr = _char, sig = int, scope = GlobalScope@677327b6} 
+					ID: {line = 36, attr = ch, sig = int, scope = Scope@7f31245a} 
+				]
+			]
+		]
+	]
+	variabledeclaration: {line = 43} [
+		BOOL: {line = 43} 
+		ID: {line = 43, attr = _havetoken, sig = boolean, scope = GlobalScope@677327b6} 
+	]
+	variabledeclaration: {line = 44} [
+		INT: {line = 44} 
+		ID: {line = 44, attr = _token, sig = int, scope = GlobalScope@677327b6} 
+	]
+	variabledeclaration: {line = 45} [
+		INT: {line = 45} 
+		ID: {line = 45, attr = attr, sig = int, scope = GlobalScope@677327b6} 
+	]
+	functiondeclaration: {line = 47} [
+		INT: {line = 47} 
+		ID: {line = 47, attr = peek, sig = int f(), scope = GlobalScope@677327b6} 
+		formalparameterlist: {}
+		block: {line = 49} [
+			IF: {line = 49} [
+				ID: {line = 49, attr = _havetoken, sig = boolean, scope = GlobalScope@677327b6} 
+				RETURN: {line = 50} [
+					ID: {line = 50, attr = _token, sig = int, scope = GlobalScope@677327b6} 
+				]
+			]
+			statementexpression: {line = 52} [
+				ASSIGN: {line = 52, sig = boolean} [
+					ID: {line = 52, attr = _havetoken, sig = boolean, scope = GlobalScope@677327b6} 
+					TRUE: {line = 52, sig = boolean} 
+				]
+			]
+			RETURN: {line = 53} [
+				ASSIGN: {line = 53, sig = int} [
+					ID: {line = 53, attr = _token, sig = int, scope = GlobalScope@677327b6} 
+					functioninvocation: {line = 53} [
+						ID: {line = 53, attr = scanner, sig = int f(), scope = GlobalScope@677327b6} 
+						argumentlist: {}
+					]
+				]
+			]
+		]
+	]
+	functiondeclaration: {line = 56} [
+		VOID: {line = 56} 
+		ID: {line = 56, attr = match, sig = void f(int), scope = GlobalScope@677327b6} 
+		formalparameterlist: {}[
+			formalparameter: {line = 56} [
+				INT: {line = 56} 
+				ID: {line = 56, attr = expect, sig = int, scope = GlobalScope@677327b6} 
+			]
+		]
+		block: {line = 58} [
+			IF: {line = 58} [
+				NEQ: {line = 58, sig = boolean} [
+					functioninvocation: {line = 58} [
+						ID: {line = 58, attr = peek, sig = int f(), scope = GlobalScope@677327b6} 
+						argumentlist: {}
+					]
+					ID: {line = 58, attr = expect, sig = int, scope = Scope@6d6f6e28} 
+				]
+				block: {line = 59} [
+					functioninvocation: {line = 59} [
+						ID: {line = 59, attr = prints, sig = void f(string), scope = GlobalScope@14ae5a5} 
+						argumentlist: {}[
+							STRING: {line = 59, attr = Error: expected , sig = string} 
+						]
+					]
+					functioninvocation: {line = 60} [
+						ID: {line = 60, attr = printc, sig = void f(int), scope = GlobalScope@14ae5a5} 
+						argumentlist: {}[
+							ID: {line = 60, attr = expect, sig = int, scope = Scope@6d6f6e28} 
+						]
+					]
+					functioninvocation: {line = 61} [
+						ID: {line = 61, attr = prints, sig = void f(string), scope = GlobalScope@14ae5a5} 
+						argumentlist: {}[
+							STRING: {line = 61, attr = \n, sig = string} 
+						]
+					]
+					functioninvocation: {line = 62} [
+						ID: {line = 62, attr = halt, sig = void f(), scope = GlobalScope@14ae5a5} 
+						argumentlist: {}
+					]
+				]
+			]
+			statementexpression: {line = 64} [
+				ASSIGN: {line = 64, sig = boolean} [
+					ID: {line = 64, attr = _havetoken, sig = boolean, scope = GlobalScope@677327b6} 
+					FALSE: {line = 64, sig = boolean} 
+				]
+			]
+		]
+	]
+	functiondeclaration: {line = 67} [
+		INT: {line = 67} 
+		ID: {line = 67, attr = scanner, sig = int f(), scope = GlobalScope@677327b6} 
+		formalparameterlist: {}
+		block: {line = 69} [
+			variabledeclaration: {line = 69} [
+				INT: {line = 69} 
+				ID: {line = 69, attr = ch, sig = int, scope = Scope@135fbaa4} 
+			]
+			WHILE: {line = 71} [
+				functioninvocation: {line = 71} [
+					ID: {line = 71, attr = isspace, sig = boolean f(int), scope = GlobalScope@677327b6} 
+					argumentlist: {}[
+						ASSIGN: {line = 71, sig = int} [
+							ID: {line = 71, attr = ch, sig = int, scope = Scope@135fbaa4} 
+							functioninvocation: {line = 71} [
+								ID: {line = 71, attr = getc, sig = int f(), scope = GlobalScope@677327b6} 
+								argumentlist: {}
+							]
+						]
+					]
+				]
+				nullStatement: {line = 72} 
+			]
+			IF: {line = 74} [
+				EQ: {line = 74, sig = boolean} [
+					ID: {line = 74, attr = ch, sig = int, scope = Scope@135fbaa4} 
+					ID: {line = 74, attr = EOF, sig = int, scope = GlobalScope@677327b6} 
+				]
+				RETURN: {line = 74} [
+					ID: {line = 74, attr = TK_EOF, sig = int, scope = GlobalScope@677327b6} 
+				]
+			]
+			IF: {line = 75} [
+				EQ: {line = 75, sig = boolean} [
+					ID: {line = 75, attr = ch, sig = int, scope = Scope@135fbaa4} 
+					ID: {line = 75, attr = ASCII_NL, sig = int, scope = GlobalScope@677327b6} 
+				]
+				RETURN: {line = 75} [
+					ID: {line = 75, attr = TK_EOLN, sig = int, scope = GlobalScope@677327b6} 
+				]
+			]
+			IF: {line = 76} [
+				EQ: {line = 76, sig = boolean} [
+					ID: {line = 76, attr = ch, sig = int, scope = Scope@135fbaa4} 
+					ID: {line = 76, attr = ASCII_PLUS, sig = int, scope = GlobalScope@677327b6} 
+				]
+				RETURN: {line = 76} [
+					ID: {line = 76, attr = TK_ADD, sig = int, scope = GlobalScope@677327b6} 
+				]
+			]
+			IF: {line = 77} [
+				EQ: {line = 77, sig = boolean} [
+					ID: {line = 77, attr = ch, sig = int, scope = Scope@135fbaa4} 
+					ID: {line = 77, attr = ASCII_MINUS, sig = int, scope = GlobalScope@677327b6} 
+				]
+				RETURN: {line = 77} [
+					ID: {line = 77, attr = TK_SUB, sig = int, scope = GlobalScope@677327b6} 
+				]
+			]
+			IF: {line = 78} [
+				EQ: {line = 78, sig = boolean} [
+					ID: {line = 78, attr = ch, sig = int, scope = Scope@135fbaa4} 
+					ID: {line = 78, attr = ASCII_STAR, sig = int, scope = GlobalScope@677327b6} 
+				]
+				RETURN: {line = 78} [
+					ID: {line = 78, attr = TK_MUL, sig = int, scope = GlobalScope@677327b6} 
+				]
+			]
+			IF: {line = 79} [
+				EQ: {line = 79, sig = boolean} [
+					ID: {line = 79, attr = ch, sig = int, scope = Scope@135fbaa4} 
+					ID: {line = 79, attr = ASCII_SLASH, sig = int, scope = GlobalScope@677327b6} 
+				]
+				RETURN: {line = 79} [
+					ID: {line = 79, attr = TK_DIV, sig = int, scope = GlobalScope@677327b6} 
+				]
+			]
+			IF: {line = 80} [
+				EQ: {line = 80, sig = boolean} [
+					ID: {line = 80, attr = ch, sig = int, scope = Scope@135fbaa4} 
+					ID: {line = 80, attr = ASCII_LPAREN, sig = int, scope = GlobalScope@677327b6} 
+				]
+				RETURN: {line = 80} [
+					ID: {line = 80, attr = TK_LPAREN, sig = int, scope = GlobalScope@677327b6} 
+				]
+			]
+			IF: {line = 81} [
+				EQ: {line = 81, sig = boolean} [
+					ID: {line = 81, attr = ch, sig = int, scope = Scope@135fbaa4} 
+					ID: {line = 81, attr = ASCII_RPAREN, sig = int, scope = GlobalScope@677327b6} 
+				]
+				RETURN: {line = 81} [
+					ID: {line = 81, attr = TK_RPAREN, sig = int, scope = GlobalScope@677327b6} 
+				]
+			]
+			IF: {line = 83} [
+				functioninvocation: {line = 83} [
+					ID: {line = 83, attr = isdigit, sig = boolean f(int), scope = GlobalScope@677327b6} 
+					argumentlist: {}[
+						ID: {line = 83, attr = ch, sig = int, scope = Scope@135fbaa4} 
+					]
+				]
+				block: {line = 84} [
+					statementexpression: {line = 84} [
+						ASSIGN: {line = 84, sig = int} [
+							ID: {line = 84, attr = attr, sig = int, scope = GlobalScope@677327b6} 
+							NUM: {line = 84, attr = 0, sig = int} 
+						]
+					]
+					WHILE: {line = 85} [
+						functioninvocation: {line = 85} [
+							ID: {line = 85, attr = isdigit, sig = boolean f(int), scope = GlobalScope@677327b6} 
+							argumentlist: {}[
+								ID: {line = 85, attr = ch, sig = int, scope = Scope@135fbaa4} 
+							]
+						]
+						block: {line = 86} [
+							statementexpression: {line = 86} [
+								ASSIGN: {line = 86, sig = int} [
+									ID: {line = 86, attr = attr, sig = int, scope = GlobalScope@677327b6} 
+									ADD: {line = 86, sig = int} [
+										MUL: {line = 86, sig = int} [
+											ID: {line = 86, attr = attr, sig = int, scope = GlobalScope@677327b6} 
+											NUM: {line = 86, attr = 10, sig = int} 
+										]
+										SUB: {line = 86, sig = int} [
+											ID: {line = 86, attr = ch, sig = int, scope = Scope@135fbaa4} 
+											ID: {line = 86, attr = ASCII_0, sig = int, scope = GlobalScope@677327b6} 
+										]
+									]
+								]
+							]
+							statementexpression: {line = 87} [
+								ASSIGN: {line = 87, sig = int} [
+									ID: {line = 87, attr = ch, sig = int, scope = Scope@135fbaa4} 
+									functioninvocation: {line = 87} [
+										ID: {line = 87, attr = getc, sig = int f(), scope = GlobalScope@677327b6} 
+										argumentlist: {}
+									]
+								]
+							]
+						]
+					]
+					functioninvocation: {line = 89} [
+						ID: {line = 89, attr = ungetc, sig = void f(int), scope = GlobalScope@677327b6} 
+						argumentlist: {}[
+							ID: {line = 89, attr = ch, sig = int, scope = Scope@135fbaa4} 
+						]
+					]
+					RETURN: {line = 90} [
+						ID: {line = 90, attr = TK_NUMBER, sig = int, scope = GlobalScope@677327b6} 
+					]
+				]
+			]
+			functioninvocation: {line = 93} [
+				ID: {line = 93, attr = prints, sig = void f(string), scope = GlobalScope@14ae5a5} 
+				argumentlist: {}[
+					STRING: {line = 93, attr = Error: invalid character.\n, sig = string} 
+				]
+			]
+			functioninvocation: {line = 94} [
+				ID: {line = 94, attr = halt, sig = void f(), scope = GlobalScope@14ae5a5} 
+				argumentlist: {}
+			]
+		]
+	]
+	functiondeclaration: {line = 97} [
+		BOOL: {line = 97} 
+		ID: {line = 97, attr = isdigit, sig = boolean f(int), scope = GlobalScope@677327b6} 
+		formalparameterlist: {}[
+			formalparameter: {line = 97} [
+				INT: {line = 97} 
+				ID: {line = 97, attr = ch, sig = int, scope = GlobalScope@677327b6} 
+			]
+		]
+		block: {line = 99} [
+			RETURN: {line = 99} [
+				AND: {line = 99, sig = boolean} [
+					GE: {line = 99, sig = boolean} [
+						ID: {line = 99, attr = ch, sig = int, scope = Scope@45ee12a7} 
+						ID: {line = 99, attr = ASCII_0, sig = int, scope = GlobalScope@677327b6} 
+					]
+					LE: {line = 99, sig = boolean} [
+						ID: {line = 99, attr = ch, sig = int, scope = Scope@45ee12a7} 
+						ID: {line = 99, attr = ASCII_9, sig = int, scope = GlobalScope@677327b6} 
+					]
+				]
+			]
+		]
+	]
+	functiondeclaration: {line = 102} [
+		BOOL: {line = 102} 
+		ID: {line = 102, attr = isspace, sig = boolean f(int), scope = GlobalScope@677327b6} 
+		formalparameterlist: {}[
+			formalparameter: {line = 102} [
+				INT: {line = 102} 
+				ID: {line = 102, attr = ch, sig = int, scope = GlobalScope@677327b6} 
+			]
+		]
+		block: {line = 104} [
+			RETURN: {line = 104} [
+				OR: {line = 105, sig = boolean} [
+					OR: {line = 104, sig = boolean} [
+						EQ: {line = 104, sig = boolean} [
+							ID: {line = 104, attr = ch, sig = int, scope = Scope@330bedb4} 
+							ID: {line = 104, attr = ASCII_SPACE, sig = int, scope = GlobalScope@677327b6} 
+						]
+						EQ: {line = 105, sig = boolean} [
+							ID: {line = 105, attr = ch, sig = int, scope = Scope@330bedb4} 
+							ID: {line = 105, attr = ASCII_TAB, sig = int, scope = GlobalScope@677327b6} 
+						]
+					]
+					EQ: {line = 106, sig = boolean} [
+						ID: {line = 106, attr = ch, sig = int, scope = Scope@330bedb4} 
+						ID: {line = 106, attr = ASCII_CR, sig = int, scope = GlobalScope@677327b6} 
+					]
+				]
+			]
+		]
+	]
+	functiondeclaration: {line = 113} [
+		VOID: {line = 113} 
+		ID: {line = 113, attr = parser, sig = void f(), scope = GlobalScope@677327b6} 
+		formalparameterlist: {}
+		block: {line = 115} [
+			variabledeclaration: {line = 115} [
+				INT: {line = 115} 
+				ID: {line = 115, attr = result, sig = int, scope = Scope@2503dbd3} 
+			]
+			WHILE: {line = 117} [
+				NEQ: {line = 117, sig = boolean} [
+					functioninvocation: {line = 117} [
+						ID: {line = 117, attr = peek, sig = int f(), scope = GlobalScope@677327b6} 
+						argumentlist: {}
+					]
+					ID: {line = 117, attr = TK_EOF, sig = int, scope = GlobalScope@677327b6} 
+				]
+				block: {line = 118} [
+					statementexpression: {line = 118} [
+						ASSIGN: {line = 118, sig = int} [
+							ID: {line = 118, attr = result, sig = int, scope = Scope@2503dbd3} 
+							functioninvocation: {line = 118} [
+								ID: {line = 118, attr = E, sig = int f(), scope = GlobalScope@677327b6} 
+								argumentlist: {}
+							]
+						]
+					]
+					functioninvocation: {line = 119} [
+						ID: {line = 119, attr = match, sig = void f(int), scope = GlobalScope@677327b6} 
+						argumentlist: {}[
+							ID: {line = 119, attr = TK_EOLN, sig = int, scope = GlobalScope@677327b6} 
+						]
+					]
+					functioninvocation: {line = 121} [
+						ID: {line = 121, attr = prints, sig = void f(string), scope = GlobalScope@14ae5a5} 
+						argumentlist: {}[
+							STRING: {line = 121, attr =  = , sig = string} 
+						]
+					]
+					functioninvocation: {line = 122} [
+						ID: {line = 122, attr = printi, sig = void f(int), scope = GlobalScope@14ae5a5} 
+						argumentlist: {}[
+							ID: {line = 122, attr = result, sig = int, scope = Scope@2503dbd3} 
+						]
+					]
+					functioninvocation: {line = 123} [
+						ID: {line = 123, attr = prints, sig = void f(string), scope = GlobalScope@14ae5a5} 
+						argumentlist: {}[
+							STRING: {line = 123, attr = \n, sig = string} 
+						]
+					]
+				]
+			]
+		]
+	]
+	functiondeclaration: {line = 127} [
+		INT: {line = 127} 
+		ID: {line = 127, attr = E, sig = int f(), scope = GlobalScope@677327b6} 
+		formalparameterlist: {}
+		block: {line = 129} [
+			variabledeclaration: {line = 129} [
+				INT: {line = 129} 
+				ID: {line = 129, attr = l, sig = int, scope = Scope@4b67cf4d} 
+			]
+			variabledeclaration: {line = 130} [
+				INT: {line = 130} 
+				ID: {line = 130, attr = r, sig = int, scope = Scope@4b67cf4d} 
+			]
+			variabledeclaration: {line = 131} [
+				INT: {line = 131} 
+				ID: {line = 131, attr = token, sig = int, scope = Scope@4b67cf4d} 
+			]
+			statementexpression: {line = 133} [
+				ASSIGN: {line = 133, sig = int} [
+					ID: {line = 133, attr = l, sig = int, scope = Scope@4b67cf4d} 
+					functioninvocation: {line = 133} [
+						ID: {line = 133, attr = T, sig = int f(), scope = GlobalScope@677327b6} 
+						argumentlist: {}
+					]
+				]
+			]
+			WHILE: {line = 134} [
+				OR: {line = 134, sig = boolean} [
+					EQ: {line = 134, sig = boolean} [
+						functioninvocation: {line = 134} [
+							ID: {line = 134, attr = peek, sig = int f(), scope = GlobalScope@677327b6} 
+							argumentlist: {}
+						]
+						ID: {line = 134, attr = TK_ADD, sig = int, scope = GlobalScope@677327b6} 
+					]
+					EQ: {line = 134, sig = boolean} [
+						functioninvocation: {line = 134} [
+							ID: {line = 134, attr = peek, sig = int f(), scope = GlobalScope@677327b6} 
+							argumentlist: {}
+						]
+						ID: {line = 134, attr = TK_SUB, sig = int, scope = GlobalScope@677327b6} 
+					]
+				]
+				block: {line = 135} [
+					functioninvocation: {line = 135} [
+						ID: {line = 135, attr = match, sig = void f(int), scope = GlobalScope@677327b6} 
+						argumentlist: {}[
+							ASSIGN: {line = 135, sig = int} [
+								ID: {line = 135, attr = token, sig = int, scope = Scope@4b67cf4d} 
+								functioninvocation: {line = 135} [
+									ID: {line = 135, attr = peek, sig = int f(), scope = GlobalScope@677327b6} 
+									argumentlist: {}
+								]
+							]
+						]
+					]
+					statementexpression: {line = 136} [
+						ASSIGN: {line = 136, sig = int} [
+							ID: {line = 136, attr = r, sig = int, scope = Scope@4b67cf4d} 
+							functioninvocation: {line = 136} [
+								ID: {line = 136, attr = T, sig = int f(), scope = GlobalScope@677327b6} 
+								argumentlist: {}
+							]
+						]
+					]
+					IFELSE: {line = 138} [
+						EQ: {line = 138, sig = boolean} [
+							ID: {line = 138, attr = token, sig = int, scope = Scope@4b67cf4d} 
+							ID: {line = 138, attr = TK_ADD, sig = int, scope = GlobalScope@677327b6} 
+						]
+						statementexpression: {line = 139} [
+							ASSIGN: {line = 139, sig = int} [
+								ID: {line = 139, attr = l, sig = int, scope = Scope@4b67cf4d} 
+								ADD: {line = 139, sig = int} [
+									ID: {line = 139, attr = l, sig = int, scope = Scope@4b67cf4d} 
+									ID: {line = 139, attr = r, sig = int, scope = Scope@4b67cf4d} 
+								]
+							]
+						]
+						statementexpression: {line = 141} [
+							ASSIGN: {line = 141, sig = int} [
+								ID: {line = 141, attr = l, sig = int, scope = Scope@4b67cf4d} 
+								SUB: {line = 141, sig = int} [
+									ID: {line = 141, attr = l, sig = int, scope = Scope@4b67cf4d} 
+									ID: {line = 141, attr = r, sig = int, scope = Scope@4b67cf4d} 
+								]
+							]
+						]
+					]
+				]
+			]
+			RETURN: {line = 143} [
+				ID: {line = 143, attr = l, sig = int, scope = Scope@4b67cf4d} 
+			]
+		]
+	]
+	functiondeclaration: {line = 146} [
+		INT: {line = 146} 
+		ID: {line = 146, attr = T, sig = int f(), scope = GlobalScope@677327b6} 
+		formalparameterlist: {}
+		block: {line = 148} [
+			variabledeclaration: {line = 148} [
+				INT: {line = 148} 
+				ID: {line = 148, attr = l, sig = int, scope = Scope@7ea987ac} 
+			]
+			variabledeclaration: {line = 149} [
+				INT: {line = 149} 
+				ID: {line = 149, attr = r, sig = int, scope = Scope@7ea987ac} 
+			]
+			variabledeclaration: {line = 150} [
+				INT: {line = 150} 
+				ID: {line = 150, attr = token, sig = int, scope = Scope@7ea987ac} 
+			]
+			statementexpression: {line = 152} [
+				ASSIGN: {line = 152, sig = int} [
+					ID: {line = 152, attr = l, sig = int, scope = Scope@7ea987ac} 
+					functioninvocation: {line = 152} [
+						ID: {line = 152, attr = F, sig = int f(), scope = GlobalScope@677327b6} 
+						argumentlist: {}
+					]
+				]
+			]
+			WHILE: {line = 153} [
+				OR: {line = 153, sig = boolean} [
+					EQ: {line = 153, sig = boolean} [
+						functioninvocation: {line = 153} [
+							ID: {line = 153, attr = peek, sig = int f(), scope = GlobalScope@677327b6} 
+							argumentlist: {}
+						]
+						ID: {line = 153, attr = TK_MUL, sig = int, scope = GlobalScope@677327b6} 
+					]
+					EQ: {line = 153, sig = boolean} [
+						functioninvocation: {line = 153} [
+							ID: {line = 153, attr = peek, sig = int f(), scope = GlobalScope@677327b6} 
+							argumentlist: {}
+						]
+						ID: {line = 153, attr = TK_DIV, sig = int, scope = GlobalScope@677327b6} 
+					]
+				]
+				block: {line = 154} [
+					functioninvocation: {line = 154} [
+						ID: {line = 154, attr = match, sig = void f(int), scope = GlobalScope@677327b6} 
+						argumentlist: {}[
+							ASSIGN: {line = 154, sig = int} [
+								ID: {line = 154, attr = token, sig = int, scope = Scope@7ea987ac} 
+								functioninvocation: {line = 154} [
+									ID: {line = 154, attr = peek, sig = int f(), scope = GlobalScope@677327b6} 
+									argumentlist: {}
+								]
+							]
+						]
+					]
+					statementexpression: {line = 155} [
+						ASSIGN: {line = 155, sig = int} [
+							ID: {line = 155, attr = r, sig = int, scope = Scope@7ea987ac} 
+							functioninvocation: {line = 155} [
+								ID: {line = 155, attr = F, sig = int f(), scope = GlobalScope@677327b6} 
+								argumentlist: {}
+							]
+						]
+					]
+					IFELSE: {line = 157} [
+						EQ: {line = 157, sig = boolean} [
+							ID: {line = 157, attr = token, sig = int, scope = Scope@7ea987ac} 
+							ID: {line = 157, attr = TK_MUL, sig = int, scope = GlobalScope@677327b6} 
+						]
+						statementexpression: {line = 158} [
+							ASSIGN: {line = 158, sig = int} [
+								ID: {line = 158, attr = l, sig = int, scope = Scope@7ea987ac} 
+								MUL: {line = 158, sig = int} [
+									ID: {line = 158, attr = l, sig = int, scope = Scope@7ea987ac} 
+									ID: {line = 158, attr = r, sig = int, scope = Scope@7ea987ac} 
+								]
+							]
+						]
+						statementexpression: {line = 160} [
+							ASSIGN: {line = 160, sig = int} [
+								ID: {line = 160, attr = l, sig = int, scope = Scope@7ea987ac} 
+								DIV: {line = 160, sig = int} [
+									ID: {line = 160, attr = l, sig = int, scope = Scope@7ea987ac} 
+									ID: {line = 160, attr = r, sig = int, scope = Scope@7ea987ac} 
+								]
+							]
+						]
+					]
+				]
+			]
+			RETURN: {line = 162} [
+				ID: {line = 162, attr = l, sig = int, scope = Scope@7ea987ac} 
+			]
+		]
+	]
+	functiondeclaration: {line = 165} [
+		INT: {line = 165} 
+		ID: {line = 165, attr = F, sig = int f(), scope = GlobalScope@677327b6} 
+		formalparameterlist: {}
+		block: {line = 167} [
+			variabledeclaration: {line = 167} [
+				INT: {line = 167} 
+				ID: {line = 167, attr = result, sig = int, scope = Scope@12a3a380} 
+			]
+			variabledeclaration: {line = 169} [
+				INT: {line = 169} 
+				ID: {line = 169, attr = token, sig = int, scope = Scope@12a3a380} 
+			]
+			statementexpression: {line = 170} [
+				ASSIGN: {line = 170, sig = int} [
+					ID: {line = 170, attr = token, sig = int, scope = Scope@12a3a380} 
+					functioninvocation: {line = 170} [
+						ID: {line = 170, attr = peek, sig = int f(), scope = GlobalScope@677327b6} 
+						argumentlist: {}
+					]
+				]
+			]
+			IFELSE: {line = 172} [
+				EQ: {line = 172, sig = boolean} [
+					ID: {line = 172, attr = token, sig = int, scope = Scope@12a3a380} 
+					ID: {line = 172, attr = TK_LPAREN, sig = int, scope = GlobalScope@677327b6} 
+				]
+				block: {line = 173} [
+					functioninvocation: {line = 173} [
+						ID: {line = 173, attr = match, sig = void f(int), scope = GlobalScope@677327b6} 
+						argumentlist: {}[
+							ID: {line = 173, attr = TK_LPAREN, sig = int, scope = GlobalScope@677327b6} 
+						]
+					]
+					statementexpression: {line = 174} [
+						ASSIGN: {line = 174, sig = int} [
+							ID: {line = 174, attr = result, sig = int, scope = Scope@12a3a380} 
+							functioninvocation: {line = 174} [
+								ID: {line = 174, attr = E, sig = int f(), scope = GlobalScope@677327b6} 
+								argumentlist: {}
+							]
+						]
+					]
+					functioninvocation: {line = 175} [
+						ID: {line = 175, attr = match, sig = void f(int), scope = GlobalScope@677327b6} 
+						argumentlist: {}[
+							ID: {line = 175, attr = TK_RPAREN, sig = int, scope = GlobalScope@677327b6} 
+						]
+					]
+				]
+				IFELSE: {line = 177} [
+					EQ: {line = 177, sig = boolean} [
+						ID: {line = 177, attr = token, sig = int, scope = Scope@12a3a380} 
+						ID: {line = 177, attr = TK_SUB, sig = int, scope = GlobalScope@677327b6} 
+					]
+					block: {line = 178} [
+						functioninvocation: {line = 178} [
+							ID: {line = 178, attr = match, sig = void f(int), scope = GlobalScope@677327b6} 
+							argumentlist: {}[
+								ID: {line = 178, attr = TK_SUB, sig = int, scope = GlobalScope@677327b6} 
+							]
+						]
+						statementexpression: {line = 179} [
+							ASSIGN: {line = 179, sig = int} [
+								ID: {line = 179, attr = result, sig = int, scope = Scope@12a3a380} 
+								UNARY_SUB: {line = 179, sig = int} [
+									functioninvocation: {line = 179} [
+										ID: {line = 179, attr = F, sig = int f(), scope = GlobalScope@677327b6} 
+										argumentlist: {}
+									]
+								]
+							]
+						]
+					]
+					IFELSE: {line = 181} [
+						EQ: {line = 181, sig = boolean} [
+							ID: {line = 181, attr = token, sig = int, scope = Scope@12a3a380} 
+							ID: {line = 181, attr = TK_NUMBER, sig = int, scope = GlobalScope@677327b6} 
+						]
+						block: {line = 182} [
+							functioninvocation: {line = 182} [
+								ID: {line = 182, attr = match, sig = void f(int), scope = GlobalScope@677327b6} 
+								argumentlist: {}[
+									ID: {line = 182, attr = TK_NUMBER, sig = int, scope = GlobalScope@677327b6} 
+								]
+							]
+							statementexpression: {line = 183} [
+								ASSIGN: {line = 183, sig = int} [
+									ID: {line = 183, attr = result, sig = int, scope = Scope@12a3a380} 
+									ID: {line = 183, attr = attr, sig = int, scope = GlobalScope@677327b6} 
+								]
+							]
+						]
+						block: {line = 186} [
+							functioninvocation: {line = 186} [
+								ID: {line = 186, attr = prints, sig = void f(string), scope = GlobalScope@14ae5a5} 
+								argumentlist: {}[
+									STRING: {line = 186, attr = Error: expected factor.\n, sig = string} 
+								]
+							]
+							functioninvocation: {line = 187} [
+								ID: {line = 187, attr = halt, sig = void f(), scope = GlobalScope@14ae5a5} 
+								argumentlist: {}
+							]
+						]
+					]
+				]
+			]
+			RETURN: {line = 189} [
+				ID: {line = 189, attr = result, sig = int, scope = Scope@12a3a380} 
+			]
+		]
+	]
+	variabledeclaration: {line = 196} [
+		INT: {line = 196} 
+		ID: {line = 196, attr = EOF, sig = int, scope = GlobalScope@677327b6} 
+	]
+	variabledeclaration: {line = 198} [
+		INT: {line = 198} 
+		ID: {line = 198, attr = TK_EOF, sig = int, scope = GlobalScope@677327b6} 
+	]
+	variabledeclaration: {line = 199} [
+		INT: {line = 199} 
+		ID: {line = 199, attr = TK_EOLN, sig = int, scope = GlobalScope@677327b6} 
+	]
+	variabledeclaration: {line = 200} [
+		INT: {line = 200} 
+		ID: {line = 200, attr = TK_NUMBER, sig = int, scope = GlobalScope@677327b6} 
+	]
+	variabledeclaration: {line = 201} [
+		INT: {line = 201} 
+		ID: {line = 201, attr = TK_ADD, sig = int, scope = GlobalScope@677327b6} 
+	]
+	variabledeclaration: {line = 202} [
+		INT: {line = 202} 
+		ID: {line = 202, attr = TK_SUB, sig = int, scope = GlobalScope@677327b6} 
+	]
+	variabledeclaration: {line = 203} [
+		INT: {line = 203} 
+		ID: {line = 203, attr = TK_MUL, sig = int, scope = GlobalScope@677327b6} 
+	]
+	variabledeclaration: {line = 204} [
+		INT: {line = 204} 
+		ID: {line = 204, attr = TK_DIV, sig = int, scope = GlobalScope@677327b6} 
+	]
+	variabledeclaration: {line = 205} [
+		INT: {line = 205} 
+		ID: {line = 205, attr = TK_LPAREN, sig = int, scope = GlobalScope@677327b6} 
+	]
+	variabledeclaration: {line = 206} [
+		INT: {line = 206} 
+		ID: {line = 206, attr = TK_RPAREN, sig = int, scope = GlobalScope@677327b6} 
+	]
+	variabledeclaration: {line = 208} [
+		INT: {line = 208} 
+		ID: {line = 208, attr = ASCII_0, sig = int, scope = GlobalScope@677327b6} 
+	]
+	variabledeclaration: {line = 209} [
+		INT: {line = 209} 
+		ID: {line = 209, attr = ASCII_9, sig = int, scope = GlobalScope@677327b6} 
+	]
+	variabledeclaration: {line = 210} [
+		INT: {line = 210} 
+		ID: {line = 210, attr = ASCII_PLUS, sig = int, scope = GlobalScope@677327b6} 
+	]
+	variabledeclaration: {line = 211} [
+		INT: {line = 211} 
+		ID: {line = 211, attr = ASCII_MINUS, sig = int, scope = GlobalScope@677327b6} 
+	]
+	variabledeclaration: {line = 212} [
+		INT: {line = 212} 
+		ID: {line = 212, attr = ASCII_STAR, sig = int, scope = GlobalScope@677327b6} 
+	]
+	variabledeclaration: {line = 213} [
+		INT: {line = 213} 
+		ID: {line = 213, attr = ASCII_SLASH, sig = int, scope = GlobalScope@677327b6} 
+	]
+	variabledeclaration: {line = 214} [
+		INT: {line = 214} 
+		ID: {line = 214, attr = ASCII_LPAREN, sig = int, scope = GlobalScope@677327b6} 
+	]
+	variabledeclaration: {line = 215} [
+		INT: {line = 215} 
+		ID: {line = 215, attr = ASCII_RPAREN, sig = int, scope = GlobalScope@677327b6} 
+	]
+	variabledeclaration: {line = 216} [
+		INT: {line = 216} 
+		ID: {line = 216, attr = ASCII_SPACE, sig = int, scope = GlobalScope@677327b6} 
+	]
+	variabledeclaration: {line = 217} [
+		INT: {line = 217} 
+		ID: {line = 217, attr = ASCII_TAB, sig = int, scope = GlobalScope@677327b6} 
+	]
+	variabledeclaration: {line = 218} [
+		INT: {line = 218} 
+		ID: {line = 218, attr = ASCII_CR, sig = int, scope = GlobalScope@677327b6} 
+	]
+	variabledeclaration: {line = 219} [
+		INT: {line = 219} 
+		ID: {line = 219, attr = ASCII_NL, sig = int, scope = GlobalScope@677327b6} 
+	]
+	functiondeclaration: {line = 221} [
+		VOID: {line = 221} 
+		ID: {line = 221, attr = init, sig = void f(), scope = GlobalScope@677327b6} 
+		formalparameterlist: {}
+		block: {line = 223} [
+			statementexpression: {line = 223} [
+				ASSIGN: {line = 223, sig = int} [
+					ID: {line = 223, attr = EOF, sig = int, scope = GlobalScope@677327b6} 
+					UNARY_SUB: {line = 223, sig = int} [
+						NUM: {line = 223, attr = 1, sig = int} 
+					]
+				]
+			]
+			statementexpression: {line = 225} [
+				ASSIGN: {line = 225, sig = int} [
+					ID: {line = 225, attr = ASCII_0, sig = int, scope = GlobalScope@677327b6} 
+					NUM: {line = 225, attr = 48, sig = int} 
+				]
+			]
+			statementexpression: {line = 226} [
+				ASSIGN: {line = 226, sig = int} [
+					ID: {line = 226, attr = ASCII_9, sig = int, scope = GlobalScope@677327b6} 
+					NUM: {line = 226, attr = 57, sig = int} 
+				]
+			]
+			statementexpression: {line = 227} [
+				ASSIGN: {line = 227, sig = int} [
+					ID: {line = 227, attr = ASCII_PLUS, sig = int, scope = GlobalScope@677327b6} 
+					NUM: {line = 227, attr = 43, sig = int} 
+				]
+			]
+			statementexpression: {line = 228} [
+				ASSIGN: {line = 228, sig = int} [
+					ID: {line = 228, attr = ASCII_MINUS, sig = int, scope = GlobalScope@677327b6} 
+					NUM: {line = 228, attr = 45, sig = int} 
+				]
+			]
+			statementexpression: {line = 229} [
+				ASSIGN: {line = 229, sig = int} [
+					ID: {line = 229, attr = ASCII_STAR, sig = int, scope = GlobalScope@677327b6} 
+					NUM: {line = 229, attr = 42, sig = int} 
+				]
+			]
+			statementexpression: {line = 230} [
+				ASSIGN: {line = 230, sig = int} [
+					ID: {line = 230, attr = ASCII_SLASH, sig = int, scope = GlobalScope@677327b6} 
+					NUM: {line = 230, attr = 47, sig = int} 
+				]
+			]
+			statementexpression: {line = 231} [
+				ASSIGN: {line = 231, sig = int} [
+					ID: {line = 231, attr = ASCII_LPAREN, sig = int, scope = GlobalScope@677327b6} 
+					NUM: {line = 231, attr = 40, sig = int} 
+				]
+			]
+			statementexpression: {line = 232} [
+				ASSIGN: {line = 232, sig = int} [
+					ID: {line = 232, attr = ASCII_RPAREN, sig = int, scope = GlobalScope@677327b6} 
+					NUM: {line = 232, attr = 41, sig = int} 
+				]
+			]
+			statementexpression: {line = 233} [
+				ASSIGN: {line = 233, sig = int} [
+					ID: {line = 233, attr = ASCII_SPACE, sig = int, scope = GlobalScope@677327b6} 
+					NUM: {line = 233, attr = 32, sig = int} 
+				]
+			]
+			statementexpression: {line = 234} [
+				ASSIGN: {line = 234, sig = int} [
+					ID: {line = 234, attr = ASCII_TAB, sig = int, scope = GlobalScope@677327b6} 
+					NUM: {line = 234, attr = 9, sig = int} 
+				]
+			]
+			statementexpression: {line = 235} [
+				ASSIGN: {line = 235, sig = int} [
+					ID: {line = 235, attr = ASCII_CR, sig = int, scope = GlobalScope@677327b6} 
+					NUM: {line = 235, attr = 13, sig = int} 
+				]
+			]
+			statementexpression: {line = 236} [
+				ASSIGN: {line = 236, sig = int} [
+					ID: {line = 236, attr = ASCII_NL, sig = int, scope = GlobalScope@677327b6} 
+					NUM: {line = 236, attr = 10, sig = int} 
+				]
+			]
+			statementexpression: {line = 238} [
+				ASSIGN: {line = 238, sig = int} [
+					ID: {line = 238, attr = TK_EOF, sig = int, scope = GlobalScope@677327b6} 
+					NUM: {line = 238, attr = 256, sig = int} 
+				]
+			]
+			statementexpression: {line = 239} [
+				ASSIGN: {line = 239, sig = int} [
+					ID: {line = 239, attr = TK_NUMBER, sig = int, scope = GlobalScope@677327b6} 
+					NUM: {line = 239, attr = 257, sig = int} 
+				]
+			]
+			statementexpression: {line = 240} [
+				ASSIGN: {line = 240, sig = int} [
+					ID: {line = 240, attr = TK_ADD, sig = int, scope = GlobalScope@677327b6} 
+					ID: {line = 240, attr = ASCII_PLUS, sig = int, scope = GlobalScope@677327b6} 
+				]
+			]
+			statementexpression: {line = 241} [
+				ASSIGN: {line = 241, sig = int} [
+					ID: {line = 241, attr = TK_SUB, sig = int, scope = GlobalScope@677327b6} 
+					ID: {line = 241, attr = ASCII_MINUS, sig = int, scope = GlobalScope@677327b6} 
+				]
+			]
+			statementexpression: {line = 242} [
+				ASSIGN: {line = 242, sig = int} [
+					ID: {line = 242, attr = TK_MUL, sig = int, scope = GlobalScope@677327b6} 
+					ID: {line = 242, attr = ASCII_STAR, sig = int, scope = GlobalScope@677327b6} 
+				]
+			]
+			statementexpression: {line = 243} [
+				ASSIGN: {line = 243, sig = int} [
+					ID: {line = 243, attr = TK_DIV, sig = int, scope = GlobalScope@677327b6} 
+					ID: {line = 243, attr = ASCII_SLASH, sig = int, scope = GlobalScope@677327b6} 
+				]
+			]
+			statementexpression: {line = 244} [
+				ASSIGN: {line = 244, sig = int} [
+					ID: {line = 244, attr = TK_LPAREN, sig = int, scope = GlobalScope@677327b6} 
+					ID: {line = 244, attr = ASCII_LPAREN, sig = int, scope = GlobalScope@677327b6} 
+				]
+			]
+			statementexpression: {line = 245} [
+				ASSIGN: {line = 245, sig = int} [
+					ID: {line = 245, attr = TK_RPAREN, sig = int, scope = GlobalScope@677327b6} 
+					ID: {line = 245, attr = ASCII_RPAREN, sig = int, scope = GlobalScope@677327b6} 
+				]
+			]
+			statementexpression: {line = 246} [
+				ASSIGN: {line = 246, sig = int} [
+					ID: {line = 246, attr = TK_EOLN, sig = int, scope = GlobalScope@677327b6} 
+					ID: {line = 246, attr = ASCII_NL, sig = int, scope = GlobalScope@677327b6} 
+				]
+			]
+		]
+	]
+]
+]0;ce.zheng1@csx:~/cpsc411/Scanner/srcce.zheng1@csx:~/cpsc411/Scanner/src$ exit
+exit
+
+Script done on 2020-03-27 00:15:38-06:00 [COMMAND_EXIT_CODE="0"]
